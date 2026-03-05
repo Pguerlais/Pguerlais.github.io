@@ -9,17 +9,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
-    /* ============================================================
-       VARIABLES & RESET
-    ============================================================ */
     :root {
       --bg-deep:      #0f0f12;
       --bg-card:      #161618;
       --bg-hover:     #1e1e22;
-      --orange:       #b5914a;
-      --orange-light: #cda55e;
-      --orange-dim:   rgba(181,145,74,0.15);
-      --orange-glow:  rgba(181,145,74,0.07);
+      --gold:         #b5914a;
+      --gold-light:   #cda55e;
+      --gold-dim:     rgba(181,145,74,0.15);
+      --gold-glow:    rgba(181,145,74,0.07);
       --white:        #f0ece4;
       --muted:        #8a8880;
       --border:       rgba(181,145,74,0.22);
@@ -30,7 +27,6 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; font-size: 16px; }
 
     body {
@@ -41,7 +37,6 @@
       overflow-x: hidden;
     }
 
-    /* Grain overlay */
     body::before {
       content: '';
       position: fixed;
@@ -52,9 +47,6 @@
       opacity: 0.5;
     }
 
-    /* ============================================================
-       NAV
-    ============================================================ */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -63,24 +55,13 @@
       justify-content: space-between;
       align-items: center;
       padding: 1.2rem 4rem;
-      background: rgba(15,15,20,0.85);
+      background: rgba(15,15,18,0.88);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-soft);
     }
 
-    .nav-logo {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--orange);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
+    .nav-logo { font-family: var(--font-mono); font-size: 0.85rem; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
 
     .nav-links a {
       color: var(--muted);
@@ -93,21 +74,10 @@
       position: relative;
     }
 
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 1px;
-      background: var(--orange);
-      transition: width 0.3s;
-    }
-
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
     .nav-links a:hover { color: var(--white); }
     .nav-links a:hover::after { width: 100%; }
 
-    /* ============================================================
-       HERO
-    ============================================================ */
     #hero {
       min-height: 100vh;
       display: grid;
@@ -118,696 +88,134 @@
       gap: 4rem;
     }
 
-    /* Orange diagonal background accent */
-    #hero::after {
-      content: '';
-      position: absolute;
-      top: 0; right: 0;
-      width: 45%;
-      height: 100%;
-      background: linear-gradient(135deg, transparent 30%, rgba(249,115,22,0.04) 100%);
-      pointer-events: none;
-    }
+    #hero::after { content: ''; position: absolute; top: 0; right: 0; width: 45%; height: 100%; background: linear-gradient(135deg, transparent 30%, rgba(181,145,74,0.04) 100%); pointer-events: none; }
 
-    .hero-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--orange);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      opacity: 0;
-      animation: fadeUp 0.6s 0.2s forwards;
-    }
+    .hero-eyebrow { font-family: var(--font-mono); font-size: 0.8rem; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
+    .hero-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--gold); }
 
-    .hero-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 32px; height: 1px;
-      background: var(--orange);
-    }
+    .hero-name { font-family: var(--font-display); font-size: clamp(4rem, 8vw, 7rem); line-height: 0.92; letter-spacing: 0.02em; color: var(--white); margin-bottom: 0.4rem; opacity: 0; animation: fadeUp 0.6s 0.35s forwards; }
+    .hero-name span { color: var(--gold); display: block; }
 
-    .hero-name {
-      font-family: var(--font-display);
-      font-size: clamp(4rem, 8vw, 7rem);
-      line-height: 0.92;
-      letter-spacing: 0.02em;
-      color: var(--white);
-      margin-bottom: 0.4rem;
-      opacity: 0;
-      animation: fadeUp 0.6s 0.35s forwards;
-    }
+    .hero-tagline { font-size: 1.1rem; color: var(--muted); font-weight: 300; margin: 1.5rem 0 2rem; max-width: 480px; line-height: 1.7; opacity: 0; animation: fadeUp 0.6s 0.5s forwards; }
+    .hero-tagline strong { color: var(--white); font-weight: 500; }
 
-    .hero-name span {
-      color: var(--orange);
-      display: block;
-    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s 0.65s forwards; }
 
-    .hero-tagline {
-      font-size: 1.1rem;
-      color: var(--muted);
-      font-weight: 300;
-      margin: 1.5rem 0 2rem;
-      max-width: 480px;
-      line-height: 1.7;
-      opacity: 0;
-      animation: fadeUp 0.6s 0.5s forwards;
-    }
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; background: var(--gold); color: var(--bg-deep); font-family: var(--font-body); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, transform 0.2s; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%); }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
 
-    .hero-tagline strong {
-      color: var(--white);
-      font-weight: 500;
-    }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; background: transparent; color: var(--white); font-family: var(--font-body); font-weight: 500; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s, transform 0.2s; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%); }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.6s 0.65s forwards;
-    }
+    .hero-visual { display: flex; flex-direction: column; gap: 1.2rem; opacity: 0; animation: fadeLeft 0.7s 0.7s forwards; }
 
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.85rem 2rem;
-      background: var(--orange);
-      color: var(--bg-deep);
-      font-family: var(--font-body);
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
-    }
+    .identity-card { background: var(--bg-card); border: 1px solid var(--border-soft); border-left: 3px solid var(--gold); padding: 1.8rem 2rem; }
+    .card-label { font-family: var(--font-mono); font-size: 0.72rem; color: var(--gold); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.8rem; }
+    .card-value { font-size: 1rem; font-weight: 300; color: var(--white); line-height: 1.5; }
 
-    .btn-primary:hover {
-      background: var(--orange-light);
-      transform: translateY(-2px);
-    }
+    .journey-bar { background: var(--bg-card); border: 1px solid var(--border-soft); padding: 1.5rem 2rem; }
+    .journey-v-wrap { display: flex; flex-direction: column; gap: 0; }
 
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.85rem 2rem;
-      background: transparent;
-      color: var(--white);
-      font-family: var(--font-body);
-      font-weight: 500;
-      font-size: 0.9rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: 1px solid var(--border);
-      transition: border-color 0.2s, color 0.2s, transform 0.2s;
-      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--orange);
-      color: var(--orange);
-      transform: translateY(-2px);
-    }
-
-    /* Hero right — visual identity card */
-    .hero-visual {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      opacity: 0;
-      animation: fadeLeft 0.7s 0.7s forwards;
-    }
-
-    .identity-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-soft);
-      border-left: 3px solid var(--orange);
-      padding: 1.8rem 2rem;
-      position: relative;
-    }
-
-    .identity-card .card-label {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--orange);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-bottom: 0.8rem;
-    }
-
-    .identity-card .card-value {
-      font-size: 1rem;
-      font-weight: 300;
-      color: var(--white);
-      line-height: 1.5;
-    }
-
-    /* Journey bar */
-    .journey-bar {
-      background: var(--bg-card);
-      border: 1px solid var(--border-soft);
-      padding: 1.5rem 2rem;
-    }
-
-    .journey-bar .card-label {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--orange);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    /* Journey V shape */
-    .journey-v-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .jv-top-labels {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      text-align: center;
-      padding: 0 4%;
-    }
-
-    .jv-label {
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--muted);
-      line-height: 1.4;
-    }
-
-    .jv-label em {
-      font-style: normal;
-      font-size: 0.65rem;
-      opacity: 0.75;
-      display: block;
-    }
-
+    .jv-top-labels { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; text-align: center; padding: 0 4%; }
+    .jv-label { font-size: 0.75rem; font-weight: 500; color: var(--muted); line-height: 1.4; }
+    .jv-label em { font-style: normal; font-size: 0.65rem; opacity: 0.75; display: block; }
     .jv-label.accent { color: var(--white); }
-    .jv-label.gold   { color: var(--orange); font-weight: 700; }
+    .jv-label.gold { color: var(--gold); font-weight: 700; }
 
-    .journey-svg {
-      width: 100%;
-      height: 60px;
-      overflow: visible;
-    }
+    .journey-svg { width: 100%; height: 60px; overflow: visible; }
 
-    .jv-bottom-labels {
-      display: flex;
-      justify-content: center;
-      padding: 0 4%;
-    }
+    .jv-bottom-labels { display: flex; justify-content: center; padding: 0 4%; }
+    .jv-label-bottom { font-size: 0.75rem; font-weight: 500; text-align: center; line-height: 1.4; color: var(--white); }
 
-    .jv-label-bottom {
-      font-size: 0.78rem;
-      font-weight: 500;
-      text-align: center;
-      line-height: 1.4;
-    }
+    .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-soft); }
+    .stat-box { background: var(--bg-card); padding: 1.2rem 1.5rem; text-align: center; }
+    .stat-number { font-family: var(--font-display); font-size: 2.2rem; color: var(--gold); line-height: 1; }
+    .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; letter-spacing: 0.06em; }
 
-    .jv-label-bottom.accent { color: var(--white); }
+    section { padding: 6rem 4rem; position: relative; }
 
-    /* Stats row */
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border-soft);
-    }
+    .section-header { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 3.5rem; }
+    .section-number { font-family: var(--font-mono); font-size: 0.75rem; color: var(--gold); letter-spacing: 0.12em; }
+    .section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: 0.04em; color: var(--white); }
+    .section-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
 
-    .stat-box {
-      background: var(--bg-card);
-      padding: 1.2rem 1.5rem;
-      text-align: center;
-    }
+    #about { background: var(--bg-card); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 
-    .stat-number {
-      font-family: var(--font-display);
-      font-size: 2.2rem;
-      color: var(--orange);
-      line-height: 1;
-    }
+    .about-text p { color: var(--muted); font-weight: 300; line-height: 1.8; margin-bottom: 1.2rem; font-size: 1.05rem; }
+    .about-text p strong { color: var(--white); font-weight: 500; }
+    .about-text p .highlight { color: var(--gold); font-weight: 500; }
 
-    .stat-label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 0.3rem;
-      letter-spacing: 0.06em;
-    }
-
-    /* ============================================================
-       SECTIONS COMMUNES
-    ============================================================ */
-    section {
-      padding: 6rem 4rem;
-      position: relative;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-      margin-bottom: 3.5rem;
-    }
-
-    .section-number {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--orange);
-      letter-spacing: 0.12em;
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      letter-spacing: 0.04em;
-      color: var(--white);
-    }
-
-    .section-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, var(--border), transparent);
-    }
-
-    /* ============================================================
-       ABOUT / PARCOURS
-    ============================================================ */
-    #about {
-      background: var(--bg-card);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    .about-text p {
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.8;
-      margin-bottom: 1.2rem;
-      font-size: 1.05rem;
-    }
-
-    .about-text p strong {
-      color: var(--white);
-      font-weight: 500;
-    }
-
-    .about-text p .highlight {
-      color: var(--orange);
-      font-weight: 500;
-    }
-
-    /* Timeline */
-    .timeline {
-      position: relative;
-      padding-left: 1.5rem;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 1px;
-      background: linear-gradient(180deg, var(--orange), transparent);
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-left: 1.5rem;
-      padding-bottom: 2rem;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -1.94rem; top: 0.4rem;
-      width: 8px; height: 8px;
-      background: var(--orange);
-      border-radius: 50%;
-      box-shadow: 0 0 0 3px var(--orange-dim);
-    }
-
+    .timeline { position: relative; padding-left: 1.5rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, var(--gold), transparent); }
+    .timeline-item { position: relative; padding-left: 1.5rem; padding-bottom: 2rem; }
+    .timeline-item::before { content: ''; position: absolute; left: -1.94rem; top: 0.4rem; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 0 3px var(--gold-dim); }
     .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-period { font-family: var(--font-mono); font-size: 0.72rem; color: var(--gold); letter-spacing: 0.12em; margin-bottom: 0.3rem; }
+    .timeline-role { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; }
+    .timeline-company { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .timeline-desc { font-size: 0.9rem; color: var(--muted); font-weight: 300; line-height: 1.6; }
 
-    .timeline-period {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--orange);
-      letter-spacing: 0.12em;
-      margin-bottom: 0.3rem;
-    }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 
-    .timeline-role {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--white);
-      margin-bottom: 0.2rem;
-    }
-
-    .timeline-company {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 0.5rem;
-    }
-
-    .timeline-desc {
-      font-size: 0.9rem;
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.6;
-    }
-
-    /* ============================================================
-       COMPÉTENCES
-    ============================================================ */
-    #skills {}
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .skill-category {
-      background: var(--bg-card);
-      border: 1px solid var(--border-soft);
-      padding: 1.8rem;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-
-    .skill-category::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--orange);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s;
-    }
-
-    .skill-category:hover {
-      border-color: var(--border);
-      transform: translateY(-3px);
-    }
-
+    .skill-category { background: var(--bg-card); border: 1px solid var(--border-soft); padding: 1.8rem; position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
+    .skill-category::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
+    .skill-category:hover { border-color: var(--border); transform: translateY(-3px); }
     .skill-category:hover::before { transform: scaleX(1); }
 
-    .skill-cat-icon {
-      font-size: 1.5rem;
-      margin-bottom: 0.8rem;
-      display: block;
-    }
+    .skill-cat-icon { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; }
+    .skill-cat-title { font-family: var(--font-mono); font-size: 0.75rem; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
-    .skill-cat-title {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--orange);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
+    .skill-tag { font-size: 0.78rem; font-family: var(--font-mono); padding: 0.3rem 0.7rem; background: var(--gold-glow); color: var(--white); border: 1px solid var(--border); letter-spacing: 0.04em; }
+    .skill-tag.core { background: var(--gold-dim); border-color: rgba(181,145,74,0.4); color: var(--gold-light); }
 
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
+    #projects { background: var(--bg-card); }
+    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
 
-    .skill-tag {
-      font-size: 0.78rem;
-      font-family: var(--font-mono);
-      padding: 0.3rem 0.7rem;
-      background: var(--orange-glow);
-      color: var(--white);
-      border: 1px solid var(--border);
-      letter-spacing: 0.04em;
-    }
+    .project-card { background: var(--bg-deep); border: 1px solid var(--border-soft); overflow: hidden; transition: border-color 0.3s, transform 0.3s; position: relative; }
+    .project-card:hover { border-color: var(--gold); transform: translateY(-4px); }
 
-    .skill-tag.core {
-      background: var(--orange-dim);
-      border-color: rgba(249,115,22,0.4);
-      color: var(--orange-light);
-    }
+    .project-header { padding: 2rem 2rem 1.2rem; border-bottom: 1px solid var(--border-soft); display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+    .project-num { font-family: var(--font-display); font-size: 3.5rem; color: var(--gold-dim); line-height: 1; flex-shrink: 0; }
+    .project-title { font-family: var(--font-display); font-size: 1.7rem; letter-spacing: 0.04em; color: var(--white); margin-bottom: 0.4rem; }
+    .project-subtitle { font-size: 0.85rem; color: var(--gold); font-family: var(--font-mono); letter-spacing: 0.1em; }
 
-    /* ============================================================
-       PROJETS
-    ============================================================ */
-    #projects {
-      background: var(--bg-card);
-    }
+    .project-body { padding: 1.5rem 2rem 2rem; }
+    .project-desc { font-size: 0.95rem; color: var(--muted); font-weight: 300; line-height: 1.7; margin-bottom: 1.2rem; }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
 
-    .projects-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
+    .stack-badge { font-size: 0.75rem; font-family: var(--font-mono); padding: 0.25rem 0.65rem; background: transparent; color: var(--muted); border: 1px solid var(--border-soft); letter-spacing: 0.04em; transition: color 0.2s, border-color 0.2s; }
+    .project-card:hover .stack-badge { color: var(--white); border-color: var(--border); }
 
-    .project-card {
-      background: var(--bg-deep);
-      border: 1px solid var(--border-soft);
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-      position: relative;
-    }
-
-    .project-card:hover {
-      border-color: var(--orange);
-      transform: translateY(-4px);
-    }
-
-    .project-header {
-      padding: 2rem 2rem 1.2rem;
-      border-bottom: 1px solid var(--border-soft);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-
-    .project-num {
-      font-family: var(--font-display);
-      font-size: 3.5rem;
-      color: var(--orange-dim);
-      line-height: 1;
-      flex-shrink: 0;
-    }
-
-    .project-title {
-      font-family: var(--font-display);
-      font-size: 1.7rem;
-      letter-spacing: 0.04em;
-      color: var(--white);
-      margin-bottom: 0.4rem;
-    }
-
-    .project-subtitle {
-      font-size: 0.85rem;
-      color: var(--orange);
-      font-family: var(--font-mono);
-      letter-spacing: 0.1em;
-    }
-
-    .project-body {
-      padding: 1.5rem 2rem 2rem;
-    }
-
-    .project-desc {
-      font-size: 0.95rem;
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.7;
-      margin-bottom: 1.2rem;
-    }
-
-    .project-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .stack-badge {
-      font-size: 0.75rem;
-      font-family: var(--font-mono);
-      padding: 0.25rem 0.65rem;
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid var(--border-soft);
-      letter-spacing: 0.04em;
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    .project-card:hover .stack-badge {
-      color: var(--white);
-      border-color: var(--border);
-    }
-
-    .project-links {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .project-link {
-      font-size: 0.8rem;
-      font-family: var(--font-mono);
-      color: var(--orange);
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: color 0.2s;
-    }
-
-    .project-link:hover { color: var(--orange-light); }
-
+    .project-links { display: flex; gap: 1rem; }
+    .project-link { font-size: 0.8rem; font-family: var(--font-mono); color: var(--gold); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+    .project-link:hover { color: var(--gold-light); }
     .project-link::after { content: '↗'; font-size: 0.9em; }
 
-    /* WIP badge */
-    .wip-badge {
-      position: absolute;
-      top: 1rem; right: 1rem;
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.14em;
-      color: var(--orange);
-      border: 1px solid var(--orange);
-      padding: 0.2rem 0.6rem;
-      text-transform: uppercase;
-      animation: pulse 2s infinite;
-    }
+    .wip-badge { position: absolute; top: 1rem; right: 1rem; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.14em; color: var(--gold); border: 1px solid var(--gold); padding: 0.2rem 0.6rem; text-transform: uppercase; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
+    #contact { text-align: center; padding: 7rem 4rem; }
+    .contact-intro { font-size: 1.1rem; color: var(--muted); font-weight: 300; max-width: 520px; margin: 0 auto 3rem; line-height: 1.8; }
+    .contact-intro strong { color: var(--white); font-weight: 500; }
+    .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
 
-    /* ============================================================
-       CONTACT
-    ============================================================ */
-    #contact {
-      text-align: center;
-      padding: 7rem 4rem;
-    }
-
-    .contact-intro {
-      font-size: 1.1rem;
-      color: var(--muted);
-      font-weight: 300;
-      max-width: 520px;
-      margin: 0 auto 3rem;
-      line-height: 1.8;
-    }
-
-    .contact-intro strong {
-      color: var(--white);
-      font-weight: 500;
-    }
-
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .contact-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 1.5rem 2rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border-soft);
-      text-decoration: none;
-      min-width: 160px;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-
-    .contact-item:hover {
-      border-color: var(--orange);
-      transform: translateY(-3px);
-    }
-
+    .contact-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1.5rem 2rem; background: var(--bg-card); border: 1px solid var(--border-soft); text-decoration: none; min-width: 160px; transition: border-color 0.3s, transform 0.3s; }
+    .contact-item:hover { border-color: var(--gold); transform: translateY(-3px); }
     .contact-item-icon { font-size: 1.4rem; }
+    .contact-item-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; }
+    .contact-item-value { font-size: 0.85rem; color: var(--white); }
 
-    .contact-item-label {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--orange);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
+    footer { border-top: 1px solid var(--border-soft); padding: 1.5rem 4rem; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+    footer .gold { color: var(--gold); }
 
-    .contact-item-value {
-      font-size: 0.85rem;
-      color: var(--white);
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeLeft { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
 
-    /* ============================================================
-       FOOTER
-    ============================================================ */
-    footer {
-      border-top: 1px solid var(--border-soft);
-      padding: 1.5rem 4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--muted);
-    }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+    .reveal.visible { opacity: 1; transform: none; }
 
-    footer span { color: var(--orange); }
-
-    /* ============================================================
-       ANIMATIONS
-    ============================================================ */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeLeft {
-      from { opacity: 0; transform: translateX(24px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
-
-    /* Scroll reveal */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s, transform 0.6s;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
-
-    /* ============================================================
-       RESPONSIVE
-    ============================================================ */
     @media (max-width: 1024px) {
       nav { padding: 1.2rem 2rem; }
       #hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; }
@@ -831,32 +239,28 @@
 
 <body>
 
-  <!-- ===== NAV ===== -->
   <nav>
     <div class="nav-logo">PG — Data Analyst</div>
     <ul class="nav-links">
       <li><a href="#about">Parcours</a></li>
-      <li><a href="#skills">Compétences</a></li>
+      <li><a href="#skills">Competences</a></li>
       <li><a href="#projects">Projets</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- ===== HERO ===== -->
   <section id="hero">
     <div class="hero-content">
-      <div class="hero-eyebrow">Data Analyst · Performance Opérationnelle</div>
-      <h1 class="hero-name">
-        Pierre<span>Guerlais</span>
-      </h1>
+      <div class="hero-eyebrow">Data Analyst · Performance Operationnelle</div>
+      <h1 class="hero-name">Pierre<span>Guerlais</span></h1>
       <p class="hero-tagline">
-        <strong>10 ans dans les opérations</strong>, la donnée comme outil de décision.<br/>
-        Je transforme des données complexes en <strong>analyses actionnables</strong> — 
-        avec une compréhension terrain que les chiffres seuls ne donnent pas.
+        <strong>10 ans dans les operations</strong>, la donnee comme outil de decision.<br/>
+        Je transforme des donnees complexes en <strong>analyses actionnables</strong> —
+        avec une comprehension terrain que les chiffres seuls ne donnent pas.
       </p>
       <div class="hero-cta">
         <a href="#projects" class="btn-primary">Voir mes projets</a>
-        <a href="/cdn-cgi/l/email-protection#671749001202150b060e1427000a060e0b4904080a" class="btn-secondary">Me contacter</a>
+        <a href="#contact" class="btn-secondary">Me contacter</a>
       </div>
     </div>
 
@@ -864,24 +268,20 @@
       <div class="identity-card">
         <div class="card-label">// Profil</div>
         <div class="card-value">
-          Data Analyst junior avec un ancrage fort dans le terrain opérationnel. 
-          Je parle autant aux décideurs qu'aux équipes métier.
+          Data Analyst junior avec un ancrage fort dans le terrain operationnel.
+          Je parle autant aux decideurs qu'aux equipes metier.
         </div>
       </div>
 
       <div class="journey-bar">
         <div class="card-label">// Trajectoire</div>
         <div class="journey-v-wrap">
-
-          <!-- Labels ligne haute -->
           <div class="jv-top-labels">
-            <div class="jv-label">Formateur</div>
-            <div class="jv-label accent">Resp. Qualité<br/>& Formation <em>junior</em></div>
-            <div class="jv-label accent">Resp. Qualité<br/>& Formation <em>confirmé</em></div>
+            <div class="jv-label accent">Formateur</div>
+            <div class="jv-label accent">Resp. Qualite<br/>Formation <em>junior</em></div>
+            <div class="jv-label accent">Resp. Qualite<br/>Formation <em>confirme</em></div>
             <div class="jv-label gold">Data<br/>Analyst</div>
           </div>
-
-          <!-- SVG du schéma en V -->
           <svg class="journey-svg" viewBox="0 0 500 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <marker id="arrowGold" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
@@ -891,229 +291,174 @@
                 <path d="M0,0 L6,3 L0,6 Z" fill="#8a8880"/>
               </marker>
             </defs>
-            <!-- Ligne haute : Formateur → Q.junior -->
             <line x1="52" y1="15" x2="155" y2="15" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
-            <!-- Descente : Q.junior → Production -->
             <line x1="168" y1="18" x2="168" y2="46" stroke="#8a8880" stroke-width="1" marker-end="url(#arrowMuted)"/>
-            <!-- Ligne basse : Production → remontée -->
             <line x1="175" y1="52" x2="325" y2="52" stroke="#8a8880" stroke-width="1" marker-end="url(#arrowMuted)"/>
-            <!-- Remontée : Production → Q.confirmé -->
             <line x1="332" y1="46" x2="332" y2="18" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
-            <!-- Ligne haute : Q.confirmé → Data Analyst -->
             <line x1="345" y1="15" x2="448" y2="15" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
           </svg>
-
-          <!-- Label ligne basse -->
           <div class="jv-bottom-labels">
-            <div class="jv-label-bottom accent">Resp.<br/>Production</div>
+            <div class="jv-label-bottom">Resp. Production</div>
           </div>
-
         </div>
       </div>
 
       <div class="hero-stats">
-        <div class="stat-box">
-          <div class="stat-number">10+</div>
-          <div class="stat-label">Ans en Ops</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">2</div>
-          <div class="stat-label">Projets Data</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">6</div>
-          <div class="stat-label">Outils maîtrisés</div>
-        </div>
+        <div class="stat-box"><div class="stat-number">10+</div><div class="stat-label">Ans en Ops</div></div>
+        <div class="stat-box"><div class="stat-number">2</div><div class="stat-label">Projets Data</div></div>
+        <div class="stat-box"><div class="stat-number">6</div><div class="stat-label">Outils</div></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== ABOUT ===== -->
   <section id="about">
     <div class="section-header reveal">
       <span class="section-number">01</span>
       <h2 class="section-title">Parcours</h2>
       <div class="section-line"></div>
     </div>
-
     <div class="about-grid">
       <div class="about-text reveal">
         <p>
-          Tout a commencé par une passion pour l'informatique — suffisamment forte pour orienter 
-          mes études vers un <strong>BTS Informatique de Gestion</strong>. Mon objectif d'alors : 
-          devenir formateur, transmettre, et à terme basculer vers la formation informatique.
+          Tout a commence par une passion pour l'informatique — suffisamment forte pour orienter
+          mes etudes vers un <strong>BTS Informatique de Gestion</strong>. Mon objectif d'alors :
+          devenir formateur, transmettre, et a terme basculer vers la formation informatique.
         </p>
         <p>
-          Le monde de la <strong>relation client</strong> en a décidé autrement. Je m'y suis pris au jeu, 
-          et ce qui devait être une étape est devenu une carrière de plus de 10 ans chez 
-          Teleperformance. Une carrière où j'ai gravi les échelons — formateur, responsable qualité, 
-          responsable de production, puis de retour à mes premiers amours en qualité & formation — 
-          en portant toujours le même fil rouge : <span class="highlight">piloter par les chiffres.</span>
+          Le monde de la <strong>relation client</strong> en a decide autrement. Je m'y suis pris au jeu,
+          et ce qui devait etre une etape est devenu une carriere de plus de 10 ans chez
+          Teleperformance. Une carriere ou j'ai gravi les echelons — formateur, responsable qualite,
+          responsable de production, puis de retour a mes premiers amours en qualite et formation —
+          en portant toujours le meme fil rouge : <span class="highlight">piloter par les chiffres.</span>
         </p>
         <p>
-          Sans le formaliser, je faisais déjà de la data. J'ai construit des 
-          <strong>matrices Excel automatisées</strong> pour mes reportings et ceux de mes équipes, 
-          au point de devenir le référent sur le sujet à mon niveau. J'ai collaboré avec les équipes 
-          BI pour faire évoluer des tableaux de bord. Les KPI, les écarts de performance, 
-          l'amélioration continue — c'était mon quotidien.
+          Sans le formaliser, je faisais deja de la data. J'ai construit des
+          <strong>matrices Excel automatisees</strong> pour mes reportings et ceux de mes equipes,
+          au point de devenir le referent sur le sujet a mon niveau. J'ai collabore avec les equipes
+          BI pour faire evoluer des tableaux de bord. Les KPI, les ecarts de performance,
+          l'amelioration continue — c'etait mon quotidien.
         </p>
         <p>
-          La <strong>Wild Code School</strong> n'a pas changé ma trajectoire, elle lui a donné 
-          un nom et un cadre technique. Python, SQL, Power BI, Machine Learning — 
-          autant d'outils qui donnent enfin toute leur puissance à ce que j'ai toujours fait intuitivement. 
-          Et la prochaine étape qui m'attire ? <span class="highlight">Me rapprocher du paramétrage des LLM</span> — 
-          un domaine où ma culture terrain et ma curiosité technologique se rejoignent naturellement.
+          La <strong>Wild Code School</strong> n'a pas change ma trajectoire, elle lui a donne
+          un nom et un cadre technique. Python, SQL, Power BI, Machine Learning —
+          autant d'outils qui donnent enfin toute leur puissance a ce que j'ai toujours fait intuitivement.
+          Et la prochaine etape qui m'attire ? <span class="highlight">Me rapprocher du parametrage des LLM</span> —
+          un domaine ou ma culture terrain et ma curiosite technologique se rejoignent naturellement.
         </p>
       </div>
-
       <div class="timeline reveal">
         <div class="timeline-item">
-          <div class="timeline-period">2025 — Présent</div>
+          <div class="timeline-period">2025 — Present</div>
           <div class="timeline-role">Data Analyst — RNCP Niv. 6</div>
           <div class="timeline-company">Wild Code School</div>
-          <div class="timeline-desc">Python, SQL, Power BI, Machine Learning. Projets data en conditions réelles, méthode Agile, storytelling et restitution décisionnelle.</div>
+          <div class="timeline-desc">Python, SQL, Power BI, Machine Learning. Projets data en conditions reelles, methode Agile, storytelling et restitution decisionnelle.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-period">2021 — 2025</div>
-          <div class="timeline-role">Responsable Qualité & Formation — confirmé</div>
-          <div class="timeline-company">Teleperformance — Le Mans & Laval</div>
-          <div class="timeline-desc">Pilotage qualité par KPI, matrices Excel automatisées pour le reporting d'équipes, analyse d'écarts et plans d'amélioration continue. Référent reporting à l'échelle du site.</div>
+          <div class="timeline-role">Responsable Qualite &amp; Formation — confirme</div>
+          <div class="timeline-company">Teleperformance — Le Mans &amp; Laval</div>
+          <div class="timeline-desc">Pilotage qualite par KPI, matrices Excel automatisees pour le reporting d'equipes, analyse d'ecarts et plans d'amelioration continue. Referent reporting a l'echelle du site.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-period">2017 — 2021</div>
           <div class="timeline-role">Responsable de Production</div>
-          <div class="timeline-company">Teleperformance — Le Mans & Laval</div>
-          <div class="timeline-desc">Pilotage opérationnel via indicateurs (volumétrie, productivité, qualité, délais). Monitoring quotidien, optimisation des ressources et aide à la décision par les données.</div>
+          <div class="timeline-company">Teleperformance — Le Mans &amp; Laval</div>
+          <div class="timeline-desc">Pilotage operationnel via indicateurs (volumetrie, productivite, qualite, delais). Monitoring quotidien, optimisation des ressources et aide a la decision par les donnees.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-period">2009 — 2017</div>
-          <div class="timeline-role">Formateur & Responsable Qualité & Formation — junior</div>
+          <div class="timeline-role">Formateur &amp; Responsable Qualite &amp; Formation — junior</div>
           <div class="timeline-company">Teleperformance · WebHelp · Orange</div>
-          <div class="timeline-desc">Transmission des pratiques opérationnelles, construction des premiers outils de suivi de performance. Premières collaborations avec les équipes BI pour faire évoluer les dashboards.</div>
+          <div class="timeline-desc">Transmission des pratiques operationnelles, construction des premiers outils de suivi de performance. Premieres collaborations avec les equipes BI pour faire evoluer les dashboards.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== COMPÉTENCES ===== -->
   <section id="skills">
     <div class="section-header reveal">
       <span class="section-number">02</span>
-      <h2 class="section-title">Compétences</h2>
+      <h2 class="section-title">Competences</h2>
       <div class="section-line"></div>
     </div>
-
     <div class="skills-grid">
       <div class="skill-category reveal">
         <span class="skill-cat-icon">🗄️</span>
-        <div class="skill-cat-title">// Données & SQL</div>
+        <div class="skill-cat-title">// Donnees &amp; SQL</div>
         <div class="skill-tags">
-          <span class="skill-tag core">SQL</span>
-          <span class="skill-tag core">MySQL</span>
-          <span class="skill-tag">PostgreSQL</span>
-          <span class="skill-tag">Modélisation en étoile</span>
-          <span class="skill-tag">Window Functions</span>
-          <span class="skill-tag">Vues SQL</span>
+          <span class="skill-tag core">SQL</span><span class="skill-tag core">MySQL</span>
+          <span class="skill-tag">PostgreSQL</span><span class="skill-tag">Modelisation en etoile</span>
+          <span class="skill-tag">Window Functions</span><span class="skill-tag">Vues SQL</span>
         </div>
       </div>
-
       <div class="skill-category reveal">
         <span class="skill-cat-icon">🐍</span>
-        <div class="skill-cat-title">// Python & Analyse</div>
+        <div class="skill-cat-title">// Python &amp; Analyse</div>
         <div class="skill-tags">
-          <span class="skill-tag core">Python</span>
-          <span class="skill-tag core">Pandas</span>
-          <span class="skill-tag">NumPy</span>
-          <span class="skill-tag">Data Cleaning</span>
-          <span class="skill-tag">EDA</span>
-          <span class="skill-tag">APIs REST</span>
+          <span class="skill-tag core">Python</span><span class="skill-tag core">Pandas</span>
+          <span class="skill-tag">NumPy</span><span class="skill-tag">Data Cleaning</span>
+          <span class="skill-tag">EDA</span><span class="skill-tag">APIs REST</span>
         </div>
       </div>
-
       <div class="skill-category reveal">
         <span class="skill-cat-icon">📊</span>
-        <div class="skill-cat-title">// BI & Dataviz</div>
+        <div class="skill-cat-title">// BI &amp; Dataviz</div>
         <div class="skill-tags">
-          <span class="skill-tag core">Power BI</span>
-          <span class="skill-tag core">DAX</span>
-          <span class="skill-tag">Matplotlib</span>
-          <span class="skill-tag">Seaborn</span>
-          <span class="skill-tag">Streamlit</span>
-          <span class="skill-tag">Storytelling Data</span>
+          <span class="skill-tag core">Power BI</span><span class="skill-tag core">DAX</span>
+          <span class="skill-tag">Matplotlib</span><span class="skill-tag">Seaborn</span>
+          <span class="skill-tag">Streamlit</span><span class="skill-tag">Storytelling Data</span>
         </div>
       </div>
-
       <div class="skill-category reveal">
         <span class="skill-cat-icon">🤖</span>
         <div class="skill-cat-title">// Machine Learning</div>
         <div class="skill-tags">
-          <span class="skill-tag core">Scikit-learn</span>
-          <span class="skill-tag">Classification</span>
-          <span class="skill-tag">Régression</span>
-          <span class="skill-tag">Clustering</span>
-          <span class="skill-tag">KNN</span>
-          <span class="skill-tag">Cross-validation</span>
+          <span class="skill-tag core">Scikit-learn</span><span class="skill-tag">Classification</span>
+          <span class="skill-tag">Regression</span><span class="skill-tag">Clustering</span>
+          <span class="skill-tag">KNN</span><span class="skill-tag">Cross-validation</span>
         </div>
       </div>
-
       <div class="skill-category reveal">
         <span class="skill-cat-icon">⚙️</span>
-        <div class="skill-cat-title">// Ops & Méthodes</div>
+        <div class="skill-cat-title">// Ops &amp; Methodes</div>
         <div class="skill-tags">
-          <span class="skill-tag core">KPI & Reporting</span>
-          <span class="skill-tag core">Amélioration continue</span>
-          <span class="skill-tag">Lean / COPC</span>
-          <span class="skill-tag">Six Sigma Yellow Belt</span>
-          <span class="skill-tag">Agile</span>
-          <span class="skill-tag">Git / GitHub</span>
+          <span class="skill-tag core">KPI &amp; Reporting</span><span class="skill-tag core">Amelioration continue</span>
+          <span class="skill-tag">Lean / COPC</span><span class="skill-tag">Six Sigma Yellow Belt</span>
+          <span class="skill-tag">Agile</span><span class="skill-tag">Git / GitHub</span>
         </div>
       </div>
-
       <div class="skill-category reveal">
         <span class="skill-cat-icon">🤝</span>
         <div class="skill-cat-title">// Soft Skills</div>
         <div class="skill-tags">
-          <span class="skill-tag core">Leadership</span>
-          <span class="skill-tag core">Communication décideurs</span>
-          <span class="skill-tag">Rigueur analytique</span>
-          <span class="skill-tag">Pédagogie</span>
-          <span class="skill-tag">Facilitation</span>
-          <span class="skill-tag">Résolution de problèmes</span>
+          <span class="skill-tag core">Leadership</span><span class="skill-tag core">Communication decideurs</span>
+          <span class="skill-tag">Rigueur analytique</span><span class="skill-tag">Pedagogie</span>
+          <span class="skill-tag">Facilitation</span><span class="skill-tag">Resolution de problemes</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== PROJETS ===== -->
   <section id="projects">
     <div class="section-header reveal">
       <span class="section-number">03</span>
       <h2 class="section-title">Projets</h2>
       <div class="section-line"></div>
     </div>
-
     <div class="projects-grid">
-
       <div class="project-card reveal">
         <div class="project-header">
           <div>
-            <div class="project-title">Toys & Models</div>
+            <div class="project-title">Toys &amp; Models</div>
             <div class="project-subtitle">SQL · Power BI · DAX</div>
           </div>
           <div class="project-num">01</div>
         </div>
         <div class="project-body">
-          <p class="project-desc">
-            Analyse complète de la performance commerciale d'un distributeur de jouets et modèles réduits.
-            Modélisation en étoile, création de vues SQL orientées business, puis dashboard Power BI 
-            interactif pour le pilotage décisionnel.
-          </p>
+          <p class="project-desc">Analyse complete de la performance commerciale d'un distributeur de jouets et modeles reduits. Modelisation en etoile, creation de vues SQL orientees business, puis dashboard Power BI interactif pour le pilotage decisionnel.</p>
           <div class="project-stack">
-            <span class="stack-badge">SQL</span>
-            <span class="stack-badge">Modélisation en étoile</span>
-            <span class="stack-badge">Power BI</span>
-            <span class="stack-badge">DAX</span>
-            <span class="stack-badge">Reporting</span>
+            <span class="stack-badge">SQL</span><span class="stack-badge">Modelisation en etoile</span>
+            <span class="stack-badge">Power BI</span><span class="stack-badge">DAX</span><span class="stack-badge">Reporting</span>
           </div>
           <div class="project-links">
             <a href="#" class="project-link">GitHub</a>
@@ -1125,23 +470,16 @@
       <div class="project-card reveal">
         <div class="project-header">
           <div>
-            <div class="project-title">CinéData</div>
+            <div class="project-title">CineData</div>
             <div class="project-subtitle">Python · ML · Streamlit</div>
           </div>
           <div class="project-num">02</div>
         </div>
         <div class="project-body">
-          <p class="project-desc">
-            Système de recommandation de films basé sur un algorithme Nearest Neighbors.
-            Pipeline complet de nettoyage de données, enrichissement via API,
-            et restitution via une application Streamlit interactive.
-          </p>
+          <p class="project-desc">Systeme de recommandation de films base sur un algorithme Nearest Neighbors. Pipeline complet de nettoyage de donnees, enrichissement via API, et restitution via une application Streamlit interactive.</p>
           <div class="project-stack">
-            <span class="stack-badge">Pandas</span>
-            <span class="stack-badge">Scikit-learn</span>
-            <span class="stack-badge">API REST</span>
-            <span class="stack-badge">Streamlit</span>
-            <span class="stack-badge">KNN</span>
+            <span class="stack-badge">Pandas</span><span class="stack-badge">Scikit-learn</span>
+            <span class="stack-badge">API REST</span><span class="stack-badge">Streamlit</span><span class="stack-badge">KNN</span>
           </div>
           <div class="project-links">
             <a href="#" class="project-link">GitHub</a>
@@ -1155,63 +493,61 @@
         <div class="project-header">
           <div>
             <div class="project-title">Projet 3</div>
-            <div class="project-subtitle">À venir · Wild Code School</div>
+            <div class="project-subtitle">A venir · Wild Code School</div>
           </div>
           <div class="project-num">03</div>
         </div>
         <div class="project-body">
-          <p class="project-desc">
-            Prochain projet en cours de réalisation. Mise en pratique avancée 
-            des compétences data dans un contexte métier réel.
-          </p>
+          <p class="project-desc">Prochain projet en cours de realisation. Mise en pratique avancee des competences data dans un contexte metier reel.</p>
           <div class="project-stack">
-            <span class="stack-badge">Python</span>
-            <span class="stack-badge">SQL</span>
-            <span class="stack-badge">Machine Learning</span>
+            <span class="stack-badge">Python</span><span class="stack-badge">SQL</span><span class="stack-badge">Machine Learning</span>
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- ===== CONTACT ===== -->
   <section id="contact">
     <div class="section-header reveal" style="justify-content: center; text-align: center;">
       <span class="section-number">04</span>
       <h2 class="section-title">Contact</h2>
       <div class="section-line"></div>
     </div>
-
     <p class="contact-intro reveal">
-      Vous cherchez un Data Analyst qui <strong>comprend vos opérations</strong> 
-      autant qu'il maîtrise la donnée ? Parlons-en.
+      Vous cherchez un Data Analyst qui <strong>comprend vos operations</strong>
+      autant qu'il maitrise la donnee ? Parlons-en.
     </p>
-
     <div class="contact-links reveal">
-      <a href="/cdn-cgi/l/email-protection#84f4aae3f1e1f6e8e5edf7c4e3e9e5ede8aae7ebe9bbf7f1e6eee1e7f0b9cbf4f4ebf6f0f1eaedf0472da4660410a4d4ebf6f0e2ebe8edeb" class="contact-item">
+      <a href="mailto:p.guerlais@gmail.com" class="contact-item">
         <span class="contact-item-icon">✉️</span>
         <span class="contact-item-label">Email</span>
-        <span class="contact-item-value"><span class="__cf_email__" data-cfemail="fc8cd29b89998e909d958fbc9b919d9590d29f9391">[email&#160;protected]</span></span>
+        <span class="contact-item-value">p.guerlais@gmail.com</span>
       </a>
-      <a href="https://www.linkedin.com/in/pierreguerlais" target="_blank" class="contact-item">
+      <a href="https://www.linkedin.com/in/pierreguerlais" target="_blank" rel="noopener" class="contact-item">
         <span class="contact-item-icon">💼</span>
         <span class="contact-item-label">LinkedIn</span>
         <span class="contact-item-value">pierreguerlais</span>
       </a>
-      <a href="https://github.com/pierreguerlais" target="_blank" class="contact-item">
+      <a href="https://github.com/Pguerlais" target="_blank" rel="noopener" class="contact-item">
         <span class="contact-item-icon">🐙</span>
         <span class="contact-item-label">GitHub</span>
-        <span class="contact-item-value">pierreguerlais</span>
+        <span class="contact-item-value">Pguerlais</span>
       </a>
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
   <footer>
-    <span>Pierre Guerlais</span>
-    <span>Data Analyst · <span>Performance Opérationnelle</span> · 2026</span>
+    <span class="gold">Pierre Guerlais</span>
+    <span>Data Analyst · <span class="gold">Performance Operationnelle</span> · 2026</span>
   </footer>
 
-  <!-- ===== JS : Scroll Reveal ===== -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
