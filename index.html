@@ -47,6 +47,7 @@
       opacity: 0.5;
     }
 
+    /* ===== NAV ===== */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -78,6 +79,7 @@
     .nav-links a:hover { color: var(--white); }
     .nav-links a:hover::after { width: 100%; }
 
+    /* ===== HERO ===== */
     #hero {
       min-height: 100vh;
       display: grid;
@@ -88,8 +90,16 @@
       gap: 4rem;
     }
 
-    #hero::after { content: ''; position: absolute; top: 0; right: 0; width: 45%; height: 100%; background: linear-gradient(135deg, transparent 30%, rgba(181,145,74,0.04) 100%); pointer-events: none; }
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 45%; height: 100%;
+      background: linear-gradient(135deg, transparent 30%, rgba(181,145,74,0.04) 100%);
+      pointer-events: none;
+    }
 
+    /* Texte hero gauche */
     .hero-eyebrow { font-family: var(--font-mono); font-size: 0.8rem; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
     .hero-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--gold); }
 
@@ -107,31 +117,90 @@
     .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; background: transparent; color: var(--white); font-family: var(--font-body); font-weight: 500; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s, transform 0.2s; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%); }
     .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
-    .hero-visual { display: flex; flex-direction: column; gap: 1.2rem; opacity: 0; animation: fadeLeft 0.7s 0.7s forwards; }
+    /* ===== HERO VISUEL DROITE ===== */
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      opacity: 0;
+      animation: fadeLeft 0.7s 0.7s forwards;
+      position: relative;
+    }
 
-    .identity-card { background: var(--bg-card); border: 1px solid var(--border-soft); border-left: 3px solid var(--gold); padding: 1.8rem 2rem; }
-    .card-label { font-family: var(--font-mono); font-size: 0.72rem; color: var(--gold); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.8rem; }
-    .card-value { font-size: 1rem; font-weight: 300; color: var(--white); line-height: 1.5; }
+    /* Conteneur photo */
+    .hero-photo-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto;
+    }
 
-    .journey-bar { background: var(--bg-card); border: 1px solid var(--border-soft); padding: 1.5rem 2rem; }
-    .journey-v-wrap { display: flex; flex-direction: column; gap: 0; }
+    /* Cadre décoratif en or derrière la photo */
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      right: -12px;
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--border);
+      z-index: 0;
+    }
 
-    .jv-top-labels { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; text-align: center; padding: 0 4%; }
-    .jv-label { font-size: 0.75rem; font-weight: 500; color: var(--muted); line-height: 1.4; }
-    .jv-label em { font-style: normal; font-size: 0.65rem; opacity: 0.75; display: block; }
-    .jv-label.accent { color: var(--white); }
-    .jv-label.gold { color: var(--gold); font-weight: 700; }
+    /* Ligne verticale dorée à gauche */
+    .hero-photo-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -16px;
+      width: 2px;
+      height: 60%;
+      background: linear-gradient(180deg, var(--gold), transparent);
+      z-index: 2;
+    }
 
-    .journey-svg { width: 100%; height: 60px; overflow: visible; }
+    .hero-photo {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      display: block;
+      /* Fondu en bas pour que la photo s'intègre au fond sombre */
+      -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+      mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+    }
 
-    .jv-bottom-labels { display: flex; justify-content: center; padding: 0 4%; }
-    .jv-label-bottom { font-size: 0.75rem; font-weight: 500; text-align: center; line-height: 1.4; color: var(--white); }
+    /* Badge flottant */
+    .hero-badge {
+      position: absolute;
+      bottom: 28px;
+      left: -20px;
+      z-index: 3;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      padding: 0.7rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
 
-    .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-soft); }
-    .stat-box { background: var(--bg-card); padding: 1.2rem 1.5rem; text-align: center; }
-    .stat-number { font-family: var(--font-display); font-size: 2.2rem; color: var(--gold); line-height: 1; }
-    .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; letter-spacing: 0.06em; }
+    /* Stats row */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border-soft);
+      width: 100%;
+    }
 
+    .stat-box { background: var(--bg-card); padding: 1.2rem 1rem; text-align: center; }
+    .stat-number { font-family: var(--font-display); font-size: 2rem; color: var(--gold); line-height: 1; }
+    .stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; letter-spacing: 0.06em; }
+
+    /* ===== SECTIONS ===== */
     section { padding: 6rem 4rem; position: relative; }
 
     .section-header { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 3.5rem; }
@@ -139,6 +208,7 @@
     .section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: 0.04em; color: var(--white); }
     .section-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
 
+    /* ===== ABOUT / PARCOURS ===== */
     #about { background: var(--bg-card); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 
@@ -156,6 +226,7 @@
     .timeline-company { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
     .timeline-desc { font-size: 0.9rem; color: var(--muted); font-weight: 300; line-height: 1.6; }
 
+    /* ===== COMPETENCES ===== */
     .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 
     .skill-category { background: var(--bg-card); border: 1px solid var(--border-soft); padding: 1.8rem; position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
@@ -170,6 +241,7 @@
     .skill-tag { font-size: 0.78rem; font-family: var(--font-mono); padding: 0.3rem 0.7rem; background: var(--gold-glow); color: var(--white); border: 1px solid var(--border); letter-spacing: 0.04em; }
     .skill-tag.core { background: var(--gold-dim); border-color: rgba(181,145,74,0.4); color: var(--gold-light); }
 
+    /* ===== PROJETS ===== */
     #projects { background: var(--bg-card); }
     .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
 
@@ -196,6 +268,7 @@
     .wip-badge { position: absolute; top: 1rem; right: 1rem; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.14em; color: var(--gold); border: 1px solid var(--gold); padding: 0.2rem 0.6rem; text-transform: uppercase; animation: pulse 2s infinite; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
+    /* ===== CONTACT ===== */
     #contact { text-align: center; padding: 7rem 4rem; }
     .contact-intro { font-size: 1.1rem; color: var(--muted); font-weight: 300; max-width: 520px; margin: 0 auto 3rem; line-height: 1.8; }
     .contact-intro strong { color: var(--white); font-weight: 500; }
@@ -207,15 +280,18 @@
     .contact-item-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; }
     .contact-item-value { font-size: 0.85rem; color: var(--white); }
 
+    /* ===== FOOTER ===== */
     footer { border-top: 1px solid var(--border-soft); padding: 1.5rem 4rem; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
     footer .gold { color: var(--gold); }
 
+    /* ===== ANIMATIONS ===== */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeLeft { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
 
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
     .reveal.visible { opacity: 1; transform: none; }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
       nav { padding: 1.2rem 2rem; }
       #hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; }
@@ -239,6 +315,7 @@
 
 <body>
 
+  <!-- NAV -->
   <nav>
     <div class="nav-logo">PG — Data Analyst</div>
     <ul class="nav-links">
@@ -249,7 +326,10 @@
     </ul>
   </nav>
 
+  <!-- HERO -->
   <section id="hero">
+
+    <!-- Colonne gauche : texte -->
     <div class="hero-content">
       <div class="hero-eyebrow">Data Analyst · Performance Operationnelle</div>
       <h1 class="hero-name">Pierre<span>Guerlais</span></h1>
@@ -264,53 +344,39 @@
       </div>
     </div>
 
+    <!-- Colonne droite : photo + stats -->
     <div class="hero-visual">
-      <div class="identity-card">
-        <div class="card-label">// Profil</div>
-        <div class="card-value">
-          Data Analyst junior avec un ancrage fort dans le terrain operationnel.
-          Je parle autant aux decideurs qu'aux equipes metier.
-        </div>
+
+      <!-- Photo avec cadre décoratif -->
+      <div class="hero-photo-wrap">
+        <img
+          src="pierre_portfolio.png"
+          alt="Pierre Guerlais — Data Analyst"
+          class="hero-photo"
+        />
+        <div class="hero-badge">// Data Analyst · 2026</div>
       </div>
 
-      <div class="journey-bar">
-        <div class="card-label">// Trajectoire</div>
-        <div class="journey-v-wrap">
-          <div class="jv-top-labels">
-            <div class="jv-label accent">Formateur</div>
-            <div class="jv-label accent">Resp. Qualite<br/>Formation <em>junior</em></div>
-            <div class="jv-label accent">Resp. Qualite<br/>Formation <em>confirme</em></div>
-            <div class="jv-label gold">Data<br/>Analyst</div>
-          </div>
-          <svg class="journey-svg" viewBox="0 0 500 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="arrowGold" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-                <path d="M0,0 L6,3 L0,6 Z" fill="#b5914a"/>
-              </marker>
-              <marker id="arrowMuted" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-                <path d="M0,0 L6,3 L0,6 Z" fill="#8a8880"/>
-              </marker>
-            </defs>
-            <line x1="52" y1="15" x2="155" y2="15" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
-            <line x1="168" y1="18" x2="168" y2="46" stroke="#8a8880" stroke-width="1" marker-end="url(#arrowMuted)"/>
-            <line x1="175" y1="52" x2="325" y2="52" stroke="#8a8880" stroke-width="1" marker-end="url(#arrowMuted)"/>
-            <line x1="332" y1="46" x2="332" y2="18" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
-            <line x1="345" y1="15" x2="448" y2="15" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
-          </svg>
-          <div class="jv-bottom-labels">
-            <div class="jv-label-bottom">Resp. Production</div>
-          </div>
-        </div>
-      </div>
-
+      <!-- Stats -->
       <div class="hero-stats">
-        <div class="stat-box"><div class="stat-number">10+</div><div class="stat-label">Ans en Ops</div></div>
-        <div class="stat-box"><div class="stat-number">2</div><div class="stat-label">Projets Data</div></div>
-        <div class="stat-box"><div class="stat-number">6</div><div class="stat-label">Outils</div></div>
+        <div class="stat-box">
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Ans en Ops</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">2</div>
+          <div class="stat-label">Projets Data</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">6</div>
+          <div class="stat-label">Outils</div>
+        </div>
       </div>
+
     </div>
   </section>
 
+  <!-- PARCOURS -->
   <section id="about">
     <div class="section-header reveal">
       <span class="section-number">01</span>
@@ -375,6 +441,7 @@
     </div>
   </section>
 
+  <!-- COMPETENCES -->
   <section id="skills">
     <div class="section-header reveal">
       <span class="section-number">02</span>
@@ -439,6 +506,7 @@
     </div>
   </section>
 
+  <!-- PROJETS -->
   <section id="projects">
     <div class="section-header reveal">
       <span class="section-number">03</span>
@@ -446,6 +514,7 @@
       <div class="section-line"></div>
     </div>
     <div class="projects-grid">
+
       <div class="project-card reveal">
         <div class="project-header">
           <div>
@@ -504,9 +573,11 @@
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact">
     <div class="section-header reveal" style="justify-content: center; text-align: center;">
       <span class="section-number">04</span>
@@ -536,11 +607,13 @@
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     <span class="gold">Pierre Guerlais</span>
     <span>Data Analyst · <span class="gold">Performance Operationnelle</span> · 2026</span>
   </footer>
 
+  <!-- SCROLL REVEAL -->
   <script>
     const observer = new IntersectionObserver(
       (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
