@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pierre Guerlais — Data Analyst</title>
+  <title>Pierre Guerlais - Data Analyst</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -99,7 +99,6 @@
       pointer-events: none;
     }
 
-    /* Texte hero gauche */
     .hero-eyebrow { font-family: var(--font-mono); font-size: 0.8rem; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
     .hero-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--gold); }
 
@@ -126,29 +125,29 @@
       animation: fadeLeft 0.7s 0.7s forwards;
     }
 
-    /* --- PHOTO seule, largeur fixe --- */
-    .hero-top-row {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 1.2rem;
-      align-items: stretch;
-    }
-
+    /* Photo pleine largeur */
     .hero-photo-wrap {
       position: relative;
+      width: 100%;
+      height: 420px;
       overflow: hidden;
-      background: var(--bg-card);
       border: 1px solid var(--border-soft);
-      border-left: 3px solid var(--gold);
-      align-self: stretch;   /* prend exactement la hauteur du bloc trajectoire */
-      min-height: 0;
+    }
+
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: linear-gradient(180deg, var(--gold), transparent);
+      z-index: 3;
     }
 
     .hero-photo-wrap::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      height: 25%;
+      height: 40%;
       background: linear-gradient(to bottom, transparent, var(--bg-deep));
       z-index: 2;
       pointer-events: none;
@@ -159,23 +158,22 @@
       top: 0; left: 50%;
       transform: translateX(-50%);
       z-index: 1;
-      width: 110%;
+      width: 85%;
       display: block;
     }
 
-    /* Trajectoire à droite de la photo */
-    .hero-right-col {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    /* Ligne 2 : profil + trajectoire cote a cote */
+    .hero-bottom-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border-soft);
     }
 
-    /* Carte profil — pleine largeur, en dessous de la ligne photo+trajectoire */
     .identity-card {
       background: var(--bg-card);
-      border: 1px solid var(--border-soft);
       border-left: 3px solid var(--gold);
-      padding: 1.1rem 1.4rem;
+      padding: 1.2rem 1.4rem;
     }
 
     .card-label {
@@ -184,17 +182,17 @@
       color: var(--gold);
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
     }
 
     .card-value {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 300;
       color: var(--white);
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
-    /* --- TRAJECTOIRE --- */
+    /* Trajectoire */
     .journey-bar {
       background: var(--bg-card);
       border: 1px solid var(--border-soft);
@@ -203,13 +201,7 @@
 
     .journey-v-wrap { display: flex; flex-direction: column; gap: 0; }
 
-    .jv-top-labels {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      text-align: center;
-      padding: 0 4%;
-    }
-
+    .jv-top-labels { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; text-align: center; padding: 0 4%; }
     .jv-label { font-size: 0.7rem; font-weight: 500; color: var(--muted); line-height: 1.4; }
     .jv-label em { font-style: normal; font-size: 0.6rem; opacity: 0.75; display: block; }
     .jv-label.accent { color: var(--white); }
@@ -220,15 +212,8 @@
     .jv-bottom-labels { display: flex; justify-content: center; padding: 0 4%; }
     .jv-label-bottom { font-size: 0.7rem; font-weight: 500; text-align: center; line-height: 1.4; color: var(--white); }
 
-    /* Stats row */
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border-soft);
-      width: 100%;
-    }
-
+    /* Stats */
+    .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-soft); }
     .stat-box { background: var(--bg-card); padding: 1.2rem 1rem; text-align: center; }
     .stat-number { font-family: var(--font-display); font-size: 2rem; color: var(--gold); line-height: 1; }
     .stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; letter-spacing: 0.06em; }
@@ -241,7 +226,7 @@
     .section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: 0.04em; color: var(--white); }
     .section-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
 
-    /* ===== ABOUT / PARCOURS ===== */
+    /* ===== PARCOURS ===== */
     #about { background: var(--bg-card); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 
@@ -296,7 +281,7 @@
     .project-links { display: flex; gap: 1rem; }
     .project-link { font-size: 0.8rem; font-family: var(--font-mono); color: var(--gold); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
     .project-link:hover { color: var(--gold-light); }
-    .project-link::after { content: '↗'; font-size: 0.9em; }
+    .project-link::after { content: 'arrowup'; font-size: 0.9em; }
 
     .wip-badge { position: absolute; top: 1rem; right: 1rem; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.14em; color: var(--gold); border: 1px solid var(--gold); padding: 0.2rem 0.6rem; text-transform: uppercase; animation: pulse 2s infinite; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
@@ -364,86 +349,75 @@
 
     <!-- Colonne gauche : texte -->
     <div class="hero-content">
-      <div class="hero-eyebrow">Data Analyst · Performance Operationnelle</div>
+      <div class="hero-eyebrow">Data Analyst - Performance Operationnelle</div>
       <h1 class="hero-name">Pierre<span>Guerlais</span></h1>
       <p class="hero-tagline">
         <strong>10 ans dans les operations</strong>, la donnee comme outil de decision.<br/>
-        Je transforme des donnees complexes en <strong>analyses actionnables</strong> —
+        Je transforme des donnees complexes en <strong>analyses actionnables</strong> --
         avec une comprehension terrain que les chiffres seuls ne donnent pas.
       </p>
       <div class="hero-cta">
         <a href="#projects" class="btn-primary">Voir mes projets</a>
-        <a href="#contact" class="btn-secondary">Me contacter</a>
+        <a href="CV_Pierre_Guerlais.pdf" target="_blank" class="btn-secondary">Voir mon CV</a>
       </div>
     </div>
 
-    <!-- Colonne droite : photo + profil + trajectoire + stats -->
+    <!-- Colonne droite : photo + blocs -->
     <div class="hero-visual">
 
-      <!-- Ligne 1 : photo à gauche + trajectoire à droite -->
-      <div class="hero-top-row">
+      <!-- Photo grande pleine largeur -->
+      <div class="hero-photo-wrap">
+        <img src="pierre_portfolio.png" alt="Pierre Guerlais - Data Analyst" class="hero-photo" />
+      </div>
 
-        <div class="hero-photo-wrap">
-          <img src="pierre_portfolio.png" alt="Pierre Guerlais — Data Analyst" class="hero-photo" />
+      <!-- Profil + Trajectoire cote a cote -->
+      <div class="hero-bottom-row">
+
+        <div class="identity-card">
+          <div class="card-label">// Profil</div>
+          <div class="card-value">
+            Data Analyst junior avec un ancrage fort dans le terrain operationnel.
+            Je parle autant aux decideurs qu'aux equipes metier.
+          </div>
         </div>
 
-        <div class="hero-right-col">
-          <div class="journey-bar">
-            <div class="card-label">// Trajectoire</div>
-            <div class="journey-v-wrap">
-              <div class="jv-top-labels">
-                <div class="jv-label accent">Formateur</div>
-                <div class="jv-label accent">Resp. Qualite<br/>Formation <em>junior</em></div>
-                <div class="jv-label accent">Resp. Qualite<br/>Formation <em>confirme</em></div>
-                <div class="jv-label gold">Data<br/>Analyst</div>
-              </div>
-              <svg class="journey-svg" viewBox="0 0 500 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <marker id="arrowGold" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-                    <path d="M0,0 L6,3 L0,6 Z" fill="#b5914a"/>
-                  </marker>
-                  <marker id="arrowMuted" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-                    <path d="M0,0 L6,3 L0,6 Z" fill="#8a8880"/>
-                  </marker>
-                </defs>
-                <line x1="52" y1="14" x2="155" y2="14" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
-                <line x1="168" y1="17" x2="168" y2="42" stroke="#8a8880" stroke-width="1" marker-end="url(#arrowMuted)"/>
-                <line x1="175" y1="47" x2="325" y2="47" stroke="#8a8880" stroke-width="1" marker-end="url(#arrowMuted)"/>
-                <line x1="332" y1="42" x2="332" y2="17" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
-                <line x1="345" y1="14" x2="448" y2="14" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
-              </svg>
-              <div class="jv-bottom-labels">
-                <div class="jv-label-bottom">Resp. Production</div>
-              </div>
+        <div class="journey-bar">
+          <div class="card-label">// Trajectoire</div>
+          <div class="journey-v-wrap">
+            <div class="jv-top-labels">
+              <div class="jv-label accent">Formateur</div>
+              <div class="jv-label accent">Resp. Qualite<br/>Formation <em>junior</em></div>
+              <div class="jv-label accent">Resp. Qualite<br/>Formation <em>confirme</em></div>
+              <div class="jv-label gold">Data<br/>Analyst</div>
+            </div>
+            <svg class="journey-svg" viewBox="0 0 500 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrowGold" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#b5914a"/>
+                </marker>
+                <marker id="arrowMuted" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#8a8880"/>
+                </marker>
+              </defs>
+              <line x1="52" y1="14" x2="155" y2="14" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
+              <line x1="168" y1="17" x2="168" y2="42" stroke="#8a8880" stroke-width="1" marker-end="url(#arrowMuted)"/>
+              <line x1="175" y1="47" x2="325" y2="47" stroke="#8a8880" stroke-width="1" marker-end="url(#arrowMuted)"/>
+              <line x1="332" y1="42" x2="332" y2="17" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
+              <line x1="345" y1="14" x2="448" y2="14" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
+            </svg>
+            <div class="jv-bottom-labels">
+              <div class="jv-label-bottom">Resp. Production</div>
             </div>
           </div>
         </div>
 
       </div>
 
-      <!-- Ligne 2 : profil pleine largeur -->
-      <div class="identity-card">
-        <div class="card-label">// Profil</div>
-        <div class="card-value">
-          Data Analyst junior avec un ancrage fort dans le terrain operationnel.
-          Je parle autant aux decideurs qu'aux equipes metier.
-        </div>
-      </div>
-
-      <!-- Ligne 3 : stats -->
+      <!-- Stats -->
       <div class="hero-stats">
-        <div class="stat-box">
-          <div class="stat-number">10+</div>
-          <div class="stat-label">Ans en Ops</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">2</div>
-          <div class="stat-label">Projets Data</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">6</div>
-          <div class="stat-label">Outils</div>
-        </div>
+        <div class="stat-box"><div class="stat-number">10+</div><div class="stat-label">Ans en Ops</div></div>
+        <div class="stat-box"><div class="stat-number">2</div><div class="stat-label">Projets Data</div></div>
+        <div class="stat-box"><div class="stat-number">6</div><div class="stat-label">Outils</div></div>
       </div>
 
     </div>
@@ -459,15 +433,15 @@
     <div class="about-grid">
       <div class="about-text reveal">
         <p>
-          Tout a commence par une passion pour l'informatique — suffisamment forte pour orienter
+          Tout a commence par une passion pour l'informatique -- suffisamment forte pour orienter
           mes etudes vers un <strong>BTS Informatique de Gestion</strong>. Mon objectif d'alors :
           devenir formateur, transmettre, et a terme basculer vers la formation informatique.
         </p>
         <p>
           Le monde de la <strong>relation client</strong> en a decide autrement. Je m'y suis pris au jeu,
           et ce qui devait etre une etape est devenu une carriere de plus de 10 ans chez
-          Teleperformance. Une carriere ou j'ai gravi les echelons — formateur, responsable qualite,
-          responsable de production, puis de retour a mes premiers amours en qualite et formation —
+          Teleperformance. Une carriere ou j'ai gravi les echelons -- formateur, responsable qualite,
+          responsable de production, puis de retour a mes premiers amours en qualite et formation --
           en portant toujours le meme fil rouge : <span class="highlight">piloter par les chiffres.</span>
         </p>
         <p>
@@ -475,39 +449,39 @@
           <strong>matrices Excel automatisees</strong> pour mes reportings et ceux de mes equipes,
           au point de devenir le referent sur le sujet a mon niveau. J'ai collabore avec les equipes
           BI pour faire evoluer des tableaux de bord. Les KPI, les ecarts de performance,
-          l'amelioration continue — c'etait mon quotidien.
+          l'amelioration continue -- c'etait mon quotidien.
         </p>
         <p>
           La <strong>Wild Code School</strong> n'a pas change ma trajectoire, elle lui a donne
-          un nom et un cadre technique. Python, SQL, Power BI, Machine Learning —
+          un nom et un cadre technique. Python, SQL, Power BI, Machine Learning --
           autant d'outils qui donnent enfin toute leur puissance a ce que j'ai toujours fait intuitivement.
-          Et la prochaine etape qui m'attire ? <span class="highlight">Me rapprocher du parametrage des LLM</span> —
+          Et la prochaine etape qui m'attire ? <span class="highlight">Me rapprocher du parametrage des LLM</span> --
           un domaine ou ma culture terrain et ma curiosite technologique se rejoignent naturellement.
         </p>
       </div>
       <div class="timeline reveal">
         <div class="timeline-item">
-          <div class="timeline-period">2025 — Present</div>
-          <div class="timeline-role">Data Analyst — RNCP Niv. 6</div>
+          <div class="timeline-period">2025 -- Present</div>
+          <div class="timeline-role">Data Analyst -- RNCP Niv. 6</div>
           <div class="timeline-company">Wild Code School</div>
           <div class="timeline-desc">Python, SQL, Power BI, Machine Learning. Projets data en conditions reelles, methode Agile, storytelling et restitution decisionnelle.</div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-period">2021 — 2025</div>
-          <div class="timeline-role">Responsable Qualite &amp; Formation — confirme</div>
-          <div class="timeline-company">Teleperformance — Le Mans &amp; Laval</div>
+          <div class="timeline-period">2021 -- 2025</div>
+          <div class="timeline-role">Responsable Qualite et Formation -- confirme</div>
+          <div class="timeline-company">Teleperformance -- Le Mans et Laval</div>
           <div class="timeline-desc">Pilotage qualite par KPI, matrices Excel automatisees pour le reporting d'equipes, analyse d'ecarts et plans d'amelioration continue. Referent reporting a l'echelle du site.</div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-period">2017 — 2021</div>
+          <div class="timeline-period">2017 -- 2021</div>
           <div class="timeline-role">Responsable de Production</div>
-          <div class="timeline-company">Teleperformance — Le Mans &amp; Laval</div>
+          <div class="timeline-company">Teleperformance -- Le Mans et Laval</div>
           <div class="timeline-desc">Pilotage operationnel via indicateurs (volumetrie, productivite, qualite, delais). Monitoring quotidien, optimisation des ressources et aide a la decision par les donnees.</div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-period">2009 — 2017</div>
-          <div class="timeline-role">Formateur &amp; Responsable Qualite &amp; Formation — junior</div>
-          <div class="timeline-company">Teleperformance · WebHelp · Orange</div>
+          <div class="timeline-period">2009 -- 2017</div>
+          <div class="timeline-role">Formateur et Responsable Qualite et Formation -- junior</div>
+          <div class="timeline-company">Teleperformance - WebHelp - Orange</div>
           <div class="timeline-desc">Transmission des pratiques operationnelles, construction des premiers outils de suivi de performance. Premieres collaborations avec les equipes BI pour faire evoluer les dashboards.</div>
         </div>
       </div>
@@ -524,7 +498,7 @@
     <div class="skills-grid">
       <div class="skill-category reveal">
         <span class="skill-cat-icon">🗄️</span>
-        <div class="skill-cat-title">// Donnees &amp; SQL</div>
+        <div class="skill-cat-title">// Donnees et SQL</div>
         <div class="skill-tags">
           <span class="skill-tag core">SQL</span><span class="skill-tag core">MySQL</span>
           <span class="skill-tag">PostgreSQL</span><span class="skill-tag">Modelisation en etoile</span>
@@ -533,7 +507,7 @@
       </div>
       <div class="skill-category reveal">
         <span class="skill-cat-icon">🐍</span>
-        <div class="skill-cat-title">// Python &amp; Analyse</div>
+        <div class="skill-cat-title">// Python et Analyse</div>
         <div class="skill-tags">
           <span class="skill-tag core">Python</span><span class="skill-tag core">Pandas</span>
           <span class="skill-tag">NumPy</span><span class="skill-tag">Data Cleaning</span>
@@ -542,7 +516,7 @@
       </div>
       <div class="skill-category reveal">
         <span class="skill-cat-icon">📊</span>
-        <div class="skill-cat-title">// BI &amp; Dataviz</div>
+        <div class="skill-cat-title">// BI et Dataviz</div>
         <div class="skill-tags">
           <span class="skill-tag core">Power BI</span><span class="skill-tag core">DAX</span>
           <span class="skill-tag">Matplotlib</span><span class="skill-tag">Seaborn</span>
@@ -560,9 +534,9 @@
       </div>
       <div class="skill-category reveal">
         <span class="skill-cat-icon">⚙️</span>
-        <div class="skill-cat-title">// Ops &amp; Methodes</div>
+        <div class="skill-cat-title">// Ops et Methodes</div>
         <div class="skill-tags">
-          <span class="skill-tag core">KPI &amp; Reporting</span><span class="skill-tag core">Amelioration continue</span>
+          <span class="skill-tag core">KPI et Reporting</span><span class="skill-tag core">Amelioration continue</span>
           <span class="skill-tag">Lean / COPC</span><span class="skill-tag">Six Sigma Yellow Belt</span>
           <span class="skill-tag">Agile</span><span class="skill-tag">Git / GitHub</span>
         </div>
@@ -591,8 +565,8 @@
       <div class="project-card reveal">
         <div class="project-header">
           <div>
-            <div class="project-title">Toys &amp; Models</div>
-            <div class="project-subtitle">SQL · Power BI · DAX</div>
+            <div class="project-title">Toys and Models</div>
+            <div class="project-subtitle">SQL - Power BI - DAX</div>
           </div>
           <div class="project-num">01</div>
         </div>
@@ -613,7 +587,7 @@
         <div class="project-header">
           <div>
             <div class="project-title">CineData</div>
-            <div class="project-subtitle">Python · ML · Streamlit</div>
+            <div class="project-subtitle">Python - ML - Streamlit</div>
           </div>
           <div class="project-num">02</div>
         </div>
@@ -635,7 +609,7 @@
         <div class="project-header">
           <div>
             <div class="project-title">Projet 3</div>
-            <div class="project-subtitle">A venir · Wild Code School</div>
+            <div class="project-subtitle">A venir - Wild Code School</div>
           </div>
           <div class="project-num">03</div>
         </div>
@@ -662,10 +636,10 @@
       autant qu'il maitrise la donnee ? Parlons-en.
     </p>
     <div class="contact-links reveal">
-      <a href="/cdn-cgi/l/email-protection#45356b2230203729242c36052228242c296b262a28" class="contact-item">
-        <span class="contact-item-icon">✉️</span>
-        <span class="contact-item-label">Email</span>
-        <span class="contact-item-value"><span class="__cf_email__" data-cfemail="176739706272657b767e6457707a767e7b3974787a">[email&#160;protected]</span></span>
+      <a href="CV_Pierre_Guerlais.pdf" target="_blank" class="contact-item">
+        <span class="contact-item-icon">📄</span>
+        <span class="contact-item-label">Curriculum Vitae</span>
+        <span class="contact-item-value">Telecharger mon CV</span>
       </a>
       <a href="https://www.linkedin.com/in/pierreguerlais" target="_blank" rel="noopener" class="contact-item">
         <span class="contact-item-icon">💼</span>
@@ -683,9 +657,17 @@
   <!-- FOOTER -->
   <footer>
     <span class="gold">Pierre Guerlais</span>
-    <span>Data Analyst · <span class="gold">Performance Operationnelle</span> · 2026</span>
+    <span>Data Analyst - <span class="gold">Performance Operationnelle</span> - 2026</span>
   </footer>
 
   <!-- SCROLL REVEAL -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    const observer = new IntersectionObserver
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
