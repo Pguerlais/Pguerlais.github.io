@@ -287,37 +287,57 @@
       margin-bottom: 1rem;
     }
 
-    .journey-steps {
+    /* Journey V shape */
+    .journey-v-wrap {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       gap: 0;
     }
 
-    .journey-step {
-      font-size: 0.8rem;
+    .jv-top-labels {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      text-align: center;
+      padding: 0 4%;
+    }
+
+    .jv-label {
+      font-size: 0.78rem;
       font-weight: 500;
       color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .jv-label em {
+      font-style: normal;
+      font-size: 0.65rem;
+      opacity: 0.75;
+      display: block;
+    }
+
+    .jv-label.accent { color: var(--white); }
+    .jv-label.gold   { color: var(--orange); font-weight: 700; }
+
+    .journey-svg {
+      width: 100%;
+      height: 60px;
+      overflow: visible;
+    }
+
+    .jv-bottom-labels {
+      display: flex;
+      justify-content: center;
+      padding: 0 4%;
+    }
+
+    .jv-label-bottom {
+      font-size: 0.78rem;
+      font-weight: 500;
       text-align: center;
-      flex: 1;
+      line-height: 1.4;
     }
 
-    .journey-step.active { color: var(--orange); }
-
-    .journey-connector {
-      flex: 0.5;
-      height: 2px;
-      background: linear-gradient(90deg, var(--border-soft), var(--orange));
-      position: relative;
-    }
-
-    .journey-connector::after {
-      content: '→';
-      position: absolute;
-      right: -6px;
-      top: -9px;
-      font-size: 0.75rem;
-      color: var(--orange);
-    }
+    .jv-label-bottom.accent { color: var(--white); }
 
     /* Stats row */
     .hero-stats {
@@ -851,14 +871,43 @@
 
       <div class="journey-bar">
         <div class="card-label">// Trajectoire</div>
-        <div class="journey-steps">
-          <div class="journey-step">Conseiller<br/>Clientèle</div>
-          <div class="journey-connector"></div>
-          <div class="journey-step">Resp. Plateau<br/>& Activité</div>
-          <div class="journey-connector"></div>
-          <div class="journey-step">Resp. Qualité<br/>& Formation</div>
-          <div class="journey-connector"></div>
-          <div class="journey-step active">Data<br/>Analyst</div>
+        <div class="journey-v-wrap">
+
+          <!-- Labels ligne haute -->
+          <div class="jv-top-labels">
+            <div class="jv-label">Formateur</div>
+            <div class="jv-label accent">Resp. Qualité<br/>& Formation <em>junior</em></div>
+            <div class="jv-label accent">Resp. Qualité<br/>& Formation <em>confirmé</em></div>
+            <div class="jv-label gold">Data<br/>Analyst</div>
+          </div>
+
+          <!-- SVG du schéma en V -->
+          <svg class="journey-svg" viewBox="0 0 500 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrowGold" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#b5914a"/>
+              </marker>
+              <marker id="arrowMuted" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#8a8880"/>
+              </marker>
+            </defs>
+            <!-- Ligne haute : Formateur → Q.junior -->
+            <line x1="52" y1="15" x2="155" y2="15" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
+            <!-- Descente : Q.junior → Production -->
+            <line x1="168" y1="18" x2="168" y2="46" stroke="#8a8880" stroke-width="1" marker-end="url(#arrowMuted)"/>
+            <!-- Ligne basse : Production → remontée -->
+            <line x1="175" y1="52" x2="325" y2="52" stroke="#8a8880" stroke-width="1" marker-end="url(#arrowMuted)"/>
+            <!-- Remontée : Production → Q.confirmé -->
+            <line x1="332" y1="46" x2="332" y2="18" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
+            <!-- Ligne haute : Q.confirmé → Data Analyst -->
+            <line x1="345" y1="15" x2="448" y2="15" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
+          </svg>
+
+          <!-- Label ligne basse -->
+          <div class="jv-bottom-labels">
+            <div class="jv-label-bottom accent">Resp.<br/>Production</div>
+          </div>
+
         </div>
       </div>
 
@@ -890,24 +939,30 @@
     <div class="about-grid">
       <div class="about-text reveal">
         <p>
-          Mon parcours chez <strong>Teleperformance</strong> pendant plus de 10 ans m'a appris une chose essentielle : 
-          <span class="highlight">une donnée n'a de valeur que si elle sert une décision.</span>
+          Tout a commencé par une passion pour l'informatique — suffisamment forte pour orienter 
+          mes études vers un <strong>BTS Informatique de Gestion</strong>. Mon objectif d'alors : 
+          devenir formateur, transmettre, et à terme basculer vers la formation informatique.
         </p>
         <p>
-          En pilotant des équipes et des activités à grande échelle, j'ai bâti une culture 
-          profonde des <strong>KPI, du reporting et de l'amélioration continue</strong> — 
-          bien avant de toucher à Python ou SQL.
+          Le monde de la <strong>relation client</strong> en a décidé autrement. Je m'y suis pris au jeu, 
+          et ce qui devait être une étape est devenu une carrière de plus de 10 ans chez 
+          Teleperformance. Une carrière où j'ai gravi les échelons — formateur, responsable qualité, 
+          responsable de production, puis de retour à mes premiers amours en qualité & formation — 
+          en portant toujours le même fil rouge : <span class="highlight">piloter par les chiffres.</span>
         </p>
         <p>
-          Ma reconversion à la <strong>Wild Code School</strong> n'est pas un changement de cap, 
-          c'est une montée en puissance : je donne maintenant un cadre technique 
-          à ce que j'ai toujours fait intuitivement.
+          Sans le formaliser, je faisais déjà de la data. J'ai construit des 
+          <strong>matrices Excel automatisées</strong> pour mes reportings et ceux de mes équipes, 
+          au point de devenir le référent sur le sujet à mon niveau. J'ai collaboré avec les équipes 
+          BI pour faire évoluer des tableaux de bord. Les KPI, les écarts de performance, 
+          l'amélioration continue — c'était mon quotidien.
         </p>
         <p>
-          Ce que j'apporte en entreprise, c'est un <strong>Data Analyst qui comprend 
-          les contraintes du terrain</strong>, qui sait poser les bonnes questions avant 
-          de lancer une requête, et qui restitue des analyses que les équipes métier 
-          peuvent réellement utiliser.
+          La <strong>Wild Code School</strong> n'a pas changé ma trajectoire, elle lui a donné 
+          un nom et un cadre technique. Python, SQL, Power BI, Machine Learning — 
+          autant d'outils qui donnent enfin toute leur puissance à ce que j'ai toujours fait intuitivement. 
+          Et la prochaine étape qui m'attire ? <span class="highlight">Me rapprocher du paramétrage des LLM</span> — 
+          un domaine où ma culture terrain et ma curiosité technologique se rejoignent naturellement.
         </p>
       </div>
 
@@ -916,25 +971,25 @@
           <div class="timeline-period">2025 — Présent</div>
           <div class="timeline-role">Data Analyst — RNCP Niv. 6</div>
           <div class="timeline-company">Wild Code School</div>
-          <div class="timeline-desc">Python, SQL, Power BI, Machine Learning, projets data en conditions réelles.</div>
+          <div class="timeline-desc">Python, SQL, Power BI, Machine Learning. Projets data en conditions réelles, méthode Agile, storytelling et restitution décisionnelle.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-period">2021 — 2025</div>
-          <div class="timeline-role">Responsable Qualité & Formation</div>
+          <div class="timeline-role">Responsable Qualité & Formation — confirmé</div>
           <div class="timeline-company">Teleperformance — Le Mans & Laval</div>
-          <div class="timeline-desc">Pilotage qualité par KPI, construction de dashboards de reporting, analyse d'écarts et plans d'action.</div>
+          <div class="timeline-desc">Pilotage qualité par KPI, matrices Excel automatisées pour le reporting d'équipes, analyse d'écarts et plans d'amélioration continue. Référent reporting à l'échelle du site.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-period">2017 — 2021</div>
-          <div class="timeline-role">Responsable de Plateau & d'Activité</div>
+          <div class="timeline-role">Responsable de Production</div>
           <div class="timeline-company">Teleperformance — Le Mans & Laval</div>
-          <div class="timeline-desc">Pilotage opérationnel via indicateurs (volumétrie, productivité, qualité, délais). Monitoring quotidien et hebdomadaire.</div>
+          <div class="timeline-desc">Pilotage opérationnel via indicateurs (volumétrie, productivité, qualité, délais). Monitoring quotidien, optimisation des ressources et aide à la décision par les données.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-period">2009 — 2017</div>
-          <div class="timeline-role">Formateur / Conseiller de Clientèle</div>
+          <div class="timeline-role">Formateur & Responsable Qualité & Formation — junior</div>
           <div class="timeline-company">Teleperformance · WebHelp · Orange</div>
-          <div class="timeline-desc">Relation client et transmission des pratiques opérationnelles.</div>
+          <div class="timeline-desc">Transmission des pratiques opérationnelles, construction des premiers outils de suivi de performance. Premières collaborations avec les équipes BI pour faire évoluer les dashboards.</div>
         </div>
       </div>
     </div>
