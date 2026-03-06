@@ -255,7 +255,9 @@
     .skill-category:hover { border-color: var(--border); transform: translateY(-3px); }
     .skill-category:hover::before { transform: scaleX(1); }
 
-    .skill-cat-icon { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; }
+    .skill-cat-icons { display: flex; gap: 0.6rem; align-items: center; margin-bottom: 0.8rem; }
+    .skill-cat-icons i { font-size: 1.8rem; color: var(--muted); transition: color 0.2s; }
+    .skill-category:hover .skill-cat-icons i { color: var(--gold); }
     .skill-cat-title { font-family: var(--font-mono); font-size: 0.75rem; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1rem; }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
@@ -332,6 +334,7 @@
       .contact-links { flex-direction: column; align-items: center; }
     }
   </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 </head>
 
 <body>
@@ -500,7 +503,7 @@
     </div>
     <div class="skills-grid">
       <div class="skill-category reveal">
-        <span class="skill-cat-icon">🗄️</span>
+        <div class="skill-cat-icons"><i class="devicon-mysql-plain" title="MySQL"></i><i class="devicon-postgresql-plain" title="PostgreSQL"></i><i class="devicon-azuresqldatabase-plain" title="SQL"></i></div>
         <div class="skill-cat-title">// Donnees et SQL</div>
         <div class="skill-tags">
           <span class="skill-tag core">SQL</span><span class="skill-tag core">MySQL</span>
@@ -509,7 +512,7 @@
         </div>
       </div>
       <div class="skill-category reveal">
-        <span class="skill-cat-icon">🐍</span>
+        <div class="skill-cat-icons"><i class="devicon-python-plain" title="Python"></i><i class="devicon-pandas-plain" title="Pandas"></i><i class="devicon-numpy-plain" title="NumPy"></i></div>
         <div class="skill-cat-title">// Python et Analyse</div>
         <div class="skill-tags">
           <span class="skill-tag core">Python</span><span class="skill-tag core">Pandas</span>
@@ -518,7 +521,7 @@
         </div>
       </div>
       <div class="skill-category reveal">
-        <span class="skill-cat-icon">📊</span>
+        <div class="skill-cat-icons"><i class="devicon-matplotlib-plain" title="Matplotlib"></i><i class="devicon-streamlit-plain" title="Streamlit"></i></div>
         <div class="skill-cat-title">// BI et Dataviz</div>
         <div class="skill-tags">
           <span class="skill-tag core">Power BI</span><span class="skill-tag core">DAX</span>
@@ -527,7 +530,7 @@
         </div>
       </div>
       <div class="skill-category reveal">
-        <span class="skill-cat-icon">🤖</span>
+        <div class="skill-cat-icons"><i class="devicon-scikitlearn-plain" title="Scikit-learn"></i></div>
         <div class="skill-cat-title">// Machine Learning</div>
         <div class="skill-tags">
           <span class="skill-tag core">Scikit-learn</span><span class="skill-tag">Classification</span>
@@ -536,7 +539,7 @@
         </div>
       </div>
       <div class="skill-category reveal">
-        <span class="skill-cat-icon">⚙️</span>
+        <div class="skill-cat-icons"><i class="devicon-git-plain" title="Git"></i><i class="devicon-github-original" title="GitHub"></i><i class="devicon-jira-plain" title="Agile/Jira"></i></div>
         <div class="skill-cat-title">// Ops et Methodes</div>
         <div class="skill-tags">
           <span class="skill-tag core">KPI et Reporting</span><span class="skill-tag core">Amelioration continue</span>
@@ -545,7 +548,7 @@
         </div>
       </div>
       <div class="skill-category reveal">
-        <span class="skill-cat-icon">🤝</span>
+        <div class="skill-cat-icons"><i class="devicon-confluence-plain" title="Confluence"></i><i class="devicon-slack-plain" title="Communication"></i></div>
         <div class="skill-cat-title">// Soft Skills</div>
         <div class="skill-tags">
           <span class="skill-tag core">Leadership</span><span class="skill-tag core">Communication decideurs</span>
