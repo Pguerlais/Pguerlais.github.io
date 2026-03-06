@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CinéData — Pierre Guerlais</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+  <style>
+    :root {
+      --bg-deep:     #0f0f12;
+      --bg-card:     #161618;
+      --gold:        #b5914a;
+      --gold-light:  #cda55e;
+      --gold-dim:    rgba(181,145,74,0.15);
+      --gold-glow:   rgba(181,145,74,0.07);
+      --white:       #f0ece4;
+      --muted:       #8a8880;
+      --border:      rgba(181,145,74,0.22);
+      --border-soft: rgba(255,255,255,0.06);
+      --font-display:'Bebas Neue', sans-serif;
+      --font-body:   'DM Sans', sans-serif;
+      --font-mono:   'DM Mono', monospace;
+      --cinema-red:  #c0392b;
+      --cinema-dim:  rgba(192,57,43,0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-deep);
+      color: var(--white);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Grain texture */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.5;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(15,15,18,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .nav-logo { font-family: var(--font-mono); font-size: 0.85rem; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; }
+    .nav-back { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
+    .nav-back:hover { color: var(--gold); }
+
+    /* ===== HERO PROJET ===== */
+    .project-hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 4rem 4rem;
+      gap: 4rem;
+      position: relative;
+    }
+
+    /* Pellicule décorative gauche */
+    .project-hero::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 6px;
+      background: repeating-linear-gradient(
+        180deg,
+        var(--gold) 0px, var(--gold) 20px,
+        transparent 20px, transparent 30px
+      );
+      opacity: 0.3;
+    }
+
+    /* Fond ambiants */
+    .hero-glow-1 {
+      position: absolute; width: 400px; height: 400px; border-radius: 50%;
+      background: rgba(192,57,43,0.04); filter: blur(100px);
+      top: 10%; right: 5%; pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute; width: 300px; height: 300px; border-radius: 50%;
+      background: rgba(181,145,74,0.05); filter: blur(80px);
+      bottom: 10%; left: 10%; pointer-events: none;
+    }
+
+    .hero-left { position: relative; z-index: 1; }
+
+    .project-num {
+      font-family: var(--font-mono); font-size: 0.75rem; color: var(--gold);
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.8rem; opacity: 0;
+      animation: fadeUp 0.5s 0.1s forwards;
+    }
+    .project-num::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--gold); }
+
+    .project-title-big {
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 10vw, 9rem);
+      line-height: 0.88;
+      letter-spacing: 0.03em;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      opacity: 0; animation: fadeUp 0.5s 0.25s forwards;
+    }
+
+    .project-title-big span {
+      color: var(--gold);
+    }
+
+    .project-tagline {
+      font-size: 1rem; color: var(--muted); font-weight: 300;
+      max-width: 460px; line-height: 1.75; margin: 1.5rem 0 2rem;
+      opacity: 0; animation: fadeUp 0.5s 0.4s forwards;
+    }
+    .project-tagline strong { color: var(--white); font-weight: 500; }
+
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.5s 0.55s forwards; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 2rem; background: var(--gold); color: var(--bg-deep);
+      font-family: var(--font-body); font-weight: 700; font-size: 0.9rem;
+      letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 2rem; background: transparent; color: var(--white);
+      font-family: var(--font-body); font-weight: 500; font-size: 0.9rem;
+      letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none;
+      border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s, transform 0.2s;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    /* Panneau droit — méta-infos */
+    .hero-right {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; gap: 1px;
+      background: var(--border-soft);
+      opacity: 0; animation: fadeLeft 0.6s 0.5s forwards;
+    }
+
+    .meta-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--border-soft);
+    }
+
+    .meta-cell {
+      background: var(--bg-card);
+      padding: 1.4rem 1.6rem;
+      border-left: 2px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .meta-cell:hover { border-left-color: var(--gold); }
+    .meta-cell.accent { border-left-color: var(--gold); }
+
+    .meta-label {
+      font-family: var(--font-mono); font-size: 0.65rem; color: var(--gold);
+      letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .meta-value { font-size: 0.9rem; font-weight: 400; color: var(--white); line-height: 1.5; }
+    .meta-value.muted { color: var(--muted); font-weight: 300; font-size: 0.85rem; }
+
+    .stack-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+    .chip {
+      font-family: var(--font-mono); font-size: 0.7rem; padding: 0.2rem 0.6rem;
+      background: var(--gold-glow); border: 1px solid var(--border);
+      color: var(--white); letter-spacing: 0.04em;
+    }
+    .chip.core { background: var(--gold-dim); border-color: rgba(181,145,74,0.4); color: var(--gold-light); }
+
+    /* Jauge de complexité */
+    .complexity-bar {
+      display: flex; gap: 4px; margin-top: 0.6rem;
+    }
+    .cbar-seg {
+      flex: 1; height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px;
+    }
+    .cbar-seg.filled { background: var(--gold); }
+    .cbar-seg.filled.dim { background: rgba(181,145,74,0.4); }
+
+    /* ===== SECTIONS ===== */
+    section.content-section { padding: 5rem 4rem; position: relative; }
+    section.content-section.alt { background: var(--bg-card); }
+
+    .section-header { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 3rem; }
+    .section-number { font-family: var(--font-mono); font-size: 0.75rem; color: var(--gold); letter-spacing: 0.12em; }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.8rem); letter-spacing: 0.04em; color: var(--white); }
+    .section-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+
+    /* ===== PIPELINE ===== */
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    /* Ligne de connexion -->  */
+    .pipeline-grid::before {
+      content: '';
+      position: absolute;
+      top: 28px; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), var(--gold), var(--border), transparent);
+      z-index: 0;
+    }
+
+    .pipeline-step {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 0 0.8rem 1.5rem;
+      position: relative; z-index: 1;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .pipeline-step.visible { opacity: 1; transform: none; }
+
+    .step-bubble {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--bg-card); border: 1px solid var(--border-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 0.8rem;
+      transition: all 0.3s ease; cursor: default;
+    }
+    .pipeline-step:hover .step-bubble {
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(181,145,74,0.2);
+      transform: translateY(-4px);
+    }
+
+    .pipeline-step:last-child .step-bubble {
+      background: var(--gold-dim); border-color: rgba(181,145,74,0.4);
+      box-shadow: 0 0 16px rgba(181,145,74,0.25);
+    }
+
+    .step-num {
+      font-family: var(--font-mono); font-size: 0.65rem;
+      color: var(--gold); letter-spacing: 0.1em; margin-bottom: 0.3rem;
+    }
+    .step-label {
+      font-size: 0.75rem; font-weight: 600; text-align: center;
+      color: var(--white); line-height: 1.35; margin-bottom: 0.3rem;
+    }
+    .step-desc {
+      font-size: 0.7rem; color: var(--muted); text-align: center; line-height: 1.4;
+    }
+
+    /* ===== ML SECTION ===== */
+    .ml-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+
+    .ml-text h3 {
+      font-family: var(--font-display); font-size: 1.8rem; color: var(--white);
+      letter-spacing: 0.04em; margin-bottom: 1rem;
+    }
+    .ml-text p { color: var(--muted); font-weight: 300; line-height: 1.8; margin-bottom: 1rem; font-size: 0.95rem; }
+    .ml-text p strong { color: var(--white); font-weight: 500; }
+    .ml-text p .accent { color: var(--gold); font-weight: 500; }
+
+    /* Features panel */
+    .features-panel {
+      background: var(--bg-deep); border: 1px solid var(--border-soft);
+      padding: 1.6rem;
+    }
+
+    .feat-header {
+      font-family: var(--font-mono); font-size: 0.7rem; color: var(--gold);
+      letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.2rem;
+    }
+
+    .feat-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.7rem 0; border-bottom: 1px solid var(--border-soft);
+    }
+    .feat-row:last-child { border-bottom: none; }
+
+    .feat-name { font-size: 0.85rem; color: var(--white); }
+    .feat-type {
+      font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted);
+      padding: 0.2rem 0.6rem; border: 1px solid var(--border-soft);
+    }
+    .feat-type.tfidf { color: var(--gold-light); border-color: rgba(181,145,74,0.3); background: var(--gold-glow); }
+    .feat-type.num { color: #7abfff; border-color: rgba(120,190,255,0.2); background: rgba(120,190,255,0.05); }
+    .feat-type.cat { color: #9bdb9b; border-color: rgba(155,219,155,0.2); background: rgba(155,219,155,0.05); }
+
+    /* Code block */
+    .code-block {
+      background: #0a0a0d;
+      border: 1px solid var(--border-soft);
+      border-left: 3px solid var(--gold);
+      padding: 1.4rem 1.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin-top: 1.5rem;
+    }
+    .code-comment { color: #5a5a6a; }
+    .code-keyword { color: var(--gold-light); }
+    .code-string { color: #98c379; }
+    .code-func { color: #61afef; }
+    .code-param { color: #e06c75; }
+
+    /* ===== RÉSULTATS / METRICS ===== */
+    .metrics-row {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      background: var(--border-soft); margin-bottom: 3rem;
+    }
+    .metric-box {
+      background: var(--bg-card); padding: 1.6rem 1rem; text-align: center;
+      transition: background 0.3s;
+    }
+    .metric-box:hover { background: var(--bg-hover); }
+    .metric-box:last-child { border-left: 2px solid var(--gold); }
+
+    .metric-val {
+      font-family: var(--font-display); font-size: 2.4rem;
+      color: var(--gold); line-height: 1;
+    }
+    .metric-box:last-child .metric-val { color: var(--gold-light); font-size: 2rem; }
+    .metric-lbl { font-size: 0.72rem; color: var(--muted); margin-top: 0.4rem; letter-spacing: 0.06em; }
+
+    /* Screenshots placeholder */
+    .screenshots-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+    .screenshot-card {
+      background: var(--bg-card); border: 1px solid var(--border-soft);
+      overflow: hidden; transition: border-color 0.3s, transform 0.3s;
+    }
+    .screenshot-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+
+    .screenshot-placeholder {
+      height: 200px; display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0.8rem;
+      background: linear-gradient(135deg, #0f0f14, #161618);
+      position: relative; overflow: hidden;
+    }
+
+    /* Grille interne décorative */
+    .screenshot-placeholder::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    .screenshot-icon { font-size: 2.5rem; position: relative; z-index: 1; }
+    .screenshot-label {
+      font-family: var(--font-mono); font-size: 0.7rem; color: var(--gold);
+      letter-spacing: 0.14em; text-transform: uppercase; position: relative; z-index: 1;
+    }
+
+    .screenshot-cap {
+      padding: 0.9rem 1.2rem; border-top: 1px solid var(--border-soft);
+    }
+    .screenshot-title { font-size: 0.85rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; }
+    .screenshot-desc { font-size: 0.78rem; color: var(--muted); font-weight: 300; }
+
+    /* ===== STRUCTURE DU PROJET ===== */
+    .tree-block {
+      background: #0a0a0d; border: 1px solid var(--border-soft);
+      padding: 1.6rem 2rem; font-family: var(--font-mono); font-size: 0.82rem;
+      line-height: 1.8; max-width: 600px;
+    }
+    .tree-dir { color: var(--gold-light); }
+    .tree-file { color: rgba(240,236,228,0.6); }
+    .tree-comment { color: #5a5a6a; }
+    .tree-highlight { color: var(--white); font-weight: 500; }
+
+    /* ===== NAV BAS ===== */
+    .bottom-nav {
+      padding: 3rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .back-link {
+      display: flex; align-items: center; gap: 0.6rem;
+      text-decoration: none; color: var(--muted);
+      font-family: var(--font-mono); font-size: 0.8rem;
+      letter-spacing: 0.08em; transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--gold); }
+
+    .ext-links { display: flex; gap: 1rem; }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeLeft { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Stagger delays */
+    .reveal:nth-child(2) { transition-delay: 0.1s; }
+    .reveal:nth-child(3) { transition-delay: 0.2s; }
+    .reveal:nth-child(4) { transition-delay: 0.3s; }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      nav { padding: 1.2rem 2rem; }
+      .project-hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; }
+      .hero-right { display: none; }
+      section.content-section { padding: 4rem 2rem; }
+      .pipeline-grid { grid-template-columns: repeat(3, 1fr); }
+      .ml-grid { grid-template-columns: 1fr; }
+      .metrics-row { grid-template-columns: 1fr 1fr; }
+      .screenshots-grid { grid-template-columns: 1fr; }
+      .bottom-nav { padding: 2rem; flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">PG — Data Analyst</a>
+    <a href="index.html#projects" class="nav-back">← Retour aux projets</a>
+  </nav>
+
+  <!-- HERO PROJET -->
+  <div class="project-hero">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+
+    <div class="hero-left">
+      <div class="project-num">Projet 02 — Python · ML · Streamlit</div>
+      <h1 class="project-title-big">Ciné<span>Data</span></h1>
+      <p class="project-tagline">
+        Un <strong>système de recommandation de films</strong> construit de bout en bout —
+        du pipeline de données brutes IMDb & TMDB jusqu'à une application Streamlit
+        déployée en production, pilotée par un moteur <strong>Nearest Neighbors</strong>.
+      </p>
+      <div class="hero-cta">
+        <a href="https://cinedata.streamlit.app/" target="_blank" class="btn-primary">↗ Voir l'app live</a>
+        <a href="https://github.com/Pguerlais/Cinedata" target="_blank" class="btn-secondary">↗ GitHub</a>
+      </div>
+    </div>
+
+    <!-- Méta-infos droite -->
+    <div class="hero-right">
+      <div class="meta-row">
+        <div class="meta-cell accent">
+          <div class="meta-label">// Contexte</div>
+          <div class="meta-value">Projet de formation</div>
+          <div class="meta-value muted">Wild Code School · 2025</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-label">// Équipe</div>
+          <div class="meta-value">Pierre Guerlais</div>
+          <div class="meta-value muted">+ Anthony (co-auteur)</div>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-cell">
+          <div class="meta-label">// Stack principale</div>
+          <div class="stack-chips">
+            <span class="chip core">Python</span>
+            <span class="chip core">Scikit-learn</span>
+            <span class="chip">Pandas</span>
+            <span class="chip">Streamlit</span>
+            <span class="chip">TMDB API</span>
+          </div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-label">// Sources de données</div>
+          <div class="stack-chips">
+            <span class="chip">IMDb Datasets</span>
+            <span class="chip">TMDB API</span>
+          </div>
+          <div class="meta-value muted" style="margin-top:0.5rem; font-size:0.78rem;">Fusion multi-sources · ~500k films</div>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-cell">
+          <div class="meta-label">// Algorithme ML</div>
+          <div class="meta-value">Nearest Neighbors</div>
+          <div class="meta-value muted">Similarité cosinus · Données hybrides</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-label">// Complexité pipeline</div>
+          <div class="meta-value">10 étapes · End-to-end</div>
+          <div class="complexity-bar">
+            <div class="cbar-seg filled"></div>
+            <div class="cbar-seg filled"></div>
+            <div class="cbar-seg filled"></div>
+            <div class="cbar-seg filled"></div>
+            <div class="cbar-seg filled dim"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-cell">
+          <div class="meta-label">// Déploiement</div>
+          <div class="meta-value">Streamlit Cloud</div>
+          <div class="meta-value muted" style="font-size:0.75rem;">cinedata.streamlit.app</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-label">// Commits GitHub</div>
+          <div class="meta-value" style="font-size:1.5rem; font-family: var(--font-display);">102</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PIPELINE DATA -->
+  <section class="content-section alt">
+    <div class="section-header reveal">
+      <span class="section-number">01</span>
+      <h2 class="section-title">Pipeline de données</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="pipeline-grid">
+      <div class="pipeline-step reveal">
+        <div class="step-bubble">📥</div>
+        <div class="step-num">s01</div>
+        <div class="step-label">Chargement IMDb</div>
+        <div class="step-desc">Lecture en streaming depuis datasets.imdbws.com</div>
+      </div>
+      <div class="pipeline-step reveal">
+        <div class="step-bubble">🔪</div>
+        <div class="step-num">s02–s04</div>
+        <div class="step-label">Filtrage & Nettoyage</div>
+        <div class="step-desc">Titres pertinents, ratings, sélection des films principaux</div>
+      </div>
+      <div class="pipeline-step reveal">
+        <div class="step-bubble">🎭</div>
+        <div class="step-num">s05–s07</div>
+        <div class="step-label">Enrichissement</div>
+        <div class="step-desc">Réalisateurs, casting, consolidation multi-champs</div>
+      </div>
+      <div class="pipeline-step reveal">
+        <div class="step-bubble">🔗</div>
+        <div class="step-num">s08–s10</div>
+        <div class="step-label">Fusion TMDB</div>
+        <div class="step-desc">Nettoyage TMDB + fusion finale des deux sources</div>
+      </div>
+      <div class="pipeline-step reveal">
+        <div class="step-bubble">✨</div>
+        <div class="step-num">output</div>
+        <div class="step-label">Dataset ML-ready</div>
+        <div class="step-desc">Dataset final normalisé, prêt pour le moteur de reco</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTEUR ML -->
+  <section class="content-section">
+    <div class="section-header reveal">
+      <span class="section-number">02</span>
+      <h2 class="section-title">Moteur de recommandation</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="ml-grid">
+      <div class="ml-text reveal">
+        <h3>Approche hybride<br/>& similarité cosinus</h3>
+        <p>
+          Le système combine des <strong>features hétérogènes</strong> — texte, catégories et
+          variables numériques — pour produire un vecteur de représentation dense par film.
+          L'algorithme <span class="accent">NearestNeighbors</span> de scikit-learn calcule
+          ensuite la distance cosinus entre ce vecteur et l'ensemble du catalogue.
+        </p>
+        <p>
+          Ce choix permet de gérer efficacement les <strong>matrices creuses (sparse)</strong>
+          issues du TF-IDF, tout en assurant des performances rapides en production — 
+          même sur un catalogue de plusieurs centaines de milliers de films.
+        </p>
+        <p>
+          Les recommandations croisent ainsi <span class="accent">genre, casting, réalisateurs,
+          popularité, année et description textuelle</span> pour identifier des films
+          genuinement similaires.
+        </p>
+
+        <div class="code-block">
+<span class="code-comment"># Preprocessing hybride</span>
+<span class="code-keyword">vectorizer</span> = TfidfVectorizer(<span class="code-param">max_features</span>=<span class="code-string">5000</span>)
+<span class="code-keyword">text_features</span> = vectorizer.fit_transform(df[<span class="code-string">'text_combined'</span>])
+
+<span class="code-keyword">mlb</span> = MultiLabelBinarizer()
+<span class="code-keyword">cat_features</span> = mlb.fit_transform(df[<span class="code-string">'genres'</span>])
+
+<span class="code-keyword">scaler</span> = StandardScaler()
+<span class="code-keyword">num_features</span> = scaler.fit_transform(df[[<span class="code-string">'popularity'</span>, <span class="code-string">'year'</span>]])
+
+<span class="code-comment"># Matrice finale sparse</span>
+<span class="code-keyword">X</span> = hstack([text_features, cat_features, num_features])
+
+<span class="code-comment"># Moteur de recommandation</span>
+<span class="code-keyword">model</span> = NearestNeighbors(<span class="code-param">metric</span>=<span class="code-string">"cosine"</span>, <span class="code-param">algorithm</span>=<span class="code-string">"brute"</span>)
+model.fit(X)
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="features-panel">
+          <div class="feat-header">// Features utilisées</div>
+          <div class="feat-row">
+            <div class="feat-name">Casting + Description</div>
+            <div class="feat-type tfidf">TF-IDF</div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-name">Genres</div>
+            <div class="feat-type cat">MultiLabelBinarizer</div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-name">Pays de production</div>
+            <div class="feat-type cat">MultiLabelBinarizer</div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-name">Réalisateurs</div>
+            <div class="feat-type tfidf">TF-IDF</div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-name">Popularité</div>
+            <div class="feat-type num">StandardScaler</div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-name">Année de sortie</div>
+            <div class="feat-type num">StandardScaler</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP STREAMLIT -->
+  <section class="content-section alt">
+    <div class="section-header reveal">
+      <span class="section-number">03</span>
+      <h2 class="section-title">Application Streamlit</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="metrics-row reveal">
+      <div class="metric-box">
+        <div class="metric-val">3</div>
+        <div class="metric-lbl">Pages dédiées</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">~500k</div>
+        <div class="metric-lbl">Films indexés</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">102</div>
+        <div class="metric-lbl">Commits GitHub</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">Live</div>
+        <div class="metric-lbl">Déployé Streamlit Cloud</div>
+      </div>
+    </div>
+
+    <div class="screenshots-grid reveal">
+      <div class="screenshot-card">
+        <div class="screenshot-placeholder">
+          <div class="screenshot-icon">🎬</div>
+          <div class="screenshot-label">Catalogue</div>
+        </div>
+        <div class="screenshot-cap">
+          <div class="screenshot-title">Navigation dans le catalogue</div>
+          <div class="screenshot-desc">Exploration de l'ensemble du catalogue de films avec filtres par genre, période et popularité.</div>
+        </div>
+      </div>
+      <div class="screenshot-card">
+        <div class="screenshot-placeholder">
+          <div class="screenshot-icon">🎞️</div>
+          <div class="screenshot-label">Fiche Film</div>
+        </div>
+        <div class="screenshot-cap">
+          <div class="screenshot-title">Fiche détaillée</div>
+          <div class="screenshot-desc">Informations complètes : casting, réalisateur, synopsis, popularité et films similaires suggérés.</div>
+        </div>
+      </div>
+      <div class="screenshot-card">
+        <div class="screenshot-placeholder">
+          <div class="screenshot-icon">🤖</div>
+          <div class="screenshot-label">Reco ML</div>
+        </div>
+        <div class="screenshot-cap">
+          <div class="screenshot-title">Recommandations personnalisées</div>
+          <div class="screenshot-desc">Moteur Nearest Neighbors en temps réel : saisir un film, obtenir 5 recommandations ciblées.</div>
+        </div>
+      </div>
+      <div class="screenshot-card">
+        <div class="screenshot-placeholder">
+          <div class="screenshot-icon">⚙️</div>
+          <div class="screenshot-label">Architecture</div>
+        </div>
+        <div class="screenshot-cap">
+          <div class="screenshot-title">Design CSS personnalisé</div>
+          <div class="screenshot-desc">Interface soignée avec CSS sur mesure, intégrée directement dans Streamlit via <code>st.markdown</code>.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section class="content-section">
+    <div class="section-header reveal">
+      <span class="section-number">04</span>
+      <h2 class="section-title">Architecture du projet</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="tree-block reveal">
+<span class="tree-dir">Cinedata/</span>
+│
+├── <span class="tree-highlight">app.py</span>                  <span class="tree-comment"># Entrée principale Streamlit</span>
+│
+├── <span class="tree-dir">pages/</span>
+│   ├── <span class="tree-highlight">Catalogue.py</span>          <span class="tree-comment"># Navigation catalogue</span>
+│   ├── <span class="tree-highlight">Film_details.py</span>       <span class="tree-comment"># Fiches films détaillées</span>
+│   └── <span class="tree-highlight">Reco_ML.py</span>            <span class="tree-comment"># Moteur de recommandation</span>
+│
+├── <span class="tree-dir">src/</span>
+│   ├── <span class="tree-file">config.py</span>
+│   ├── <span class="tree-highlight">pipeline.py</span>           <span class="tree-comment"># Orchestration pipeline</span>
+│   ├── <span class="tree-file">utils.py · ui.py</span>
+│   ├── <span class="tree-dir">reco/</span>
+│   │   └── <span class="tree-highlight">engine.py</span>         <span class="tree-comment"># Moteur NearestNeighbors</span>
+│   └── <span class="tree-dir">s01 → s10/</span>             <span class="tree-comment"># 10 étapes pipeline data</span>
+│
+├── <span class="tree-dir">assets/</span>
+│   └── <span class="tree-highlight">style.css</span>             <span class="tree-comment"># UI Streamlit personnalisée</span>
+│
+└── <span class="tree-file">requirements.txt</span>
+    </div>
+  </section>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="index.html#projects" class="back-link">← Tous les projets</a>
+    <div class="ext-links">
+      <a href="https://github.com/Pguerlais/Cinedata" target="_blank" class="btn-secondary">↗ GitHub</a>
+      <a href="https://cinedata.streamlit.app/" target="_blank" class="btn-primary">↗ App live</a>
+    </div>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.reveal, .pipeline-step').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
