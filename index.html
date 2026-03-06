@@ -300,6 +300,8 @@
     .contact-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1.5rem 2rem; background: var(--bg-card); border: 1px solid var(--border-soft); text-decoration: none; min-width: 160px; transition: border-color 0.3s, transform 0.3s; }
     .contact-item:hover { border-color: var(--gold); transform: translateY(-3px); }
     .contact-item-icon { font-size: 1.4rem; }
+    .contact-item-icon-dev { font-size: 2rem; color: var(--muted); transition: color 0.3s; }
+    .contact-item:hover .contact-item-icon-dev { color: var(--gold); }
     .contact-item-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; }
     .contact-item-value { font-size: 0.85rem; color: var(--white); }
 
@@ -643,17 +645,17 @@
     </p>
     <div class="contact-links reveal">
       <a href="CV_Pierre_Guerlais.pdf" target="_blank" class="contact-item">
-        <span class="contact-item-icon">📄</span>
+        <i class="devicon-markdown-original contact-item-icon-dev" title="CV"></i>
         <span class="contact-item-label">Curriculum Vitae</span>
         <span class="contact-item-value">Telecharger mon CV</span>
       </a>
       <a href="https://www.linkedin.com/in/pierreguerlais" target="_blank" rel="noopener" class="contact-item">
-        <span class="contact-item-icon">💼</span>
+        <i class="devicon-linkedin-plain contact-item-icon-dev" title="LinkedIn"></i>
         <span class="contact-item-label">LinkedIn</span>
         <span class="contact-item-value">pierreguerlais</span>
       </a>
       <a href="https://github.com/Pguerlais" target="_blank" rel="noopener" class="contact-item">
-        <span class="contact-item-icon">🐙</span>
+        <i class="devicon-github-original contact-item-icon-dev" title="GitHub"></i>
         <span class="contact-item-label">GitHub</span>
         <span class="contact-item-value">Pguerlais</span>
       </a>
