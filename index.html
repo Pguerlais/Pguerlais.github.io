@@ -116,8 +116,6 @@
     .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; background: transparent; color: var(--white); font-family: var(--font-body); font-weight: 500; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s, transform 0.2s; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%); }
     .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
-
-    /* Contacts inline hero */
     .hero-contacts {
       display: flex;
       align-items: center;
@@ -157,7 +155,6 @@
       animation: fadeLeft 0.7s 0.7s forwards;
     }
 
-    /* Photo pleine largeur */
     .hero-photo-wrap {
       position: relative;
       width: 100%;
@@ -193,14 +190,12 @@
       width: 62%;
       display: block;
       image-rendering: -webkit-optimize-contrast;
-      image-rendering: crisp-edges;
       filter: contrast(1.08) brightness(1.04) saturate(0.92);
     }
 
-    /* Ligne 2 : profil + trajectoire cote a cote */
     .hero-bottom-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1.6fr;
       gap: 1px;
       background: var(--border-soft);
     }
@@ -227,27 +222,155 @@
       line-height: 1.55;
     }
 
-    /* Trajectoire */
+    /* ===== TRAJECTOIRE V4 INTÉGRÉE ===== */
     .journey-bar {
       background: var(--bg-card);
       border: 1px solid var(--border-soft);
-      padding: 1.2rem 1.6rem;
+      padding: 1.2rem 1.4rem 1rem;
+      position: relative;
+      overflow: hidden;
     }
 
-    .journey-v-wrap { display: flex; flex-direction: column; gap: 0; }
+    /* Blobs ambiants discrets */
+    .journey-bar::before {
+      content: '';
+      position: absolute;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: rgba(181,145,74,0.06);
+      filter: blur(50px);
+      top: -40px; right: 20px;
+      pointer-events: none;
+    }
 
-    .jv-top-labels { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; text-align: center; padding: 0 4%; }
-    .jv-label { font-size: 0.7rem; font-weight: 500; color: var(--muted); line-height: 1.4; }
-    .jv-label em { font-style: normal; font-size: 0.6rem; opacity: 0.75; display: block; }
-    .jv-label.accent { color: var(--white); }
-    .jv-label.gold { color: var(--gold); font-weight: 700; }
+    .journey-inner { position: relative; z-index: 1; }
 
-    .journey-svg { width: 100%; height: 54px; overflow: visible; }
+    /* Grille de fond */
+    .journey-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
 
-    .jv-bottom-labels { display: flex; justify-content: center; padding: 0 4%; }
-    .jv-label-bottom { font-size: 0.7rem; font-weight: 500; text-align: center; line-height: 1.4; color: var(--white); }
+    /* Conteneur des nœuds */
+    .journey-nodes-area {
+      position: relative;
+      height: 110px;
+      margin-top: 8px;
+    }
 
-    /* Stats */
+    .journey-svg-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    /* Nœuds positionnés */
+    .jn {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      animation: jnPop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
+      cursor: default;
+    }
+
+    @keyframes jnPop {
+      from { opacity: 0; transform: scale(0.6) translateY(8px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .jn:nth-child(1) { animation-delay: 0.1s; }
+    .jn:nth-child(2) { animation-delay: 0.3s; }
+    .jn:nth-child(3) { animation-delay: 0.5s; }
+    .jn:nth-child(4) { animation-delay: 0.7s; }
+    .jn:nth-child(5) { animation-delay: 0.9s; }
+
+    /* Positions : top row = 4 nœuds, bottom = 1 */
+    .jn-1 { left:   2%; top: 2px; }
+    .jn-2 { left:  27%; top: 2px; }
+    .jn-3 { left:  52%; top: 2px; }
+    .jn-4 { left:  77%; top: 2px; }
+    .jn-5 { left:  38%; top: 62px; }
+
+    .jn-pin {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .jn:hover .jn-pin {
+      border-color: var(--gold);
+      background: var(--gold-dim);
+      box-shadow: 0 0 14px rgba(181,145,74,0.35);
+      transform: scale(1.15) translateY(-2px);
+    }
+
+    .jn-4 .jn-pin {
+      background: var(--gold-dim);
+      border-color: rgba(181,145,74,0.5);
+      box-shadow: 0 0 18px rgba(181,145,74,0.4);
+      animation: jnGlow 2.5s ease infinite;
+    }
+
+    @keyframes jnGlow {
+      0%,100% { box-shadow: 0 0 18px rgba(181,145,74,0.4); }
+      50% { box-shadow: 0 0 28px rgba(181,145,74,0.75); }
+    }
+
+    .jn-4 .jn-pin::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid rgba(181,145,74,0.25);
+      animation: jnRing 2.5s ease infinite;
+    }
+    @keyframes jnRing {
+      0%   { transform: scale(0.85); opacity: 0; }
+      50%  { opacity: 1; }
+      100% { transform: scale(1.15); opacity: 0; }
+    }
+
+    .jn-5 .jn-pin {
+      border-color: rgba(181,145,74,0.2);
+      background: rgba(181,145,74,0.04);
+    }
+
+    .jn-text {
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-align: center;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1.3;
+      max-width: 70px;
+    }
+
+    .jn-4 .jn-text { color: var(--gold); }
+
+    .jn-sub {
+      font-size: 0.55rem;
+      color: rgba(255,255,255,0.25);
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* Footer stats */
     .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-soft); }
     .stat-box { background: var(--bg-card); padding: 1.2rem 1rem; text-align: center; }
     .stat-number { font-family: var(--font-display); font-size: 2rem; color: var(--gold); line-height: 1; }
@@ -279,7 +402,7 @@
     .timeline-company { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
     .timeline-desc { font-size: 0.9rem; color: var(--muted); font-weight: 300; line-height: 1.6; }
 
-    /* ===== COMPETENCES ===== */
+    /* ===== COMPÉTENCES ===== */
     .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 
     .skill-category { background: var(--bg-card); border: 1px solid var(--border-soft); padding: 1.8rem; position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
@@ -318,7 +441,6 @@
     .project-links { display: flex; gap: 1rem; }
     .project-link { font-size: 0.8rem; font-family: var(--font-mono); color: var(--gold); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
     .project-link:hover { color: var(--gold-light); }
-    .project-link::after { content: 'arrowup'; font-size: 0.9em; }
 
     .wip-badge { position: absolute; top: 1rem; right: 1rem; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.14em; color: var(--gold); border: 1px solid var(--gold); padding: 0.2rem 0.6rem; text-transform: uppercase; animation: pulse 2s infinite; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
@@ -331,7 +453,6 @@
 
     .contact-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1.5rem 2rem; background: var(--bg-card); border: 1px solid var(--border-soft); text-decoration: none; min-width: 160px; transition: border-color 0.3s, transform 0.3s; }
     .contact-item:hover { border-color: var(--gold); transform: translateY(-3px); }
-    .contact-item-icon { font-size: 1.4rem; }
     .contact-item-icon-dev { font-size: 2rem; color: var(--muted); transition: color 0.3s; }
     .contact-item:hover .contact-item-icon-dev { color: var(--gold); }
     .contact-item-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; }
@@ -378,7 +499,7 @@
     <div class="nav-logo">PG — Data Analyst</div>
     <ul class="nav-links">
       <li><a href="#about">Parcours</a></li>
-      <li><a href="#skills">Competences</a></li>
+      <li><a href="#skills">Compétences</a></li>
       <li><a href="#projects">Projets</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -389,19 +510,18 @@
 
     <!-- Colonne gauche : texte -->
     <div class="hero-content">
-      <div class="hero-eyebrow">Data Analyst - Performance Operationnelle</div>
+      <div class="hero-eyebrow">Data Analyst — Performance Opérationnelle</div>
       <h1 class="hero-name">Pierre<span>Guerlais</span></h1>
       <p class="hero-tagline">
-        <strong>10 ans dans les operations</strong>, la donnee comme outil de decision.<br/>
-        Je transforme des donnees complexes en <strong>analyses actionnables</strong> --
-        avec une comprehension terrain que les chiffres seuls ne donnent pas.
+        <strong>10 ans dans les opérations</strong>, la donnée comme outil de décision.<br/>
+        Je transforme des données complexes en <strong>analyses actionnables</strong> —
+        avec une compréhension terrain que les chiffres seuls ne donnent pas.
       </p>
       <div class="hero-cta">
         <a href="#projects" class="btn-primary">Voir mes projets</a>
         <a href="CV_Pierre_Guerlais.pdf" target="_blank" class="btn-secondary">Voir mon CV</a>
       </div>
 
-      <!-- Contacts inline sous les CTA -->
       <div class="hero-contacts">
         <a href="https://www.linkedin.com/in/pierreguerlais" target="_blank" rel="noopener" class="hero-contact-link">
           <i class="devicon-linkedin-plain"></i>
@@ -423,48 +543,92 @@
     <!-- Colonne droite : photo + blocs -->
     <div class="hero-visual">
 
-      <!-- Photo grande pleine largeur -->
       <div class="hero-photo-wrap">
         <img src="pierre_portfolio.png" alt="Pierre Guerlais - Data Analyst" class="hero-photo" />
       </div>
 
-      <!-- Profil + Trajectoire cote a cote -->
+      <!-- Profil + Trajectoire côte à côte -->
       <div class="hero-bottom-row">
 
         <div class="identity-card">
           <div class="card-label">// Profil</div>
           <div class="card-value">
-            Data Analyst junior avec un ancrage fort dans le terrain operationnel.
-            Je parle autant aux decideurs qu'aux equipes metier.
+            Data Analyst junior avec un ancrage fort dans le terrain opérationnel.
+            Je parle autant aux décideurs qu'aux équipes métier.
           </div>
         </div>
 
+        <!-- TRAJECTOIRE V4 — couleurs portfolio -->
         <div class="journey-bar">
-          <div class="card-label">// Trajectoire</div>
-          <div class="journey-v-wrap">
-            <div class="jv-top-labels">
-              <div class="jv-label accent">Formateur</div>
-              <div class="jv-label accent">Resp. Qualite<br/>Formation <em>junior</em></div>
-              <div class="jv-label accent">Resp. Qualite<br/>Formation <em>confirme</em></div>
-              <div class="jv-label gold">Data<br/>Analyst</div>
-            </div>
-            <svg class="journey-svg" viewBox="0 0 500 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <marker id="arrowGold" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-                  <path d="M0,0 L6,3 L0,6 Z" fill="#b5914a"/>
-                </marker>
-                <marker id="arrowMuted" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-                  <path d="M0,0 L6,3 L0,6 Z" fill="#8a8880"/>
-                </marker>
-              </defs>
-              <line x1="52" y1="14" x2="155" y2="14" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
-              <line x1="168" y1="17" x2="168" y2="42" stroke="#8a8880" stroke-width="1" marker-end="url(#arrowMuted)"/>
-              <line x1="175" y1="47" x2="325" y2="47" stroke="#8a8880" stroke-width="1" marker-end="url(#arrowMuted)"/>
-              <line x1="332" y1="42" x2="332" y2="17" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
-              <line x1="345" y1="14" x2="448" y2="14" stroke="#b5914a" stroke-width="1" marker-end="url(#arrowGold)"/>
-            </svg>
-            <div class="jv-bottom-labels">
-              <div class="jv-label-bottom">Resp. Production</div>
+          <div class="journey-grid-bg"></div>
+          <div class="journey-inner">
+            <div class="card-label">// Trajectoire</div>
+            <div class="journey-nodes-area">
+
+              <!-- SVG arrows layer -->
+              <svg class="journey-svg-layer" viewBox="0 0 400 110" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <marker id="jArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                    <path d="M0,0 L6,3 L0,6 Z" fill="rgba(181,145,74,0.5)"/>
+                  </marker>
+                  <marker id="jArrowGold" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                    <path d="M0,0 L6,3 L0,6 Z" fill="#b5914a"/>
+                  </marker>
+                  <marker id="jArrowMuted" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                    <path d="M0,0 L6,3 L0,6 Z" fill="rgba(138,136,128,0.5)"/>
+                  </marker>
+                </defs>
+
+                <!-- N1 Formateur → N2 RQF junior -->
+                <path d="M 26,15 L 114,15" stroke="rgba(181,145,74,0.35)" stroke-width="1.5" fill="none" marker-end="url(#jArrow)"
+                  stroke-dasharray="90" style="stroke-dashoffset:90;animation:jDraw 0.4s ease 0.2s forwards"/>
+
+                <!-- N2 RQF junior → N5 Resp Prod (détour bas) -->
+                <path d="M 128,28 Q 168,78 196,78" stroke="rgba(138,136,128,0.35)" stroke-width="1" fill="none" marker-end="url(#jArrowMuted)"
+                  stroke-dasharray="80" style="stroke-dashoffset:80;animation:jDraw 0.4s ease 0.45s forwards" stroke-dasharray="4 3"/>
+
+                <!-- N5 Resp Prod → N3 RQF confirmé (retour) -->
+                <path d="M 220,78 Q 252,78 272,28" stroke="rgba(138,136,128,0.35)" stroke-width="1" fill="none" marker-end="url(#jArrowMuted)"
+                  stroke-dasharray="80" style="stroke-dashoffset:80;animation:jDraw 0.4s ease 0.65s forwards" stroke-dasharray="4 3"/>
+
+                <!-- N3 RQF confirmé → N4 Data Analyst -->
+                <path d="M 286,15 L 316,15" stroke="#b5914a" stroke-width="2" fill="none" marker-end="url(#jArrowGold)"
+                  stroke-dasharray="35" style="stroke-dashoffset:35;animation:jDraw 0.4s ease 0.85s forwards"/>
+
+                <style>@keyframes jDraw { to { stroke-dashoffset: 0; } }</style>
+
+                <!-- Ligne pointillée fantôme -->
+                <path d="M 10,8 L 398,8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="3 6" fill="none"/>
+              </svg>
+
+              <!-- Nœuds -->
+              <div class="jn jn-1">
+                <div class="jn-pin">🎓</div>
+                <div class="jn-text">Formateur</div>
+              </div>
+
+              <div class="jn jn-2">
+                <div class="jn-pin">🔍</div>
+                <div class="jn-text">RQF</div>
+                <div class="jn-sub">junior</div>
+              </div>
+
+              <div class="jn jn-3">
+                <div class="jn-pin">✅</div>
+                <div class="jn-text">RQF</div>
+                <div class="jn-sub">confirmé</div>
+              </div>
+
+              <div class="jn jn-4">
+                <div class="jn-pin">📊</div>
+                <div class="jn-text">Data Analyst</div>
+              </div>
+
+              <div class="jn jn-5">
+                <div class="jn-pin">⚙️</div>
+                <div class="jn-text">Resp. Production</div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -491,75 +655,75 @@
     <div class="about-grid">
       <div class="about-text reveal">
         <p>
-          Tout a commence par une passion pour l'informatique -- suffisamment forte pour orienter
-          mes etudes vers un <strong>BTS Informatique de Gestion</strong>. Mon objectif d'alors :
-          devenir formateur, transmettre, et a terme basculer vers la formation informatique.
+          Tout a commencé par une passion pour l'informatique — suffisamment forte pour orienter
+          mes études vers un <strong>BTS Informatique de Gestion</strong>. Mon objectif d'alors :
+          devenir formateur, transmettre, et à terme basculer vers la formation informatique.
         </p>
         <p>
-          Le monde de la <strong>relation client</strong> en a decide autrement. Je m'y suis pris au jeu,
-          et ce qui devait etre une etape est devenu une carriere de plus de 10 ans chez
-          Teleperformance. Une carriere ou j'ai gravi les echelons -- formateur, responsable qualite,
-          responsable de production, puis de retour a mes premiers amours en qualite et formation --
-          en portant toujours le meme fil rouge : <span class="highlight">piloter par les chiffres.</span>
+          Le monde de la <strong>relation client</strong> en a décidé autrement. Je m'y suis pris au jeu,
+          et ce qui devait être une étape est devenu une carrière de plus de 10 ans chez
+          Téléperformance. Une carrière où j'ai gravi les échelons — formateur, responsable qualité,
+          responsable de production, puis de retour à mes premiers amours en qualité et formation —
+          en portant toujours le même fil rouge : <span class="highlight">piloter par les chiffres.</span>
         </p>
         <p>
-          Sans le formaliser, je faisais deja de la data. J'ai construit des
-          <strong>matrices Excel automatisees</strong> pour mes reportings et ceux de mes equipes,
-          au point de devenir le referent sur le sujet a mon niveau. J'ai collabore avec les equipes
-          BI pour faire evoluer des tableaux de bord. Les KPI, les ecarts de performance,
-          l'amelioration continue -- c'etait mon quotidien.
+          Sans le formaliser, je faisais déjà de la data. J'ai construit des
+          <strong>matrices Excel automatisées</strong> pour mes reportings et ceux de mes équipes,
+          au point de devenir le référent sur le sujet à mon niveau. J'ai collaboré avec les équipes
+          BI pour faire évoluer des tableaux de bord. Les KPI, les écarts de performance,
+          l'amélioration continue — c'était mon quotidien.
         </p>
         <p>
-          La <strong>Wild Code School</strong> n'a pas change ma trajectoire, elle lui a donne
-          un nom et un cadre technique. Python, SQL, Power BI, Machine Learning --
-          autant d'outils qui donnent enfin toute leur puissance a ce que j'ai toujours fait intuitivement.
-          Et la prochaine etape qui m'attire ? <span class="highlight">Me rapprocher du parametrage des LLM</span> --
-          un domaine ou ma culture terrain et ma curiosite technologique se rejoignent naturellement.
+          La <strong>Wild Code School</strong> n'a pas changé ma trajectoire, elle lui a donné
+          un nom et un cadre technique. Python, SQL, Power BI, Machine Learning —
+          autant d'outils qui donnent enfin toute leur puissance à ce que j'ai toujours fait intuitivement.
+          Et la prochaine étape qui m'attire ? <span class="highlight">Me rapprocher du paramétrage des LLM</span> —
+          un domaine où ma culture terrain et ma curiosité technologique se rejoignent naturellement.
         </p>
       </div>
       <div class="timeline reveal">
         <div class="timeline-item">
-          <div class="timeline-period">2025 -- Present</div>
-          <div class="timeline-role">Data Analyst -- RNCP Niv. 6</div>
+          <div class="timeline-period">2025 — Présent</div>
+          <div class="timeline-role">Data Analyst — RNCP Niv. 6</div>
           <div class="timeline-company">Wild Code School</div>
-          <div class="timeline-desc">Python, SQL, Power BI, Machine Learning. Projets data en conditions reelles, methode Agile, storytelling et restitution decisionnelle.</div>
+          <div class="timeline-desc">Python, SQL, Power BI, Machine Learning. Projets data en conditions réelles, méthode Agile, storytelling et restitution décisionnelle.</div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-period">2021 -- 2025</div>
-          <div class="timeline-role">Responsable Qualite et Formation -- confirme</div>
-          <div class="timeline-company">Teleperformance -- Le Mans et Laval</div>
-          <div class="timeline-desc">Pilotage qualite par KPI, matrices Excel automatisees pour le reporting d'equipes, analyse d'ecarts et plans d'amelioration continue. Referent reporting a l'echelle du site.</div>
+          <div class="timeline-period">2021 — 2025</div>
+          <div class="timeline-role">Responsable Qualité et Formation — confirmé</div>
+          <div class="timeline-company">Téléperformance — Le Mans et Laval</div>
+          <div class="timeline-desc">Pilotage qualité par KPI, matrices Excel automatisées pour le reporting d'équipes, analyse d'écarts et plans d'amélioration continue. Référent reporting à l'échelle du site.</div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-period">2017 -- 2021</div>
+          <div class="timeline-period">2017 — 2021</div>
           <div class="timeline-role">Responsable de Production</div>
-          <div class="timeline-company">Teleperformance -- Le Mans et Laval</div>
-          <div class="timeline-desc">Pilotage operationnel via indicateurs (volumetrie, productivite, qualite, delais). Monitoring quotidien, optimisation des ressources et aide a la decision par les donnees.</div>
+          <div class="timeline-company">Téléperformance — Le Mans et Laval</div>
+          <div class="timeline-desc">Pilotage opérationnel via indicateurs (volumétrie, productivité, qualité, délais). Monitoring quotidien, optimisation des ressources et aide à la décision par les données.</div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-period">2009 -- 2017</div>
-          <div class="timeline-role">Formateur et Responsable Qualite et Formation -- junior</div>
-          <div class="timeline-company">Teleperformance - WebHelp - Orange</div>
-          <div class="timeline-desc">Transmission des pratiques operationnelles, construction des premiers outils de suivi de performance. Premieres collaborations avec les equipes BI pour faire evoluer les dashboards.</div>
+          <div class="timeline-period">2009 — 2017</div>
+          <div class="timeline-role">Formateur et Responsable Qualité et Formation — junior</div>
+          <div class="timeline-company">Téléperformance — WebHelp — Orange</div>
+          <div class="timeline-desc">Transmission des pratiques opérationnelles, construction des premiers outils de suivi de performance. Premières collaborations avec les équipes BI pour faire évoluer les dashboards.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- COMPETENCES -->
+  <!-- COMPÉTENCES -->
   <section id="skills">
     <div class="section-header reveal">
       <span class="section-number">02</span>
-      <h2 class="section-title">Competences</h2>
+      <h2 class="section-title">Compétences</h2>
       <div class="section-line"></div>
     </div>
     <div class="skills-grid">
       <div class="skill-category reveal">
         <div class="skill-cat-icons"><i class="devicon-mysql-plain" title="MySQL"></i><i class="devicon-postgresql-plain" title="PostgreSQL"></i><i class="devicon-azuresqldatabase-plain" title="SQL"></i></div>
-        <div class="skill-cat-title">// Donnees et SQL</div>
+        <div class="skill-cat-title">// Données et SQL</div>
         <div class="skill-tags">
           <span class="skill-tag core">SQL</span><span class="skill-tag core">MySQL</span>
-          <span class="skill-tag">PostgreSQL</span><span class="skill-tag">Modelisation en etoile</span>
+          <span class="skill-tag">PostgreSQL</span><span class="skill-tag">Modélisation en étoile</span>
           <span class="skill-tag">Window Functions</span><span class="skill-tag">Vues SQL</span>
         </div>
       </div>
@@ -586,15 +750,15 @@
         <div class="skill-cat-title">// Machine Learning</div>
         <div class="skill-tags">
           <span class="skill-tag core">Scikit-learn</span><span class="skill-tag">Classification</span>
-          <span class="skill-tag">Regression</span><span class="skill-tag">Clustering</span>
+          <span class="skill-tag">Régression</span><span class="skill-tag">Clustering</span>
           <span class="skill-tag">KNN</span><span class="skill-tag">Cross-validation</span>
         </div>
       </div>
       <div class="skill-category reveal">
         <div class="skill-cat-icons"><i class="devicon-git-plain" title="Git"></i><i class="devicon-github-original" title="GitHub"></i><i class="devicon-jira-plain" title="Agile/Jira"></i></div>
-        <div class="skill-cat-title">// Ops et Methodes</div>
+        <div class="skill-cat-title">// Ops et Méthodes</div>
         <div class="skill-tags">
-          <span class="skill-tag core">KPI et Reporting</span><span class="skill-tag core">Amelioration continue</span>
+          <span class="skill-tag core">KPI et Reporting</span><span class="skill-tag core">Amélioration continue</span>
           <span class="skill-tag">Lean / COPC</span><span class="skill-tag">Six Sigma Yellow Belt</span>
           <span class="skill-tag">Agile</span><span class="skill-tag">Git / GitHub</span>
         </div>
@@ -603,9 +767,9 @@
         <div class="skill-cat-icons"><i class="devicon-confluence-plain" title="Confluence"></i><i class="devicon-slack-plain" title="Communication"></i></div>
         <div class="skill-cat-title">// Soft Skills</div>
         <div class="skill-tags">
-          <span class="skill-tag core">Leadership</span><span class="skill-tag core">Communication decideurs</span>
-          <span class="skill-tag">Rigueur analytique</span><span class="skill-tag">Pedagogie</span>
-          <span class="skill-tag">Facilitation</span><span class="skill-tag">Resolution de problemes</span>
+          <span class="skill-tag core">Leadership</span><span class="skill-tag core">Communication décideurs</span>
+          <span class="skill-tag">Rigueur analytique</span><span class="skill-tag">Pédagogie</span>
+          <span class="skill-tag">Facilitation</span><span class="skill-tag">Résolution de problèmes</span>
         </div>
       </div>
     </div>
@@ -624,19 +788,19 @@
         <div class="project-header">
           <div>
             <div class="project-title">Toys and Models</div>
-            <div class="project-subtitle">SQL - Power BI - DAX</div>
+            <div class="project-subtitle">SQL — Power BI — DAX</div>
           </div>
           <div class="project-num">01</div>
         </div>
         <div class="project-body">
-          <p class="project-desc">Analyse complete de la performance commerciale d'un distributeur de jouets et modeles reduits. Modelisation en etoile, creation de vues SQL orientees business, puis dashboard Power BI interactif pour le pilotage decisionnel.</p>
+          <p class="project-desc">Analyse complète de la performance commerciale d'un distributeur de jouets et modèles réduits. Modélisation en étoile, création de vues SQL orientées business, puis dashboard Power BI interactif pour le pilotage décisionnel.</p>
           <div class="project-stack">
-            <span class="stack-badge">SQL</span><span class="stack-badge">Modelisation en etoile</span>
+            <span class="stack-badge">SQL</span><span class="stack-badge">Modélisation en étoile</span>
             <span class="stack-badge">Power BI</span><span class="stack-badge">DAX</span><span class="stack-badge">Reporting</span>
           </div>
           <div class="project-links">
-            <a href="#" class="project-link">GitHub</a>
-            <a href="#" class="project-link">Dashboard</a>
+            <a href="#" class="project-link">↗ GitHub</a>
+            <a href="#" class="project-link">↗ Dashboard</a>
           </div>
         </div>
       </div>
@@ -644,20 +808,21 @@
       <div class="project-card reveal">
         <div class="project-header">
           <div>
-            <div class="project-title">CineData</div>
-            <div class="project-subtitle">Python - ML - Streamlit</div>
+            <div class="project-title">CinéData</div>
+            <div class="project-subtitle">Python — ML — Streamlit</div>
           </div>
           <div class="project-num">02</div>
         </div>
         <div class="project-body">
-          <p class="project-desc">Systeme de recommandation de films base sur un algorithme Nearest Neighbors. Pipeline complet de nettoyage de donnees, enrichissement via API, et restitution via une application Streamlit interactive.</p>
+          <p class="project-desc">Système de recommandation de films basé sur un algorithme Nearest Neighbors. Pipeline complet de nettoyage de données, enrichissement via API, et restitution via une application Streamlit interactive.</p>
           <div class="project-stack">
             <span class="stack-badge">Pandas</span><span class="stack-badge">Scikit-learn</span>
             <span class="stack-badge">API REST</span><span class="stack-badge">Streamlit</span><span class="stack-badge">KNN</span>
           </div>
           <div class="project-links">
-            <a href="#" class="project-link">GitHub</a>
-            <a href="#" class="project-link">App Streamlit</a>
+            <a href="https://github.com/Pguerlais/Cinedata" target="_blank" class="project-link">↗ GitHub</a>
+            <a href="https://cinedata.streamlit.app/" target="_blank" class="project-link">↗ App Streamlit</a>
+            <a href="cinedata.html" class="project-link">↗ Détails</a>
           </div>
         </div>
       </div>
@@ -667,12 +832,12 @@
         <div class="project-header">
           <div>
             <div class="project-title">Projet 3</div>
-            <div class="project-subtitle">A venir - Wild Code School</div>
+            <div class="project-subtitle">À venir — Wild Code School</div>
           </div>
           <div class="project-num">03</div>
         </div>
         <div class="project-body">
-          <p class="project-desc">Prochain projet en cours de realisation. Mise en pratique avancee des competences data dans un contexte metier reel.</p>
+          <p class="project-desc">Prochain projet en cours de réalisation. Mise en pratique avancée des compétences data dans un contexte métier réel.</p>
           <div class="project-stack">
             <span class="stack-badge">Python</span><span class="stack-badge">SQL</span><span class="stack-badge">Machine Learning</span>
           </div>
@@ -690,14 +855,14 @@
       <div class="section-line"></div>
     </div>
     <p class="contact-intro reveal">
-      Vous cherchez un Data Analyst qui <strong>comprend vos operations</strong>
-      autant qu'il maitrise la donnee ? Parlons-en.
+      Vous cherchez un Data Analyst qui <strong>comprend vos opérations</strong>
+      autant qu'il maîtrise la donnée ? Parlons-en.
     </p>
     <div class="contact-links reveal">
       <a href="CV_Pierre_Guerlais.pdf" target="_blank" class="contact-item">
         <i class="devicon-markdown-original contact-item-icon-dev" title="CV"></i>
         <span class="contact-item-label">Curriculum Vitae</span>
-        <span class="contact-item-value">Telecharger mon CV</span>
+        <span class="contact-item-value">Télécharger mon CV</span>
       </a>
       <a href="https://www.linkedin.com/in/pierreguerlais" target="_blank" rel="noopener" class="contact-item">
         <i class="devicon-linkedin-plain contact-item-icon-dev" title="LinkedIn"></i>
@@ -715,7 +880,7 @@
   <!-- FOOTER -->
   <footer>
     <span class="gold">Pierre Guerlais</span>
-    <span>Data Analyst - <span class="gold">Performance Operationnelle</span> - 2026</span>
+    <span>Data Analyst — <span class="gold">Performance Opérationnelle</span> — 2026</span>
   </footer>
 
   <!-- SCROLL REVEAL -->
