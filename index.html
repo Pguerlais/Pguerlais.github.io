@@ -116,6 +116,38 @@
     .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; background: transparent; color: var(--white); font-family: var(--font-body); font-weight: 500; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s, transform 0.2s; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%); }
     .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
+
+    /* Contacts inline hero */
+    .hero-contacts {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.8rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.8s forwards;
+    }
+
+    .hero-contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      text-decoration: none;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+
+    .hero-contact-link i { font-size: 1rem; }
+    .hero-contact-link:hover { color: var(--gold); }
+
+    .hero-contact-sep {
+      width: 1px;
+      height: 14px;
+      background: var(--border);
+    }
+
     /* ===== HERO VISUEL DROITE ===== */
     .hero-visual {
       display: flex;
@@ -367,6 +399,24 @@
       <div class="hero-cta">
         <a href="#projects" class="btn-primary">Voir mes projets</a>
         <a href="CV_Pierre_Guerlais.pdf" target="_blank" class="btn-secondary">Voir mon CV</a>
+      </div>
+
+      <!-- Contacts inline sous les CTA -->
+      <div class="hero-contacts">
+        <a href="https://www.linkedin.com/in/pierreguerlais" target="_blank" rel="noopener" class="hero-contact-link">
+          <i class="devicon-linkedin-plain"></i>
+          <span>pierreguerlais</span>
+        </a>
+        <div class="hero-contact-sep"></div>
+        <a href="https://github.com/Pguerlais" target="_blank" rel="noopener" class="hero-contact-link">
+          <i class="devicon-github-original"></i>
+          <span>Pguerlais</span>
+        </a>
+        <div class="hero-contact-sep"></div>
+        <a href="CV_Pierre_Guerlais.pdf" target="_blank" class="hero-contact-link">
+          <i class="devicon-markdown-original"></i>
+          <span>Curriculum Vitae</span>
+        </a>
       </div>
     </div>
 
