@@ -286,11 +286,12 @@
     .jn:nth-child(4) { animation-delay: 0.7s; }
     .jn:nth-child(5) { animation-delay: 0.9s; }
 
-    .jn-1 { left:   2%; top: 2px; }
-    .jn-2 { left:  27%; top: 2px; }
-    .jn-3 { left:  52%; top: 2px; }
-    .jn-4 { left:  77%; top: 2px; }
-    .jn-5 { left:  38%; top: 62px; }
+    /* Positions calées sur les coordonnées SVG (viewBox 400×110) */
+    .jn-1 { left:   3%;   top: 2px;  }
+    .jn-2 { left:  27.5%; top: 2px;  }
+    .jn-3 { left:  62%;   top: 2px;  }
+    .jn-4 { left:  88%;   top: 2px;  }
+    .jn-5 { left:  46%;   top: 63px; }
 
     .jn-pin {
       width: 30px; height: 30px;
@@ -408,9 +409,12 @@
 
     #projects { background: var(--bg-card); }
     .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .projects-grid > div,
+    .projects-grid > a { display: block; min-width: 0; }
 
-    .project-card { background: var(--bg-deep); border: 1px solid var(--border-soft); overflow: hidden; transition: border-color 0.3s, transform 0.3s; position: relative; }
-    .project-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .project-card { background: var(--bg-deep); border: 1px solid var(--border-soft); overflow: hidden; transition: border-color 0.3s, transform 0.3s; position: relative; height: 100%; }
+    .project-card:hover,
+    .project-card-link:hover .project-card { border-color: var(--gold); transform: translateY(-4px); }
     /* reveal fonctionne aussi sur les wrappers <a> */
     a.project-card-link.reveal { display: block; opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
     a.project-card-link.reveal.visible { opacity: 1; transform: none; }
@@ -580,7 +584,7 @@
                 <path d="M 26,15 L 114,15" stroke="rgba(181,145,74,0.35)" stroke-width="1.5" fill="none" marker-end="url(#jArrow)" stroke-dasharray="90" style="stroke-dashoffset:90;animation:jDraw 0.4s ease 0.2s forwards"/>
                 <path d="M 128,28 Q 168,78 196,78" stroke="rgba(138,136,128,0.35)" stroke-width="1" fill="none" marker-end="url(#jArrowMuted)" stroke-dasharray="4 3" style="stroke-dashoffset:80;animation:jDraw 0.4s ease 0.45s forwards"/>
                 <path d="M 220,78 Q 252,78 272,28" stroke="rgba(138,136,128,0.35)" stroke-width="1" fill="none" marker-end="url(#jArrowMuted)" stroke-dasharray="4 3" style="stroke-dashoffset:80;animation:jDraw 0.4s ease 0.65s forwards"/>
-                <path d="M 286,15 L 316,15" stroke="#b5914a" stroke-width="2" fill="none" marker-end="url(#jArrowGold)" stroke-dasharray="35" style="stroke-dashoffset:35;animation:jDraw 0.4s ease 0.85s forwards"/>
+                <path d="M 286,15 L 368,15" stroke="#b5914a" stroke-width="2" fill="none" marker-end="url(#jArrowGold)" stroke-dasharray="90" style="stroke-dashoffset:90;animation:jDraw 0.4s ease 0.85s forwards"/>
                 <style>@keyframes jDraw { to { stroke-dashoffset: 0; } }</style>
                 <path d="M 10,8 L 398,8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="3 6" fill="none"/>
               </svg>
