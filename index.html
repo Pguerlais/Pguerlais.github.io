@@ -47,7 +47,6 @@
       opacity: 0.5;
     }
 
-    /* ===== NAV ===== */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -79,7 +78,6 @@
     .nav-links a:hover { color: var(--white); }
     .nav-links a:hover::after { width: 100%; }
 
-    /* ===== HERO ===== */
     #hero {
       min-height: 100vh;
       display: grid;
@@ -146,7 +144,6 @@
       background: var(--border);
     }
 
-    /* ===== HERO VISUEL DROITE ===== */
     .hero-visual {
       display: flex;
       flex-direction: column;
@@ -222,7 +219,6 @@
       line-height: 1.55;
     }
 
-    /* ===== TRAJECTOIRE V4 INTÉGRÉE ===== */
     .journey-bar {
       background: var(--bg-card);
       border: 1px solid var(--border-soft);
@@ -231,7 +227,6 @@
       overflow: hidden;
     }
 
-    /* Blobs ambiants discrets */
     .journey-bar::before {
       content: '';
       position: absolute;
@@ -245,7 +240,6 @@
 
     .journey-inner { position: relative; z-index: 1; }
 
-    /* Grille de fond */
     .journey-grid-bg {
       position: absolute;
       inset: 0;
@@ -256,7 +250,6 @@
       pointer-events: none;
     }
 
-    /* Conteneur des nœuds */
     .journey-nodes-area {
       position: relative;
       height: 110px;
@@ -271,7 +264,6 @@
       overflow: visible;
     }
 
-    /* Nœuds positionnés */
     .jn {
       position: absolute;
       display: flex;
@@ -294,7 +286,6 @@
     .jn:nth-child(4) { animation-delay: 0.7s; }
     .jn:nth-child(5) { animation-delay: 0.9s; }
 
-    /* Positions : top row = 4 nœuds, bottom = 1 */
     .jn-1 { left:   2%; top: 2px; }
     .jn-2 { left:  27%; top: 2px; }
     .jn-3 { left:  52%; top: 2px; }
@@ -370,13 +361,11 @@
       text-align: center;
     }
 
-    /* Footer stats */
     .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-soft); }
     .stat-box { background: var(--bg-card); padding: 1.2rem 1rem; text-align: center; }
     .stat-number { font-family: var(--font-display); font-size: 2rem; color: var(--gold); line-height: 1; }
     .stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; letter-spacing: 0.06em; }
 
-    /* ===== SECTIONS ===== */
     section { padding: 6rem 4rem; position: relative; }
 
     .section-header { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 3.5rem; }
@@ -384,7 +373,6 @@
     .section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: 0.04em; color: var(--white); }
     .section-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
 
-    /* ===== PARCOURS ===== */
     #about { background: var(--bg-card); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
 
@@ -402,7 +390,6 @@
     .timeline-company { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
     .timeline-desc { font-size: 0.9rem; color: var(--muted); font-weight: 300; line-height: 1.6; }
 
-    /* ===== COMPÉTENCES ===== */
     .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 
     .skill-category { background: var(--bg-card); border: 1px solid var(--border-soft); padding: 1.8rem; position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
@@ -419,7 +406,6 @@
     .skill-tag { font-size: 0.78rem; font-family: var(--font-mono); padding: 0.3rem 0.7rem; background: var(--gold-glow); color: var(--white); border: 1px solid var(--border); letter-spacing: 0.04em; }
     .skill-tag.core { background: var(--gold-dim); border-color: rgba(181,145,74,0.4); color: var(--gold-light); }
 
-    /* ===== PROJETS ===== */
     #projects { background: var(--bg-card); }
     .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
 
@@ -438,14 +424,13 @@
     .stack-badge { font-size: 0.75rem; font-family: var(--font-mono); padding: 0.25rem 0.65rem; background: transparent; color: var(--muted); border: 1px solid var(--border-soft); letter-spacing: 0.04em; transition: color 0.2s, border-color 0.2s; }
     .project-card:hover .stack-badge { color: var(--white); border-color: var(--border); }
 
-    .project-links { display: flex; gap: 1rem; }
+    .project-links { display: flex; gap: 1rem; flex-wrap: wrap; }
     .project-link { font-size: 0.8rem; font-family: var(--font-mono); color: var(--gold); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
     .project-link:hover { color: var(--gold-light); }
 
     .wip-badge { position: absolute; top: 1rem; right: 1rem; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.14em; color: var(--gold); border: 1px solid var(--gold); padding: 0.2rem 0.6rem; text-transform: uppercase; animation: pulse 2s infinite; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-    /* ===== CONTACT ===== */
     #contact { text-align: center; padding: 7rem 4rem; }
     .contact-intro { font-size: 1.1rem; color: var(--muted); font-weight: 300; max-width: 520px; margin: 0 auto 3rem; line-height: 1.8; }
     .contact-intro strong { color: var(--white); font-weight: 500; }
@@ -458,18 +443,15 @@
     .contact-item-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; }
     .contact-item-value { font-size: 0.85rem; color: var(--white); }
 
-    /* ===== FOOTER ===== */
     footer { border-top: 1px solid var(--border-soft); padding: 1.5rem 4rem; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
     footer .gold { color: var(--gold); }
 
-    /* ===== ANIMATIONS ===== */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeLeft { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
 
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
     .reveal.visible { opacity: 1; transform: none; }
 
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
       nav { padding: 1.2rem 2rem; }
       #hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; }
@@ -494,7 +476,6 @@
 
 <body>
 
-  <!-- NAV -->
   <nav>
     <div class="nav-logo">PG — Data Analyst</div>
     <ul class="nav-links">
@@ -505,10 +486,7 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
   <section id="hero">
-
-    <!-- Colonne gauche : texte -->
     <div class="hero-content">
       <div class="hero-eyebrow">Data Analyst — Performance Opérationnelle</div>
       <h1 class="hero-name">Pierre<span>Guerlais</span></h1>
@@ -521,7 +499,6 @@
         <a href="#projects" class="btn-primary">Voir mes projets</a>
         <a href="CV_Pierre_Guerlais.pdf" target="_blank" class="btn-secondary">Voir mon CV</a>
       </div>
-
       <div class="hero-contacts">
         <a href="https://www.linkedin.com/in/pierreguerlais" target="_blank" rel="noopener" class="hero-contact-link">
           <i class="devicon-linkedin-plain"></i>
@@ -540,16 +517,11 @@
       </div>
     </div>
 
-    <!-- Colonne droite : photo + blocs -->
     <div class="hero-visual">
-
       <div class="hero-photo-wrap">
         <img src="pierre_portfolio.png" alt="Pierre Guerlais - Data Analyst" class="hero-photo" />
       </div>
-
-      <!-- Profil + Trajectoire côte à côte -->
       <div class="hero-bottom-row">
-
         <div class="identity-card">
           <div class="card-label">// Profil</div>
           <div class="card-value">
@@ -557,15 +529,11 @@
             Je parle autant aux décideurs qu'aux équipes métier.
           </div>
         </div>
-
-        <!-- TRAJECTOIRE V4 — couleurs portfolio -->
         <div class="journey-bar">
           <div class="journey-grid-bg"></div>
           <div class="journey-inner">
             <div class="card-label">// Trajectoire</div>
             <div class="journey-nodes-area">
-
-              <!-- SVG arrows layer -->
               <svg class="journey-svg-layer" viewBox="0 0 400 110" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <marker id="jArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
@@ -578,74 +546,30 @@
                     <path d="M0,0 L6,3 L0,6 Z" fill="rgba(138,136,128,0.5)"/>
                   </marker>
                 </defs>
-
-                <!-- N1 Formateur → N2 RQF junior -->
-                <path d="M 26,15 L 114,15" stroke="rgba(181,145,74,0.35)" stroke-width="1.5" fill="none" marker-end="url(#jArrow)"
-                  stroke-dasharray="90" style="stroke-dashoffset:90;animation:jDraw 0.4s ease 0.2s forwards"/>
-
-                <!-- N2 RQF junior → N5 Resp Prod (détour bas) -->
-                <path d="M 128,28 Q 168,78 196,78" stroke="rgba(138,136,128,0.35)" stroke-width="1" fill="none" marker-end="url(#jArrowMuted)"
-                  stroke-dasharray="80" style="stroke-dashoffset:80;animation:jDraw 0.4s ease 0.45s forwards" stroke-dasharray="4 3"/>
-
-                <!-- N5 Resp Prod → N3 RQF confirmé (retour) -->
-                <path d="M 220,78 Q 252,78 272,28" stroke="rgba(138,136,128,0.35)" stroke-width="1" fill="none" marker-end="url(#jArrowMuted)"
-                  stroke-dasharray="80" style="stroke-dashoffset:80;animation:jDraw 0.4s ease 0.65s forwards" stroke-dasharray="4 3"/>
-
-                <!-- N3 RQF confirmé → N4 Data Analyst -->
-                <path d="M 286,15 L 316,15" stroke="#b5914a" stroke-width="2" fill="none" marker-end="url(#jArrowGold)"
-                  stroke-dasharray="35" style="stroke-dashoffset:35;animation:jDraw 0.4s ease 0.85s forwards"/>
-
+                <path d="M 26,15 L 114,15" stroke="rgba(181,145,74,0.35)" stroke-width="1.5" fill="none" marker-end="url(#jArrow)" stroke-dasharray="90" style="stroke-dashoffset:90;animation:jDraw 0.4s ease 0.2s forwards"/>
+                <path d="M 128,28 Q 168,78 196,78" stroke="rgba(138,136,128,0.35)" stroke-width="1" fill="none" marker-end="url(#jArrowMuted)" stroke-dasharray="4 3" style="stroke-dashoffset:80;animation:jDraw 0.4s ease 0.45s forwards"/>
+                <path d="M 220,78 Q 252,78 272,28" stroke="rgba(138,136,128,0.35)" stroke-width="1" fill="none" marker-end="url(#jArrowMuted)" stroke-dasharray="4 3" style="stroke-dashoffset:80;animation:jDraw 0.4s ease 0.65s forwards"/>
+                <path d="M 286,15 L 316,15" stroke="#b5914a" stroke-width="2" fill="none" marker-end="url(#jArrowGold)" stroke-dasharray="35" style="stroke-dashoffset:35;animation:jDraw 0.4s ease 0.85s forwards"/>
                 <style>@keyframes jDraw { to { stroke-dashoffset: 0; } }</style>
-
-                <!-- Ligne pointillée fantôme -->
                 <path d="M 10,8 L 398,8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="3 6" fill="none"/>
               </svg>
-
-              <!-- Nœuds -->
-              <div class="jn jn-1">
-                <div class="jn-pin">🎓</div>
-                <div class="jn-text">Formateur</div>
-              </div>
-
-              <div class="jn jn-2">
-                <div class="jn-pin">🔍</div>
-                <div class="jn-text">RQF</div>
-                <div class="jn-sub">junior</div>
-              </div>
-
-              <div class="jn jn-3">
-                <div class="jn-pin">✅</div>
-                <div class="jn-text">RQF</div>
-                <div class="jn-sub">confirmé</div>
-              </div>
-
-              <div class="jn jn-4">
-                <div class="jn-pin">📊</div>
-                <div class="jn-text">Data Analyst</div>
-              </div>
-
-              <div class="jn jn-5">
-                <div class="jn-pin">⚙️</div>
-                <div class="jn-text">Resp. Production</div>
-              </div>
-
+              <div class="jn jn-1"><div class="jn-pin">🎓</div><div class="jn-text">Formateur</div></div>
+              <div class="jn jn-2"><div class="jn-pin">🔍</div><div class="jn-text">RQF</div><div class="jn-sub">junior</div></div>
+              <div class="jn jn-3"><div class="jn-pin">✅</div><div class="jn-text">RQF</div><div class="jn-sub">confirmé</div></div>
+              <div class="jn jn-4"><div class="jn-pin">📊</div><div class="jn-text">Data Analyst</div></div>
+              <div class="jn jn-5"><div class="jn-pin">⚙️</div><div class="jn-text">Resp. Production</div></div>
             </div>
           </div>
         </div>
-
       </div>
-
-      <!-- Stats -->
       <div class="hero-stats">
         <div class="stat-box"><div class="stat-number">10+</div><div class="stat-label">Ans en Ops</div></div>
         <div class="stat-box"><div class="stat-number">2</div><div class="stat-label">Projets Data</div></div>
         <div class="stat-box"><div class="stat-number">6</div><div class="stat-label">Outils</div></div>
       </div>
-
     </div>
   </section>
 
-  <!-- PARCOURS -->
   <section id="about">
     <div class="section-header reveal">
       <span class="section-number">01</span>
@@ -654,32 +578,10 @@
     </div>
     <div class="about-grid">
       <div class="about-text reveal">
-        <p>
-          Tout a commencé par une passion pour l'informatique — suffisamment forte pour orienter
-          mes études vers un <strong>BTS Informatique de Gestion</strong>. Mon objectif d'alors :
-          devenir formateur, transmettre, et à terme basculer vers la formation informatique.
-        </p>
-        <p>
-          Le monde de la <strong>relation client</strong> en a décidé autrement. Je m'y suis pris au jeu,
-          et ce qui devait être une étape est devenu une carrière de plus de 10 ans chez
-          Téléperformance. Une carrière où j'ai gravi les échelons — formateur, responsable qualité,
-          responsable de production, puis de retour à mes premiers amours en qualité et formation —
-          en portant toujours le même fil rouge : <span class="highlight">piloter par les chiffres.</span>
-        </p>
-        <p>
-          Sans le formaliser, je faisais déjà de la data. J'ai construit des
-          <strong>matrices Excel automatisées</strong> pour mes reportings et ceux de mes équipes,
-          au point de devenir le référent sur le sujet à mon niveau. J'ai collaboré avec les équipes
-          BI pour faire évoluer des tableaux de bord. Les KPI, les écarts de performance,
-          l'amélioration continue — c'était mon quotidien.
-        </p>
-        <p>
-          La <strong>Wild Code School</strong> n'a pas changé ma trajectoire, elle lui a donné
-          un nom et un cadre technique. Python, SQL, Power BI, Machine Learning —
-          autant d'outils qui donnent enfin toute leur puissance à ce que j'ai toujours fait intuitivement.
-          Et la prochaine étape qui m'attire ? <span class="highlight">Me rapprocher du paramétrage des LLM</span> —
-          un domaine où ma culture terrain et ma curiosité technologique se rejoignent naturellement.
-        </p>
+        <p>Tout a commencé par une passion pour l'informatique — suffisamment forte pour orienter mes études vers un <strong>BTS Informatique de Gestion</strong>. Mon objectif d'alors : devenir formateur, transmettre, et à terme basculer vers la formation informatique.</p>
+        <p>Le monde de la <strong>relation client</strong> en a décidé autrement. Je m'y suis pris au jeu, et ce qui devait être une étape est devenu une carrière de plus de 10 ans chez Téléperformance. Une carrière où j'ai gravi les échelons — formateur, responsable qualité, responsable de production, puis de retour à mes premiers amours en qualité et formation — en portant toujours le même fil rouge : <span class="highlight">piloter par les chiffres.</span></p>
+        <p>Sans le formaliser, je faisais déjà de la data. J'ai construit des <strong>matrices Excel automatisées</strong> pour mes reportings et ceux de mes équipes, au point de devenir le référent sur le sujet à mon niveau. J'ai collaboré avec les équipes BI pour faire évoluer des tableaux de bord. Les KPI, les écarts de performance, l'amélioration continue — c'était mon quotidien.</p>
+        <p>La <strong>Wild Code School</strong> n'a pas changé ma trajectoire, elle lui a donné un nom et un cadre technique. Python, SQL, Power BI, Machine Learning — autant d'outils qui donnent enfin toute leur puissance à ce que j'ai toujours fait intuitivement. Et la prochaine étape qui m'attire ? <span class="highlight">Me rapprocher du paramétrage des LLM</span> — un domaine où ma culture terrain et ma curiosité technologique se rejoignent naturellement.</p>
       </div>
       <div class="timeline reveal">
         <div class="timeline-item">
@@ -710,7 +612,6 @@
     </div>
   </section>
 
-  <!-- COMPÉTENCES -->
   <section id="skills">
     <div class="section-header reveal">
       <span class="section-number">02</span>
@@ -784,6 +685,7 @@
     </div>
     <div class="projects-grid">
 
+      <!-- PROJET 01 -->
       <div class="project-card reveal">
         <div class="project-header">
           <div>
@@ -805,6 +707,7 @@
         </div>
       </div>
 
+      <!-- PROJET 02 -->
       <div class="project-card reveal">
         <div class="project-header">
           <div>
@@ -827,19 +730,37 @@
         </div>
       </div>
 
+      <!-- PROJET 03 — WILLITFLOP -->
       <div class="project-card reveal" style="border-style: dashed;">
         <div class="wip-badge">En cours</div>
         <div class="project-header">
           <div>
-            <div class="project-title">Projet 3</div>
-            <div class="project-subtitle">À venir — Wild Code School</div>
+            <div class="project-title">WillItFlop</div>
+            <div class="project-subtitle">Python — Airflow — dbt — PostgreSQL — IA</div>
           </div>
           <div class="project-num">03</div>
         </div>
         <div class="project-body">
-          <p class="project-desc">Prochain projet en cours de réalisation. Mise en pratique avancée des compétences data dans un contexte métier réel.</p>
+          <p class="project-desc">
+            Plateforme de prédiction de viabilité commerciale pour des jeux vidéo fictifs.
+            L'utilisateur décrit un jeu, le système interroge des APIs gaming (IGDB, Steam),
+            transforme les données avec dbt, orchestre le pipeline via Airflow et produit
+            un score de viabilité, un synopsis et une image de couverture générés par IA.
+            Code sécurisé et audité (SonarQube + OWASP).
+          </p>
           <div class="project-stack">
-            <span class="stack-badge">Python</span><span class="stack-badge">SQL</span><span class="stack-badge">Machine Learning</span>
+            <span class="stack-badge">Python</span>
+            <span class="stack-badge">PostgreSQL</span>
+            <span class="stack-badge">Apache Airflow</span>
+            <span class="stack-badge">dbt</span>
+            <span class="stack-badge">API REST</span>
+            <span class="stack-badge">IA Générative</span>
+            <span class="stack-badge">SonarQube</span>
+            <span class="stack-badge">OWASP</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">↗ GitHub</a>
+            <a href="WillItFlop_Presentation.html" class="project-link">↗ Fiche projet</a>
           </div>
         </div>
       </div>
@@ -847,7 +768,6 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <div class="section-header reveal" style="justify-content: center; text-align: center;">
       <span class="section-number">04</span>
@@ -877,13 +797,11 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <span class="gold">Pierre Guerlais</span>
     <span>Data Analyst — <span class="gold">Performance Opérationnelle</span> — 2026</span>
   </footer>
 
-  <!-- SCROLL REVEAL -->
   <script>
     const observer = new IntersectionObserver(
       (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
