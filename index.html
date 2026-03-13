@@ -411,6 +411,9 @@
 
     .project-card { background: var(--bg-deep); border: 1px solid var(--border-soft); overflow: hidden; transition: border-color 0.3s, transform 0.3s; position: relative; }
     .project-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    /* reveal fonctionne aussi sur les wrappers <a> */
+    a.project-card-link.reveal { display: block; opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+    a.project-card-link.reveal.visible { opacity: 1; transform: none; }
 
     .project-header { padding: 2rem 2rem 1.2rem; border-bottom: 1px solid var(--border-soft); display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
     .project-num { font-family: var(--font-display); font-size: 3.5rem; color: var(--gold-dim); line-height: 1; flex-shrink: 0; }
@@ -425,8 +428,36 @@
     .project-card:hover .stack-badge { color: var(--white); border-color: var(--border); }
 
     .project-links { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .project-link { font-size: 0.8rem; font-family: var(--font-mono); color: var(--gold); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+    .project-link { font-size: 0.8rem; font-family: var(--font-mono); color: var(--gold); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; position: relative; z-index: 2; }
     .project-link:hover { color: var(--gold-light); }
+
+    /* Carte entièrement cliquable */
+    .project-card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+    }
+    .project-card-link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      cursor: pointer;
+    }
+    .project-card-link .project-card {
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .project-card-link:hover .project-card {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+    /* Les liens internes passent au-dessus de l'overlay */
+    .project-card-link .project-link,
+    .project-card-link .wip-badge {
+      position: relative;
+      z-index: 2;
+    }
 
     .wip-badge { position: absolute; top: 1rem; right: 1rem; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.14em; color: var(--gold); border: 1px solid var(--gold); padding: 0.2rem 0.6rem; text-transform: uppercase; animation: pulse 2s infinite; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
@@ -708,62 +739,64 @@
       </div>
 
       <!-- PROJET 02 -->
-      <div class="project-card reveal">
-        <div class="project-header">
-          <div>
-            <div class="project-title">CinéData</div>
-            <div class="project-subtitle">Python — ML — Streamlit</div>
+      <a href="cinedata.html" class="project-card-link reveal">
+        <div class="project-card">
+          <div class="project-header">
+            <div>
+              <div class="project-title">CinéData</div>
+              <div class="project-subtitle">Python — ML — Streamlit</div>
+            </div>
+            <div class="project-num">02</div>
           </div>
-          <div class="project-num">02</div>
+          <div class="project-body">
+            <p class="project-desc">Système de recommandation de films basé sur un algorithme Nearest Neighbors. Pipeline complet de nettoyage de données, enrichissement via API, et restitution via une application Streamlit interactive.</p>
+            <div class="project-stack">
+              <span class="stack-badge">Pandas</span><span class="stack-badge">Scikit-learn</span>
+              <span class="stack-badge">API REST</span><span class="stack-badge">Streamlit</span><span class="stack-badge">KNN</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/Pguerlais/Cinedata" target="_blank" class="project-link">↗ GitHub</a>
+              <a href="https://cinedata.streamlit.app/" target="_blank" class="project-link">↗ App Streamlit</a>
+            </div>
+          </div>
         </div>
-        <div class="project-body">
-          <p class="project-desc">Système de recommandation de films basé sur un algorithme Nearest Neighbors. Pipeline complet de nettoyage de données, enrichissement via API, et restitution via une application Streamlit interactive.</p>
-          <div class="project-stack">
-            <span class="stack-badge">Pandas</span><span class="stack-badge">Scikit-learn</span>
-            <span class="stack-badge">API REST</span><span class="stack-badge">Streamlit</span><span class="stack-badge">KNN</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/Pguerlais/Cinedata" target="_blank" class="project-link">↗ GitHub</a>
-            <a href="https://cinedata.streamlit.app/" target="_blank" class="project-link">↗ App Streamlit</a>
-            <a href="cinedata.html" class="project-link">↗ Détails</a>
-          </div>
-        </div>
-      </div>
+      </a>
 
       <!-- PROJET 03 — WILLITFLOP -->
-      <div class="project-card reveal" style="border-style: dashed;">
-        <div class="wip-badge">En cours</div>
-        <div class="project-header">
-          <div>
-            <div class="project-title">WillItFlop</div>
-            <div class="project-subtitle">Python — Airflow — dbt — PostgreSQL — IA</div>
+      <a href="WillItFlop_Presentation.html" class="project-card-link reveal">
+        <div class="project-card" style="border-style: dashed;">
+          <div class="wip-badge">En cours</div>
+          <div class="project-header">
+            <div>
+              <div class="project-title">WillItFlop</div>
+              <div class="project-subtitle">Python — Airflow — dbt — PostgreSQL — IA</div>
+            </div>
+            <div class="project-num">03</div>
           </div>
-          <div class="project-num">03</div>
+          <div class="project-body">
+            <p class="project-desc">
+              Plateforme de prédiction de viabilité commerciale pour des jeux vidéo fictifs.
+              L'utilisateur décrit un jeu, le système interroge des APIs gaming (IGDB, Steam),
+              transforme les données avec dbt, orchestre le pipeline via Airflow et produit
+              un score de viabilité, un synopsis et une image de couverture générés par IA.
+              Code sécurisé et audité (SonarQube + OWASP).
+            </p>
+            <div class="project-stack">
+              <span class="stack-badge">Python</span>
+              <span class="stack-badge">PostgreSQL</span>
+              <span class="stack-badge">Apache Airflow</span>
+              <span class="stack-badge">dbt</span>
+              <span class="stack-badge">API REST</span>
+              <span class="stack-badge">IA Générative</span>
+              <span class="stack-badge">SonarQube</span>
+              <span class="stack-badge">OWASP</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link" onclick="event.stopPropagation()">↗ GitHub</a>
+            </div>
+          </div>
         </div>
-        <div class="project-body">
-          <p class="project-desc">
-            Plateforme de prédiction de viabilité commerciale pour des jeux vidéo fictifs.
-            L'utilisateur décrit un jeu, le système interroge des APIs gaming (IGDB, Steam),
-            transforme les données avec dbt, orchestre le pipeline via Airflow et produit
-            un score de viabilité, un synopsis et une image de couverture générés par IA.
-            Code sécurisé et audité (SonarQube + OWASP).
-          </p>
-          <div class="project-stack">
-            <span class="stack-badge">Python</span>
-            <span class="stack-badge">PostgreSQL</span>
-            <span class="stack-badge">Apache Airflow</span>
-            <span class="stack-badge">dbt</span>
-            <span class="stack-badge">API REST</span>
-            <span class="stack-badge">IA Générative</span>
-            <span class="stack-badge">SonarQube</span>
-            <span class="stack-badge">OWASP</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="project-link">↗ GitHub</a>
-            <a href="WillItFlop_Presentation.html" class="project-link">↗ Fiche projet</a>
-          </div>
-        </div>
-      </div>
+      </a>
 
     </div>
   </section>
