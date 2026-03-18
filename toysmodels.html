@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toys &amp; Models — Pierre Guerlais</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+  <style>
+    :root {
+      --bg-deep:     #0f0f12;
+      --bg-card:     #161618;
+      --bg-hover:    #1e1e22;
+      --gold:        #b5914a;
+      --gold-light:  #cda55e;
+      --gold-dim:    rgba(181,145,74,0.15);
+      --gold-glow:   rgba(181,145,74,0.07);
+      --white:       #f0ece4;
+      --muted:       #8a8880;
+      --border:      rgba(181,145,74,0.22);
+      --border-soft: rgba(255,255,255,0.06);
+      --font-display:'Bebas Neue', sans-serif;
+      --font-body:   'DM Sans', sans-serif;
+      --font-mono:   'DM Mono', monospace;
+      --sql-blue:    #61afef;
+      --sql-dim:     rgba(97,175,239,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-deep);
+      color: var(--white);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.5;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(15,15,18,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .nav-logo { font-family: var(--font-mono); font-size: 0.85rem; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; }
+    .nav-back { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
+    .nav-back:hover { color: var(--gold); }
+
+    /* ===== HERO ===== */
+    .project-hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 4rem 4rem;
+      gap: 4rem;
+      position: relative;
+    }
+
+    /* Liseré gauche décoratif */
+    .project-hero::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 6px;
+      background: repeating-linear-gradient(
+        180deg,
+        var(--gold) 0px, var(--gold) 20px,
+        transparent 20px, transparent 30px
+      );
+      opacity: 0.3;
+    }
+
+    .hero-glow-1 {
+      position: absolute; width: 500px; height: 500px; border-radius: 50%;
+      background: rgba(97,175,239,0.04); filter: blur(120px);
+      top: 5%; right: 5%; pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute; width: 300px; height: 300px; border-radius: 50%;
+      background: rgba(181,145,74,0.05); filter: blur(80px);
+      bottom: 10%; left: 10%; pointer-events: none;
+    }
+
+    .hero-left { position: relative; z-index: 1; }
+
+    .project-num {
+      font-family: var(--font-mono); font-size: 0.75rem; color: var(--gold);
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.8rem; opacity: 0;
+      animation: fadeUp 0.5s 0.1s forwards;
+    }
+    .project-num::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--gold); }
+
+    .project-title-big {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 8vw, 7.5rem);
+      line-height: 0.88;
+      letter-spacing: 0.03em;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      opacity: 0; animation: fadeUp 0.5s 0.25s forwards;
+    }
+    .project-title-big span { color: var(--gold); }
+
+    .project-tagline {
+      font-size: 1rem; color: var(--muted); font-weight: 300;
+      max-width: 480px; line-height: 1.75; margin: 1.5rem 0 2rem;
+      opacity: 0; animation: fadeUp 0.5s 0.4s forwards;
+    }
+    .project-tagline strong { color: var(--white); font-weight: 500; }
+
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.5s 0.55s forwards; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 2rem; background: var(--gold); color: var(--bg-deep);
+      font-family: var(--font-body); font-weight: 700; font-size: 0.9rem;
+      letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 2rem; background: transparent; color: var(--white);
+      font-family: var(--font-body); font-weight: 500; font-size: 0.9rem;
+      letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none;
+      border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s, transform 0.2s;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    /* Panneau méta-infos */
+    .hero-right {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; gap: 1px;
+      background: var(--border-soft);
+      opacity: 0; animation: fadeLeft 0.6s 0.5s forwards;
+    }
+
+    .meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-soft); }
+    .meta-cell {
+      background: var(--bg-card); padding: 1.4rem 1.6rem;
+      border-left: 2px solid transparent; transition: border-color 0.3s;
+    }
+    .meta-cell:hover { border-left-color: var(--gold); }
+    .meta-cell.accent { border-left-color: var(--gold); }
+    .meta-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--gold); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .meta-value { font-size: 0.9rem; font-weight: 400; color: var(--white); line-height: 1.5; }
+    .meta-value.muted { color: var(--muted); font-weight: 300; font-size: 0.85rem; }
+
+    .stack-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+    .chip {
+      font-family: var(--font-mono); font-size: 0.7rem; padding: 0.2rem 0.6rem;
+      background: var(--gold-glow); border: 1px solid var(--border);
+      color: var(--white); letter-spacing: 0.04em;
+    }
+    .chip.core { background: var(--gold-dim); border-color: rgba(181,145,74,0.4); color: var(--gold-light); }
+
+    /* ===== SECTIONS ===== */
+    section.content-section { padding: 5rem 4rem; position: relative; }
+    section.content-section.alt { background: var(--bg-card); }
+
+    .section-header { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 3rem; }
+    .section-number { font-family: var(--font-mono); font-size: 0.75rem; color: var(--gold); letter-spacing: 0.12em; }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.8rem); letter-spacing: 0.04em; color: var(--white); }
+    .section-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+
+    /* ===== PIPELINE / PHASES ===== */
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .pipeline-grid::before {
+      content: '';
+      position: absolute;
+      top: 28px; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), var(--gold), var(--border), transparent);
+      z-index: 0;
+    }
+    .pipeline-step {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 0 0.8rem 1.5rem;
+      position: relative; z-index: 1;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .pipeline-step.visible { opacity: 1; transform: none; }
+    .step-bubble {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--bg-card); border: 1px solid var(--border-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 0.8rem;
+      transition: all 0.3s ease; cursor: default;
+    }
+    .pipeline-step:hover .step-bubble { border-color: var(--gold); box-shadow: 0 0 20px rgba(181,145,74,0.2); transform: translateY(-4px); }
+    .pipeline-step:last-child .step-bubble { background: var(--gold-dim); border-color: rgba(181,145,74,0.4); box-shadow: 0 0 16px rgba(181,145,74,0.25); }
+    .step-num { font-family: var(--font-mono); font-size: 0.65rem; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+    .step-label { font-size: 0.75rem; font-weight: 600; text-align: center; color: var(--white); line-height: 1.35; margin-bottom: 0.3rem; }
+    .step-desc { font-size: 0.7rem; color: var(--muted); text-align: center; line-height: 1.4; }
+
+    /* ===== KPI AXES ===== */
+    .axes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .axe-card {
+      background: var(--bg-card); border: 1px solid var(--border-soft);
+      padding: 2rem; position: relative; overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .axe-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+    }
+    .axe-card:hover { border-color: var(--border); transform: translateY(-3px); }
+    .axe-card:hover::before { transform: scaleX(1); }
+
+    .axe-card.ventes::before  { background: #61afef; }
+    .axe-card.finances::before { background: #98c379; }
+    .axe-card.logistique::before { background: var(--gold); }
+    .axe-card.rh::before { background: #e06c75; }
+
+    .axe-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .axe-title { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 0.04em; color: var(--white); margin-bottom: 0.4rem; }
+    .axe-count { font-family: var(--font-mono); font-size: 0.68rem; color: var(--gold); letter-spacing: 0.12em; margin-bottom: 1rem; }
+    .axe-kpis { list-style: none; }
+    .axe-kpis li {
+      font-size: 0.82rem; color: var(--muted); font-weight: 300;
+      padding: 0.4rem 0; border-bottom: 1px solid var(--border-soft);
+      display: flex; align-items: flex-start; gap: 0.6rem;
+    }
+    .axe-kpis li:last-child { border-bottom: none; }
+    .axe-kpis li::before { content: '→'; color: var(--gold); flex-shrink: 0; font-size: 0.75rem; margin-top: 0.05rem; }
+    .axe-kpis li strong { color: var(--white); font-weight: 500; }
+
+    /* ===== SQL SECTION ===== */
+    .sql-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+
+    .sql-text h3 { font-family: var(--font-display); font-size: 1.8rem; color: var(--white); letter-spacing: 0.04em; margin-bottom: 1rem; }
+    .sql-text p { color: var(--muted); font-weight: 300; line-height: 1.8; margin-bottom: 1rem; font-size: 0.95rem; }
+    .sql-text p strong { color: var(--white); font-weight: 500; }
+    .sql-text p .accent { color: var(--gold); font-weight: 500; }
+
+    .code-block {
+      background: #0a0a0d; border: 1px solid var(--border-soft);
+      border-left: 3px solid var(--gold);
+      padding: 1.4rem 1.6rem; font-family: var(--font-mono);
+      font-size: 0.82rem; line-height: 1.7; overflow-x: auto; margin-top: 1.5rem;
+      white-space: pre;
+    }
+    .code-comment { color: #5a5a6a; }
+    .code-keyword { color: #c678dd; }
+    .code-func { color: var(--sql-blue); }
+    .code-string { color: #98c379; }
+    .code-param { color: #e06c75; }
+    .code-col { color: var(--gold-light); }
+
+    /* Panel techniques SQL */
+    .sql-panel {
+      background: var(--bg-deep); border: 1px solid var(--border-soft);
+      padding: 1.6rem;
+    }
+    .sql-panel-header { font-family: var(--font-mono); font-size: 0.7rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.2rem; }
+    .sql-feat-row { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 0; border-bottom: 1px solid var(--border-soft); }
+    .sql-feat-row:last-child { border-bottom: none; }
+    .sql-feat-name { font-size: 0.85rem; color: var(--white); }
+    .sql-feat-tag { font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); padding: 0.2rem 0.6rem; border: 1px solid var(--border-soft); }
+    .sql-feat-tag.window { color: var(--sql-blue); border-color: rgba(97,175,239,0.3); background: var(--sql-dim); }
+    .sql-feat-tag.cte    { color: #c678dd; border-color: rgba(198,120,221,0.3); background: rgba(198,120,221,0.07); }
+    .sql-feat-tag.agg    { color: #98c379; border-color: rgba(152,195,121,0.3); background: rgba(152,195,121,0.07); }
+    .sql-feat-tag.join   { color: var(--gold-light); border-color: rgba(181,145,74,0.3); background: var(--gold-glow); }
+
+    /* ===== METRICS ===== */
+    .metrics-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border-soft); margin-bottom: 3rem; }
+    .metric-box { background: var(--bg-card); padding: 1.6rem 1rem; text-align: center; transition: background 0.3s; }
+    .metric-box:hover { background: var(--bg-hover); }
+    .metric-box:last-child { border-left: 2px solid var(--gold); }
+    .metric-val { font-family: var(--font-display); font-size: 2.4rem; color: var(--gold); line-height: 1; }
+    .metric-box:last-child .metric-val { color: var(--gold-light); font-size: 2rem; }
+    .metric-lbl { font-size: 0.72rem; color: var(--muted); margin-top: 0.4rem; letter-spacing: 0.06em; }
+
+    /* ===== DASHBOARD SCREENSHOTS ===== */
+    .screenshots-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .screenshot-card { background: var(--bg-card); border: 1px solid var(--border-soft); overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
+    .screenshot-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .screenshot-placeholder { height: 200px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.8rem; background: linear-gradient(135deg, #0f0f14, #161618); position: relative; overflow: hidden; }
+    .screenshot-placeholder::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 32px 32px; }
+    .screenshot-icon { font-size: 2.5rem; position: relative; z-index: 1; }
+    .screenshot-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; position: relative; z-index: 1; }
+    .screenshot-cap { padding: 0.9rem 1.2rem; border-top: 1px solid var(--border-soft); }
+    .screenshot-title { font-size: 0.85rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; }
+    .screenshot-desc { font-size: 0.78rem; color: var(--muted); font-weight: 300; }
+
+    /* ===== MODÈLE ÉTOILE ===== */
+    .schema-block {
+      background: #0a0a0d; border: 1px solid var(--border-soft);
+      padding: 1.6rem 2rem; font-family: var(--font-mono); font-size: 0.82rem;
+      line-height: 1.9; max-width: 700px;
+    }
+    .schema-center { color: var(--gold-light); font-weight: 500; }
+    .schema-dim { color: rgba(240,236,228,0.55); }
+    .schema-comment { color: #5a5a6a; }
+    .schema-arrow { color: var(--gold); }
+
+    /* Role badge */
+    .role-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--gold-dim); border: 1px solid rgba(181,145,74,0.4);
+      padding: 0.4rem 1rem; font-family: var(--font-mono);
+      font-size: 0.75rem; color: var(--gold-light); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+
+    /* ===== NAV BAS ===== */
+    .bottom-nav { padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-soft); }
+    .back-link { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--muted); font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.08em; transition: color 0.2s; }
+    .back-link:hover { color: var(--gold); }
+    .ext-links { display: flex; gap: 1rem; }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp   { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeLeft { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal:nth-child(2) { transition-delay: 0.1s; }
+    .reveal:nth-child(3) { transition-delay: 0.2s; }
+    .reveal:nth-child(4) { transition-delay: 0.3s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      nav { padding: 1.2rem 2rem; }
+      .project-hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; }
+      .hero-right { display: none; }
+      section.content-section { padding: 4rem 2rem; }
+      .pipeline-grid { grid-template-columns: repeat(2, 1fr); }
+      .axes-grid { grid-template-columns: 1fr; }
+      .sql-grid { grid-template-columns: 1fr; }
+      .metrics-row { grid-template-columns: 1fr 1fr; }
+      .screenshots-grid { grid-template-columns: 1fr; }
+      .bottom-nav { padding: 2rem; flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">PG.portfolio</a>
+    <a href="index.html#projects" class="nav-back">← Retour aux projets</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="project-hero">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+
+    <div class="hero-left">
+      <div class="project-num">Projet 01 — SQL · Power BI</div>
+      <div class="project-title-big">TOYS<br>&amp; <span>MODELS</span></div>
+
+      <p class="project-tagline">
+        Tableau de bord décisionnel complet pour un distributeur international de jouets et modèles réduits.
+        De l'exploration SQL à la livraison d'un <strong>dashboard Power BI multi-pages</strong>,
+        en passant par la définition de 18 KPI métier répartis sur 4 axes stratégiques.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#" class="btn-primary">↗ GitHub</a>
+        <a href="#dashboard" class="btn-secondary">↓ Voir le dashboard</a>
+      </div>
+    </div>
+
+    <!-- Panneau méta-infos -->
+    <div class="hero-right">
+      <div class="meta-row">
+        <div class="meta-cell accent">
+          <div class="meta-label">Contexte</div>
+          <div class="meta-value">Wild Code School · 2025</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-label">Durée</div>
+          <div class="meta-value">4 semaines · Agile</div>
+        </div>
+      </div>
+      <div class="meta-row">
+        <div class="meta-cell">
+          <div class="meta-label">Mon rôle</div>
+          <div class="meta-value">Product Owner + Data Analyst<br><span style="font-size:0.8rem;color:var(--muted);">Équipe de 4 — Lumi Agency</span></div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-label">Périmètre</div>
+          <div class="meta-value muted">8 tables · ~300 clients · 7 bureaux mondiaux · 18 KPI</div>
+        </div>
+      </div>
+      <div class="meta-row">
+        <div class="meta-cell">
+          <div class="meta-label">Stack</div>
+          <div class="stack-chips">
+            <span class="chip core">MySQL</span>
+            <span class="chip core">Power BI</span>
+            <span class="chip core">DAX</span>
+            <span class="chip">Window Functions</span>
+            <span class="chip">CTEs</span>
+            <span class="chip">Modélisation étoile</span>
+          </div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-label">Livrables</div>
+          <div class="meta-value muted">Requêtes SQL KPI · Modèle OLAP · Dashboard 5 pages · User Stories</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASES DU PROJET -->
+  <section class="content-section alt">
+    <div class="section-header reveal">
+      <span class="section-number">01</span>
+      <h2 class="section-title">Phases du projet</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="pipeline-grid">
+      <div class="pipeline-step">
+        <div class="step-bubble">🔍</div>
+        <div class="step-num">Semaine 1</div>
+        <div class="step-label">Exploration SQL</div>
+        <div class="step-desc">Lecture des tables, mapping PK/FK, compréhension du modèle relationnel</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-bubble">📐</div>
+        <div class="step-num">Semaine 2</div>
+        <div class="step-label">KPI &amp; Requêtes</div>
+        <div class="step-desc">Définition des 18 KPI métier, écriture des requêtes SQL par axe</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-bubble">⭐</div>
+        <div class="step-num">Semaine 3</div>
+        <div class="step-label">Modélisation OLAP</div>
+        <div class="step-desc">Transformation en schéma en étoile, tables de faits et de dimensions</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-bubble">📊</div>
+        <div class="step-num">Semaine 4</div>
+        <div class="step-label">Dashboard Power BI</div>
+        <div class="step-desc">5 pages interactives, DAX, filtres croisés, présentation client</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KPI PAR AXE -->
+  <section class="content-section">
+    <div class="section-header reveal">
+      <span class="section-number">02</span>
+      <h2 class="section-title">18 KPI · 4 axes métier</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="axes-grid">
+
+      <div class="axe-card ventes reveal">
+        <div class="axe-icon">📈</div>
+        <div class="axe-title">Ventes</div>
+        <div class="axe-count">// 6 indicateurs</div>
+        <ul class="axe-kpis">
+          <li><strong>CA mensuel par région</strong> + taux d'évolution mensuel</li>
+          <li><strong>Produits les plus/moins vendus</strong> par catégorie</li>
+          <li><strong>Marge brute</strong> par produit et par catégorie</li>
+          <li><strong>Taux d'évolution annuel</strong> des ventes par catégorie</li>
+          <li><strong>Panier moyen</strong> des commandes</li>
+          <li><strong>Taux de fidélité</strong> (repeat customers)</li>
+        </ul>
+      </div>
+
+      <div class="axe-card finances reveal">
+        <div class="axe-icon">💰</div>
+        <div class="axe-title">Finances</div>
+        <div class="axe-count">// 5 indicateurs</div>
+        <ul class="axe-kpis">
+          <li><strong>Clients générant</strong> le plus / moins de revenus</li>
+          <li><strong>Taux de recouvrement</strong> des créances par client</li>
+          <li><strong>Croissance des ventes</strong> par trimestre</li>
+          <li><strong>Montant moyen des paiements</strong> + clients sous la moyenne</li>
+          <li><strong>Délai moyen de paiement</strong> post-commande</li>
+        </ul>
+      </div>
+
+      <div class="axe-card logistique reveal">
+        <div class="axe-icon">📦</div>
+        <div class="axe-title">Logistique</div>
+        <div class="axe-count">// 4 indicateurs</div>
+        <ul class="axe-kpis">
+          <li><strong>Stocks sous seuil critique</strong> (seuil dynamique basé sur les ventes)</li>
+          <li><strong>Durée moyenne de traitement</strong> des commandes</li>
+          <li><strong>Taux d'écoulement</strong> des stocks par produit</li>
+          <li><strong>Taux de commandes livrées en retard</strong></li>
+        </ul>
+      </div>
+
+      <div class="axe-card rh reveal">
+        <div class="axe-icon">👥</div>
+        <div class="axe-title">Ressources Humaines</div>
+        <div class="axe-count">// 3 indicateurs</div>
+        <ul class="axe-kpis">
+          <li><strong>CA par représentant commercial</strong> + CA moyen par client</li>
+          <li><strong>Ratio commandes/paiements</strong> par représentant (order-to-cash gap)</li>
+          <li><strong>Performance par bureau</strong> (7 offices mondiaux)</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SQL TECHNIQUE -->
+  <section class="content-section alt">
+    <div class="section-header reveal">
+      <span class="section-number">03</span>
+      <h2 class="section-title">Techniques SQL</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="sql-grid">
+      <div class="sql-text reveal">
+        <h3>De l'exploration<br>aux KPI avancés</h3>
+        <p>
+          La base MySQL Toys &amp; Models repose sur <span class="accent">8 tables reliées</span>
+          par des clés étrangères — de <code>orders</code> à <code>payments</code> en passant
+          par <code>employees</code> et <code>offices</code>.
+        </p>
+        <p>
+          Les indicateurs temporels (évolution mensuelle, croissance trimestrielle) ont nécessité
+          l'usage des <strong>window functions</strong> — notamment <code>LAG()</code> avec
+          <code>PARTITION BY</code> — pour comparer chaque période à la précédente sans sous-requête imbriquée.
+        </p>
+        <p>
+          Les KPI financiers complexes (recouvrement de créances, délai de paiement) ont été
+          structurés via des <strong>CTEs chaînées</strong> pour séparer clairement chaque
+          étape de calcul et gagner en lisibilité.
+        </p>
+
+        <div class="code-block"><span class="code-comment">-- Exemple : évolution mensuelle du CA par région</span>
+<span class="code-keyword">SELECT</span>
+  c.<span class="code-col">country</span>,
+  <span class="code-func">DATE_FORMAT</span>(p.paymentDate, <span class="code-string">'%Y-%m'</span>) <span class="code-keyword">AS</span> mois,
+  <span class="code-func">SUM</span>(p.amount) <span class="code-keyword">AS</span> CA,
+  <span class="code-func">ROUND</span>(
+    (CA - <span class="code-func">LAG</span>(CA) <span class="code-keyword">OVER</span> (
+      <span class="code-keyword">PARTITION BY</span> c.country
+      <span class="code-keyword">ORDER BY</span> mois))
+    / <span class="code-func">LAG</span>(CA) <span class="code-keyword">OVER</span> (...) * 100, 2
+  ) <span class="code-keyword">AS</span> taux_evolution
+<span class="code-keyword">FROM</span> customers c
+<span class="code-keyword">JOIN</span> payments p <span class="code-keyword">ON</span> p.customerNumber = c.customerNumber
+<span class="code-keyword">GROUP BY</span> c.country, mois;</div>
+      </div>
+
+      <div class="sql-panel reveal">
+        <div class="sql-panel-header">// Techniques utilisées</div>
+        <div class="sql-feat-row">
+          <div class="sql-feat-name">LAG() / LEAD()</div>
+          <div class="sql-feat-tag window">Window Function</div>
+        </div>
+        <div class="sql-feat-row">
+          <div class="sql-feat-name">PARTITION BY</div>
+          <div class="sql-feat-tag window">Window Function</div>
+        </div>
+        <div class="sql-feat-row">
+          <div class="sql-feat-name">WITH … AS (CTEs)</div>
+          <div class="sql-feat-tag cte">CTE chaînées</div>
+        </div>
+        <div class="sql-feat-row">
+          <div class="sql-feat-name">SUM / AVG / COUNT / ROUND</div>
+          <div class="sql-feat-tag agg">Agrégation</div>
+        </div>
+        <div class="sql-feat-row">
+          <div class="sql-feat-name">DATEDIFF / DATE_FORMAT</div>
+          <div class="sql-feat-tag agg">Date Functions</div>
+        </div>
+        <div class="sql-feat-row">
+          <div class="sql-feat-name">CASE WHEN / COALESCE</div>
+          <div class="sql-feat-tag agg">Conditionnel</div>
+        </div>
+        <div class="sql-feat-row">
+          <div class="sql-feat-name">LEFT JOIN / INNER JOIN</div>
+          <div class="sql-feat-tag join">Multi-tables</div>
+        </div>
+        <div class="sql-feat-row">
+          <div class="sql-feat-name">HAVING / ORDER BY</div>
+          <div class="sql-feat-tag join">Filtrage avancé</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section id="dashboard" class="content-section">
+    <div class="section-header reveal">
+      <span class="section-number">04</span>
+      <h2 class="section-title">Dashboard Power BI</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="metrics-row reveal">
+      <div class="metric-box">
+        <div class="metric-val">5</div>
+        <div class="metric-lbl">Pages dédiées</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">18</div>
+        <div class="metric-lbl">KPI calculés</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">$8.4M</div>
+        <div class="metric-lbl">CA analysé</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">7</div>
+        <div class="metric-lbl">Bureaux couverts</div>
+      </div>
+    </div>
+
+    <div class="screenshots-grid reveal">
+      <div class="screenshot-card">
+        <div class="screenshot-placeholder">
+          <div class="screenshot-icon">🏠</div>
+          <div class="screenshot-label">Home</div>
+        </div>
+        <div class="screenshot-cap">
+          <div class="screenshot-title">Vue d'ensemble</div>
+          <div class="screenshot-desc">Synthèse globale : CA annuel, montant impayé, répartition par bureau et classement clients. Filtres temporels (année, trimestre, mois) applicables sur toutes les pages.</div>
+        </div>
+      </div>
+      <div class="screenshot-card">
+        <div class="screenshot-placeholder">
+          <div class="screenshot-icon">👥</div>
+          <div class="screenshot-label">RH</div>
+        </div>
+        <div class="screenshot-cap">
+          <div class="screenshot-title">Performance commerciale</div>
+          <div class="screenshot-desc">KPI par représentant et par bureau : CA généré, CA moyen par client, order-to-cash gap et PO ratio. Sélecteur de sales rep interactif.</div>
+        </div>
+      </div>
+      <div class="screenshot-card">
+        <div class="screenshot-placeholder">
+          <div class="screenshot-icon">💰</div>
+          <div class="screenshot-label">Finances</div>
+        </div>
+        <div class="screenshot-cap">
+          <div class="screenshot-title">Santé financière</div>
+          <div class="screenshot-desc">Ranking clients top &amp; bottom, créances impayées, délai moyen de paiement et croissance trimestrielle. Jauge de délai de paiement moyen.</div>
+        </div>
+      </div>
+      <div class="screenshot-card">
+        <div class="screenshot-placeholder">
+          <div class="screenshot-icon">📈</div>
+          <div class="screenshot-label">Ventes</div>
+        </div>
+        <div class="screenshot-cap">
+          <div class="screenshot-title">Analyse des ventes</div>
+          <div class="screenshot-desc">Évolution mensuelle du CA, marge brute par produit et par pays, panier moyen, treemap des ventes par catégorie.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODÈLE EN ÉTOILE -->
+  <section class="content-section alt">
+    <div class="section-header reveal">
+      <span class="section-number">05</span>
+      <h2 class="section-title">Modélisation en étoile</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="sql-grid reveal">
+      <div class="sql-text">
+        <h3>Du modèle relationnel<br>au modèle analytique</h3>
+        <p>
+          Le passage du schéma transactionnel MySQL au modèle OLAP Power BI a nécessité
+          une <span class="accent">restructuration en schéma en étoile</span> : identification
+          des tables de faits et des dimensions, suppression des redondances, création
+          des relations dans le modèle Power BI.
+        </p>
+        <p>
+          La table de faits centrale agrège les <strong>orderdetails</strong> (lignes de commande)
+          complétées par les montants issus des paiements, permettant de calculer les KPI
+          de CA, de marge et de recouvrement.
+        </p>
+        <p>
+          Les <strong>mesures DAX</strong> ont été créées pour les calculs dynamiques :
+          CA filtré par période, taux d'évolution MoM, montants impayés cumulés.
+        </p>
+      </div>
+
+      <div class="schema-block">
+<span class="schema-comment">-- Schéma en étoile (simplifié)</span>
+
+              <span class="schema-center">[ FACT_OrderDetails ]</span>
+              <span class="schema-arrow">↙    ↓    ↓    ↓    ↓    ↘</span>
+
+<span class="schema-dim">DIM_Products</span>  <span class="schema-dim">DIM_Orders</span>  <span class="schema-dim">DIM_Customers</span>
+<span class="schema-dim">DIM_Employees</span>  <span class="schema-dim">DIM_Offices</span>  <span class="schema-dim">DIM_Date</span>
+
+<span class="schema-comment">
+-- Table de faits
+FACT_OrderDetails
+  ├─ orderNumber (FK → DIM_Orders)
+  ├─ productCode  (FK → DIM_Products)
+  ├─ quantityOrdered
+  ├─ priceEach
+  └─ lineNumber
+
+-- Dimension clé
+DIM_Customers
+  ├─ customerNumber (PK)
+  ├─ customerName
+  ├─ country / creditLimit
+  └─ salesRepEmployeeNumber (FK)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="index.html#projects" class="back-link">← Tous les projets</a>
+    <div class="ext-links">
+      <a href="#" class="btn-secondary">↗ GitHub</a>
+    </div>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.reveal, .pipeline-step').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
