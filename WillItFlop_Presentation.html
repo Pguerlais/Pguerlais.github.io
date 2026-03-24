@@ -341,7 +341,7 @@ body::after {
   <h1 class="hero-title">WILL<span class="hl">IT</span>FLOP</h1>
   <p class="hero-sub">Game Viability <span>Intelligence</span> Platform</p>
   <div class="hero-badges">
-    <span class="badge badge-pink"><span class="dot"></span>Projet en cours</span>
+    <span class="badge badge-pink"><span class="dot"></span>Projet livré · 89 commits</span>
     <span class="badge badge-cyan">Data Analyst · Bootcamp 2026</span>
     <span class="badge badge-ink">Anthony & Pierre</span>
   </div>
@@ -422,33 +422,33 @@ body::after {
   <div class="pipeline">
     <div class="pipe-step">
       <div class="pipe-num">1</div>
-      <div class="pipe-name">SAISIE</div>
-      <div class="pipe-desc">L'utilisateur décrit son jeu fictif via le site web</div>
+      <div class="pipe-name">COLLECTE</div>
+      <div class="pipe-desc">Steam / SteamSpy alimentent la base Supabase via Airflow &amp; Prefect</div>
     </div>
     <div class="pipe-step">
       <div class="pipe-num">2</div>
-      <div class="pipe-name">COLLECTE</div>
-      <div class="pipe-desc">APIs gaming (IGDB, Steam) récupèrent les données de référence</div>
+      <div class="pipe-name">TRANSFORM</div>
+      <div class="pipe-desc">dbt modélise et expose la vue <code>ml_features</code> dans Supabase</div>
     </div>
     <div class="pipe-step">
       <div class="pipe-num">3</div>
-      <div class="pipe-name">TRANSFORM</div>
-      <div class="pipe-desc">dbt modélise et transforme les données dans PostgreSQL</div>
+      <div class="pipe-name">ML TRAIN</div>
+      <div class="pipe-desc">XGBoost entraîné sur 13 608 jeux · seuil F1-optimisé à 0,57</div>
     </div>
     <div class="pipe-step">
       <div class="pipe-num">4</div>
-      <div class="pipe-name">ANALYSE</div>
-      <div class="pipe-desc">Airflow orchestre le scoring et l'analyse comparative</div>
+      <div class="pipe-name">API</div>
+      <div class="pipe-desc">FastAPI sert le modèle via <code>POST /predict</code> et traduit via DeepL</div>
     </div>
     <div class="pipe-step">
       <div class="pipe-num">5</div>
-      <div class="pipe-name">IA</div>
-      <div class="pipe-desc">Génération d'image et de synopsis via API IA</div>
+      <div class="pipe-name">SAISIE</div>
+      <div class="pipe-desc">L'utilisateur décrit son jeu via le frontend React + Vite</div>
     </div>
     <div class="pipe-step">
       <div class="pipe-num">6</div>
-      <div class="pipe-name">RENDU</div>
-      <div class="pipe-desc">Score + rapport + visuels affichés sur le site web</div>
+      <div class="pipe-name">VERDICT</div>
+      <div class="pipe-desc">Proba · score Metacritic fictif (40–95) · « Top! » ou « Flop! »</div>
     </div>
   </div>
 </section>
@@ -463,72 +463,72 @@ body::after {
 
     <div class="stack-card">
       <div class="stack-layer">Stockage</div>
-      <div class="stack-name">PostgreSQL</div>
-      <div class="stack-role">Base de données relationnelle pour stocker les jeux de référence, les résultats d'analyse et les métadonnées.</div>
+      <div class="stack-name">Supabase</div>
+      <div class="stack-role">Base PostgreSQL managée hébergeant les jeux de référence et la vue <code>ml_features</code> consommée par le modèle.</div>
       <span class="stack-tag tag-cyan">Base de données</span>
     </div>
 
     <div class="stack-card">
       <div class="stack-layer">Orchestration</div>
-      <div class="stack-name">Apache Airflow</div>
-      <div class="stack-role">Automatisation et planification des pipelines de collecte, de traitement et de scoring des données.</div>
+      <div class="stack-name">Airflow + Prefect</div>
+      <div class="stack-role">Double orchestration : Airflow pour les DAGs de collecte, Prefect pour les flows de mise à jour ML et déploiement.</div>
       <span class="stack-tag tag-pink">Pipeline</span>
     </div>
 
     <div class="stack-card">
       <div class="stack-layer">Transformation</div>
       <div class="stack-name">dbt</div>
-      <div class="stack-role">Modélisation et transformation des données directement dans PostgreSQL — documentation, tests et lignage inclus.</div>
+      <div class="stack-role">Modélisation et transformation des données dans Supabase — documentation, tests et lignage inclus.</div>
       <span class="stack-tag tag-cyan">Data Transform</span>
     </div>
 
     <div class="stack-card">
       <div class="stack-layer">Collecte</div>
-      <div class="stack-name">API Gaming</div>
-      <div class="stack-role">Récupération de données structurées sur les jeux vidéo existants (genre, plateformes, ventes, notes…) via IGDB et Steam.</div>
+      <div class="stack-name">Steam / SteamSpy</div>
+      <div class="stack-role">Récupération de données réelles sur les jeux indie : genre, prix, tags, notes, présence Twitch, DLC…</div>
       <span class="stack-tag tag-green">Données réelles</span>
     </div>
 
     <div class="stack-card">
-      <div class="stack-layer">Intelligence Artificielle</div>
-      <div class="stack-name">API IA</div>
-      <div class="stack-role">Génération d'image de couverture et de synopsis narratif pour le jeu fictif décrit par l'utilisateur.</div>
-      <span class="stack-tag tag-cyan">Génératif</span>
+      <div class="stack-layer">Machine Learning</div>
+      <div class="stack-name">XGBoost</div>
+      <div class="stack-role">Classifieur entraîné sur 13 608 jeux · 400 estimators · CV ROC-AUC 0,83 · seuil F1-optimisé à 0,57.</div>
+      <span class="stack-tag tag-pink">ML · Classification</span>
     </div>
 
     <div class="stack-card">
-      <div class="stack-layer">Qualité du code</div>
-      <div class="stack-name">SonarQube</div>
-      <div class="stack-role">Analyse statique du code pour détecter bugs, dette technique, duplications et failles de sécurité tout au long du développement.</div>
-      <span class="stack-tag tag-warn">Code Quality</span>
+      <div class="stack-layer">Backend</div>
+      <div class="stack-name">FastAPI</div>
+      <div class="stack-role">API REST exposant <code>POST /predict</code> (verdict + probabilité + score Metacritic fictif) et <code>POST /translate</code> via DeepL.</div>
+      <span class="stack-tag tag-green">API REST</span>
     </div>
 
     <div class="stack-card">
-      <div class="stack-layer">Sécurité</div>
-      <div class="stack-name">OWASP</div>
-      <div class="stack-role">Vérification des failles de sécurité applicative en s'appuyant sur le référentiel OWASP Top 10 pour sécuriser l'ensemble du projet.</div>
-      <span class="stack-tag tag-danger">Sécurité</span>
-    </div>
-
-    <div class="stack-card">
-      <div class="stack-layer">Visualisation</div>
-      <div class="stack-name">Matplotlib / Seaborn</div>
-      <div class="stack-role">Génération de graphiques Python intégrés au site pour visualiser les scores, tendances et comparaisons du marché.</div>
-      <span class="stack-tag tag-green">Dataviz Python</span>
-    </div>
-
-    <div class="stack-card">
-      <div class="stack-layer">Interface</div>
-      <div class="stack-name">Site Web</div>
-      <div class="stack-role">Application web custom développée en HTML/CSS/JS pour la saisie du jeu fictif et l'affichage des résultats.</div>
+      <div class="stack-layer">Frontend</div>
+      <div class="stack-name">React + Vite</div>
+      <div class="stack-role">SPA moderne (pnpm) pour la saisie du jeu fictif et l'affichage du verdict, hébergée via Render.</div>
       <span class="stack-tag tag-gray">Front-end</span>
     </div>
 
     <div class="stack-card">
-      <div class="stack-layer">Développement</div>
-      <div class="stack-name">VSCode</div>
-      <div class="stack-role">Environnement de développement principal pour l'ensemble du code du projet (scripts, web, pipelines).</div>
-      <span class="stack-tag tag-gray">IDE</span>
+      <div class="stack-layer">Visualisation</div>
+      <div class="stack-name">Chart.js</div>
+      <div class="stack-role">Dashboards interactifs (barres, radar, nuage de tags) intégrés aux pages analytiques du projet.</div>
+      <span class="stack-tag tag-cyan">Dataviz JS</span>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-layer">Traduction</div>
+      <div class="stack-name">DeepL API</div>
+      <div class="stack-role">Traduction automatique des descriptions de jeux en français via l'endpoint <code>/translate</code> de l'API.</div>
+      <span class="stack-tag tag-warn">NLP</span>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-layer">Infrastructure</div>
+      <div class="stack-name">Docker</div>
+      <div class="stack-role">Conteneurisation de l'ensemble de la stack (API, Airflow, migrations) via <code>docker-compose.yml</code>.</div>
+      <span class="stack-tag tag-gray">DevOps</span>
     </div>
 
   </div>
@@ -536,25 +536,30 @@ body::after {
 
 <div class="divider"></div>
 
-<!-- 05 IA -->
+<!-- 05 ML -->
 <section class="container">
-  <div class="section-label">05 — Intelligence Artificielle</div>
-  <h2 class="section-h2">Fonctionnalités IA / ML du projet</h2>
+  <div class="section-label">05 — Machine Learning</div>
+  <h2 class="section-h2">Modèle XGBoost · Résultats réels</h2>
   <div class="ia-grid">
     <div class="ia-card">
-      <div class="ia-emoji">🖼️</div>
-      <div class="ia-title">Génération d'image</div>
-      <div class="ia-desc">À partir de la description du jeu fictif, une API de génération d'image produit automatiquement une <strong>illustration de couverture</strong> stylisée et cohérente avec l'univers décrit.</div>
+      <div class="ia-emoji">🤖</div>
+      <div class="ia-title">Modèle XGBoost</div>
+      <div class="ia-desc">Classifieur binaire (succès / flop) entraîné sur <strong>13 608 jeux Steam</strong> · 400 estimators · profondeur max 6 · learning rate 0,05 · validation croisée 5-fold stratifiée.</div>
     </div>
     <div class="ia-card">
-      <div class="ia-emoji">✍️</div>
-      <div class="ia-title">Génération de texte</div>
-      <div class="ia-desc">Un modèle de langage génère un <strong>synopsis narratif</strong> du jeu fictif ainsi qu'un résumé analytique de ses forces et faiblesses commerciales.</div>
+      <div class="ia-emoji">📈</div>
+      <div class="ia-title">Performances (CV)</div>
+      <div class="ia-desc"><strong>ROC-AUC CV : 0,83</strong> · F1 CV : 0,53 · Précision : 0,45 · Rappel : 0,64 · Seuil de décision F1-optimisé à <strong>0,57</strong> pour gérer le déséquilibre des classes (17 % de succès).</div>
     </div>
     <div class="ia-card">
-      <div class="ia-emoji">📊</div>
-      <div class="ia-title">Scoring IA</div>
-      <div class="ia-desc">Croisement des données historiques du marché avec les caractéristiques du jeu pour produire un <strong>score de viabilité commerciale</strong> argumenté et contextualisé.</div>
+      <div class="ia-emoji">🎯</div>
+      <div class="ia-title">Feature Engineering</div>
+      <div class="ia-desc">Prix log-transformé · tags & genres pondérés · TF-IDF sur la description (200 features) · présence Twitch · DLC · Early Access · nombre de langues supportées · poids réduit aux jeux récents (&lt;6 mois).</div>
+    </div>
+    <div class="ia-card">
+      <div class="ia-emoji">🔢</div>
+      <div class="ia-title">Sortie du modèle</div>
+      <div class="ia-desc">Verdict <strong>« Top! » / « Flop! »</strong> · probabilité de succès (0–1) · score Metacritic fictif (40–95) calculé par projection linéaire de la probabilité · traduit via DeepL si besoin.</div>
     </div>
   </div>
 </section>
@@ -564,22 +569,27 @@ body::after {
 <!-- 06 DONNÉES -->
 <section class="container">
   <div class="section-label">06 — Données</div>
-  <h2 class="section-h2">Sources de données</h2>
+  <h2 class="section-h2">Dataset · Chiffres clés</h2>
   <div class="data-grid">
     <div class="data-card">
-      <div class="data-type">API</div>
-      <div class="data-source">IGDB / Twitch API</div>
-      <div class="data-desc">Base de données de référence sur les jeux vidéo : genres, plateformes, dates de sortie, éditeurs, notes.</div>
+      <div class="data-type">Dataset global</div>
+      <div class="data-source">4 872 jeux analysés</div>
+      <div class="data-desc"><strong>28 % de taux de succès</strong> · prix moyen €9 · 38 % de présence Twitch · genre dominant : Action.</div>
     </div>
     <div class="data-card">
       <div class="data-type">API</div>
       <div class="data-source">Steam / SteamSpy</div>
-      <div class="data-desc">Données de ventes estimées, nombre de joueurs, avis utilisateurs, notes Metacritic et tendances du marché PC.</div>
+      <div class="data-desc">Prix, tags, genres, catégories, date de sortie, Early Access, achievements, nombre de langues, avis utilisateurs.</div>
     </div>
     <div class="data-card">
-      <div class="data-type">API</div>
-      <div class="data-source">Sources complémentaires</div>
-      <div class="data-desc">Rapports de marché (Newzoo, GSD) et données sectorielles pour enrichir le contexte concurrentiel.</div>
+      <div class="data-type">Facteurs de succès</div>
+      <div class="data-source">Signaux binaires</div>
+      <div class="data-desc">Twitch : 52 % succès vs 18 % flop · DLC : 58 % vs 21 % · Early Access : 30 % vs 22 % — corrélations mesurées sur le dataset.</div>
+    </div>
+    <div class="data-card">
+      <div class="data-type">Entraînement ML</div>
+      <div class="data-source">13 608 exemples</div>
+      <div class="data-desc">Split 80/20 stratifié · <strong>2 298 positifs</strong> (17 %) · scale_pos_weight dynamique · poids réduits pour les jeux sortis depuis moins de 6 mois.</div>
     </div>
   </div>
 </section>
@@ -639,21 +649,21 @@ body::after {
 <!-- 08 LIVRABLE -->
 <section class="container">
   <div class="section-label">08 — Livrable</div>
-  <h2 class="section-h2">Résultat attendu</h2>
+  <h2 class="section-h2">Résultat produit</h2>
   <div class="result-card">
     <div class="result-score">
-      <div class="result-big">8.4</div>
-      <div class="result-label">Score commercial / 10</div>
-      <div class="result-verdict">✓ VIABLE</div>
+      <div class="result-big" style="font-size:3rem;line-height:1.2">0.83</div>
+      <div class="result-label">ROC-AUC · Validation croisée</div>
+      <div class="result-verdict">✓ TOP!</div>
     </div>
     <div class="result-text">
-      Le livrable final est un <strong>site web interactif</strong> permettant à n'importe quel utilisateur de décrire un jeu vidéo fictif et d'obtenir en retour :<br><br>
-      • Une <strong>image de couverture générée par IA</strong><br>
-      • Un <strong>synopsis narratif</strong> du jeu<br>
-      • Un <strong>score de viabilité commerciale</strong> sur 10<br>
-      • Un <strong>rapport analytique</strong> comparant le jeu fictif au marché réel<br>
-      • Des <strong>visualisations Python</strong> (Matplotlib / Seaborn) sur le positionnement marché<br><br>
-      L'ensemble est hébergé sur un site web custom développé en HTML/CSS/JS, dans la charte graphique <em>Cyberpunk Neon Light</em> du projet, avec un code <strong>sécurisé et audité</strong> (SonarQube + OWASP).
+      Le livrable est une <strong>plateforme full-stack déployée</strong> (Render + Supabase) permettant à l'utilisateur de décrire un jeu indie et d'obtenir :<br><br>
+      • Un <strong>verdict « Top! » / « Flop! »</strong> produit par le modèle XGBoost<br>
+      • Une <strong>probabilité de succès</strong> (0–100 %) basée sur les données Steam réelles<br>
+      • Un <strong>score Metacritic fictif</strong> (40–95) pour contextualiser le résultat<br>
+      • Un <strong>dashboard analytique</strong> (Chart.js) sur le marché indie : genres, prix, tags, timeline<br>
+      • La <strong>description traduite</strong> automatiquement en français via DeepL<br><br>
+      Architecture : <strong>FastAPI + XGBoost</strong> en backend · <strong>React + Vite</strong> en frontend · <strong>dbt + Supabase</strong> pour les données · orchestré via <strong>Airflow + Prefect</strong> · conteneurisé avec <strong>Docker</strong>.
     </div>
   </div>
 </section>
@@ -662,14 +672,14 @@ body::after {
   <div class="footer-brand">WILL<span class="hl">IT</span>FLOP</div>
   <div class="footer-copy">FICHE PROJET — Bootcamp Data Analyst 2026 — À soumettre pour validation</div>
   <div class="footer-tags">
-    <span class="stack-tag tag-pink">PostgreSQL</span>
-    <span class="stack-tag tag-cyan">Airflow</span>
+    <span class="stack-tag tag-pink">XGBoost</span>
+    <span class="stack-tag tag-green">FastAPI</span>
+    <span class="stack-tag tag-gray">React + Vite</span>
+    <span class="stack-tag tag-cyan">Supabase</span>
     <span class="stack-tag tag-cyan">dbt</span>
-    <span class="stack-tag tag-green">API IA</span>
-    <span class="stack-tag tag-green">Matplotlib</span>
-    <span class="stack-tag tag-warn">SonarQube</span>
-    <span class="stack-tag tag-danger">OWASP</span>
-    <span class="stack-tag tag-gray">Web</span>
+    <span class="stack-tag tag-pink">Airflow</span>
+    <span class="stack-tag tag-warn">DeepL</span>
+    <span class="stack-tag tag-gray">Docker</span>
   </div>
 </footer>
 
