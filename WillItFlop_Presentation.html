@@ -218,6 +218,7 @@ body::after {
 .tag-warn  { background: rgba(140,106,0,0.08); color: var(--warn); border: 1px solid rgba(140,106,0,0.25); }
 .tag-danger{ background: rgba(204,26,26,0.08); color: var(--danger); border: 1px solid rgba(204,26,26,0.25); }
 
+/* Pipeline */
 .pipeline {
   display: flex; align-items: stretch; gap: 0; flex-wrap: wrap; margin-top: 8px;
 }
@@ -239,9 +240,40 @@ body::after {
   color: #fff; font-family: 'Orbitron', sans-serif; font-size: 0.7rem; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
 }
+.pipe-num.cyan { background: var(--cyan); }
 .pipe-name { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; font-weight: 700; color: var(--ink); }
 .pipe-desc { font-size: 0.72rem; color: var(--gray); line-height: 1.4; }
 
+/* Automation loop */
+.auto-block {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  padding: 28px 32px; margin-bottom: 16px;
+}
+.auto-block-title {
+  font-family: 'Orbitron', sans-serif; font-size: 0.8rem; font-weight: 700;
+  color: var(--ink); margin-bottom: 6px; display: flex; align-items: center; gap: 10px;
+}
+.auto-block-label {
+  font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.2em;
+  padding: 2px 10px; border-radius: 3px;
+}
+.auto-block-desc { font-size: 0.84rem; color: var(--gray); line-height: 1.6; margin-bottom: 16px; }
+.auto-block-desc strong { color: var(--ink2); }
+
+/* APIs */
+.api-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 20px; }
+.api-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  padding: 28px; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.api-card:hover { border-color: var(--cyan); box-shadow: 0 4px 20px rgba(0,122,140,0.1); }
+.api-name { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.api-type { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.2em; color: var(--cyan); text-transform: uppercase; margin-bottom: 14px; }
+.api-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.api-list li { font-size: 0.8rem; color: var(--gray); display: flex; align-items: flex-start; gap: 8px; }
+.api-list li::before { content: '›'; color: var(--cyan); font-weight: 700; flex-shrink: 0; }
+
+/* IA */
 .ia-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; }
 .ia-card {
   background: var(--white); border: 1px solid var(--border); border-radius: 10px;
@@ -251,7 +283,9 @@ body::after {
 .ia-emoji { font-size: 1.6rem; margin-bottom: 10px; }
 .ia-title { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
 .ia-desc  { font-size: 0.8rem; color: var(--gray); line-height: 1.55; }
+.ia-desc strong { color: var(--ink2); }
 
+/* Team */
 .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 @media(max-width:580px){ .team-grid { grid-template-columns: 1fr; } }
 .team-card {
@@ -274,30 +308,13 @@ body::after {
   font-size: 0.82rem; color: var(--gray); line-height: 1.4;
 }
 .task-item::before { content: '▸'; color: var(--pink); flex-shrink: 0; margin-top: 1px; }
+.task-item.highlight { color: var(--ink2); font-weight: 600; }
+.task-item.highlight::before { color: var(--cyan); }
 
-.data-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 16px; }
-.data-card {
-  background: var(--white); border: 1px solid var(--border); border-radius: 10px;
-  padding: 20px; transition: border-color 0.2s;
-}
-.data-card:hover { border-color: var(--cyan); }
-.data-source { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
-.data-type   { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.2em; color: var(--cyan); text-transform: uppercase; margin-bottom: 8px; }
-.data-desc   { font-size: 0.78rem; color: var(--gray); line-height: 1.5; }
+/* ML */
+.ml-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; }
 
-.obj-list { display: flex; flex-direction: column; gap: 12px; }
-.obj-item {
-  display: flex; align-items: flex-start; gap: 14px;
-  background: var(--white); border: 1px solid var(--border); border-radius: 10px;
-  padding: 18px 22px;
-}
-.obj-num {
-  font-family: 'Orbitron', sans-serif; font-size: 0.8rem; font-weight: 700;
-  color: var(--pink); flex-shrink: 0; min-width: 28px;
-}
-.obj-text { font-size: 0.88rem; color: var(--ink2); line-height: 1.55; }
-.obj-text strong { color: var(--pink); }
-
+/* Result */
 .result-card {
   background: var(--white); border: 2px solid var(--pink); border-radius: 14px;
   padding: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center;
@@ -313,6 +330,14 @@ body::after {
 }
 .result-text { font-size: 0.88rem; color: var(--gray); line-height: 1.65; }
 .result-text strong { color: var(--ink2); font-weight: 600; }
+.result-demo {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+  padding: 10px 20px; border-radius: 6px;
+  background: var(--pink); color: #fff; text-decoration: none;
+  font-family: 'Orbitron', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em;
+  transition: background 0.2s;
+}
+.result-demo:hover { background: #c50051; }
 
 .footer {
   border-top: 1px solid var(--border); padding: 36px 48px; background: var(--bg2);
@@ -330,7 +355,7 @@ body::after {
   <div class="nav-brand">WILL<span class="hl">IT</span>FLOP</div>
   <div class="nav-right">
     <div class="nav-tag">FICHE PROJET — 2026</div>
-    <a href="explorer.html" class="btn-explore">🎮 Le Monde du Jeu Indé</a>
+    <a href="https://willit-flop.vercel.app/" target="_blank" class="btn-explore">🎮 Voir le site en direct</a>
     <button class="btn-print" onclick="window.print()">⎙ IMPRIMER</button>
   </div>
 </nav>
@@ -341,9 +366,9 @@ body::after {
   <h1 class="hero-title">WILL<span class="hl">IT</span>FLOP</h1>
   <p class="hero-sub">Game Viability <span>Intelligence</span> Platform</p>
   <div class="hero-badges">
-    <span class="badge badge-pink"><span class="dot"></span>Projet livré · 89 commits</span>
+    <span class="badge badge-pink"><span class="dot"></span>Projet livré · Pipeline automatisé</span>
     <span class="badge badge-cyan">Data Analyst · Bootcamp 2026</span>
-    <span class="badge badge-ink">Anthony & Pierre</span>
+    <span class="badge badge-ink">Anthony &amp; Pierre</span>
   </div>
 </section>
 
@@ -366,14 +391,14 @@ body::after {
       <div class="card-icon icon-cyan">💡</div>
       <div class="card-title">La solution</div>
       <div class="card-text">
-        Une plateforme web où l'utilisateur <strong>décrit un jeu vidéo fictif</strong> (genre, plateformes, budget, univers…). Le système collecte des données réelles sur des jeux similaires, les analyse, et produit un <strong>score de viabilité commerciale</strong> accompagné d'un rapport détaillé.
+        Une plateforme web où l'utilisateur <strong>décrit un jeu vidéo fictif</strong> (genre, catégories, tags, prix…). Le système s'appuie sur <strong>13 608 jeux Steam réels</strong> et un modèle XGBoost pour produire un <strong>score de viabilité commerciale</strong>, une probabilité de succès et un score Metacritic fictif.
       </div>
     </div>
     <div class="concept-card">
       <div class="card-icon icon-green">🎯</div>
       <div class="card-title">La valeur ajoutée</div>
       <div class="card-text">
-        Le projet combine <strong>collecte de données réelles via APIs</strong> (IGDB, Steam), <strong>pipeline de traitement automatisé</strong> (Airflow + dbt + PostgreSQL) et <strong>IA générative</strong> pour produire une expérience à la fois analytique et immersive — jusqu'à générer une image et un synopsis du jeu fictif.
+        Le projet combine <strong>collecte automatisée via 3 APIs</strong> (Steam, SteamSpy, Twitch), un <strong>pipeline end-to-end orchestré</strong> (Prefect + GitHub Actions + dbt) et de l'<strong>IA générative promptée</strong> (Groq + Pollinations) pour une expérience à la fois analytique et immersive.
       </div>
     </div>
   </div>
@@ -381,216 +406,238 @@ body::after {
 
 <div class="divider"></div>
 
-<!-- 02 OBJECTIFS -->
+<!-- 02 PIPELINE & AUTOMATISATION -->
 <section class="container">
-  <div class="section-label">02 — Objectifs</div>
-  <h2 class="section-h2">Ce que le projet démontre</h2>
-  <div class="obj-list">
-    <div class="obj-item">
-      <div class="obj-num">01</div>
-      <div class="obj-text"><strong>Maîtrise de la collecte de données</strong> — Interroger des APIs tierces (IGDB, Steam / SteamSpy) pour constituer une base de référence riche sur les jeux vidéo existants.</div>
+  <div class="section-label">02 — Pipeline &amp; Automatisation</div>
+  <h2 class="section-h2">Une collecte de données entièrement automatisée</h2>
+
+  <div class="auto-block">
+    <div class="auto-block-title">
+      Boucle de collecte hebdomadaire
+      <span class="auto-block-label tag-cyan">Prefect Cloud · GitHub Actions</span>
     </div>
-    <div class="obj-item">
-      <div class="obj-num">02</div>
-      <div class="obj-text"><strong>Pipeline de données automatisé</strong> — Orchestrer les flux de données avec Apache Airflow, transformer et modéliser les données avec <strong>dbt</strong>, stocker et interroger dans PostgreSQL.</div>
+    <div class="auto-block-desc">
+      Un <strong>workflow GitHub Actions déclenché chaque lundi à 3h UTC</strong> via un webhook Prefect Cloud lance le pipeline ETL complet. Les nouvelles données sont récupérées, les données récentes (jeux &lt; 1 an) rafraîchies, puis <strong>dbt transforme les données brutes</strong> en vue <code>ml_features</code> prête pour le modèle.
     </div>
-    <div class="obj-item">
-      <div class="obj-num">03</div>
-      <div class="obj-text"><strong>Analyse & scoring</strong> — Croiser les caractéristiques du jeu fictif avec les données historiques du marché pour produire un <strong>score de viabilité commerciale argumenté</strong>.</div>
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="pipe-num cyan">1</div>
+        <div class="pipe-name">TRIGGER</div>
+        <div class="pipe-desc">Prefect Cloud schedule → webhook → GitHub Actions runner</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num cyan">2</div>
+        <div class="pipe-name">COLLECTE</div>
+        <div class="pipe-desc">3 APIs : Steam Web API · SteamSpy · Twitch Helix</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num cyan">3</div>
+        <div class="pipe-name">STOCKAGE</div>
+        <div class="pipe-desc">Insertion / mise à jour dans Supabase PostgreSQL</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num cyan">4</div>
+        <div class="pipe-name">TRANSFORM</div>
+        <div class="pipe-desc">dbt modélise la vue <code>ml_features</code> (staging → ML → marts)</div>
+      </div>
     </div>
-    <div class="obj-item">
-      <div class="obj-num">04</div>
-      <div class="obj-text"><strong>Intégration de l'IA générative</strong> — Utiliser des APIs IA pour générer automatiquement une image de couverture et un synopsis du jeu fictif, rendant l'expérience utilisateur immersive.</div>
+  </div>
+
+  <div class="auto-block">
+    <div class="auto-block-title">
+      Réentraînement automatique du modèle
+      <span class="auto-block-label tag-pink">GitHub Actions · CI/CD</span>
     </div>
-    <div class="obj-item">
-      <div class="obj-num">05</div>
-      <div class="obj-text"><strong>Qualité & sécurité du code</strong> — Sécuriser le code via <strong>SonarQube</strong> (analyse statique, dette technique) et vérifier les failles de sécurité avec les standards <strong>OWASP</strong>.</div>
+    <div class="auto-block-desc">
+      Un second workflow surveille les fichiers <code>ml/config.py</code> et <code>dbt/models/ml/**</code>. Toute modification déclenche <strong>automatiquement le réentraînement XGBoost</strong>, puis les artefacts (<code>model.pkl</code>, <code>preprocessor.pkl</code>) sont <strong>commités automatiquement dans le dépôt</strong>, garantissant que l'API FastAPI utilise toujours le modèle le plus récent.
     </div>
-    <div class="obj-item">
-      <div class="obj-num">06</div>
-      <div class="obj-text"><strong>Restitution claire et impactante</strong> — Présenter les résultats via un <strong>site web custom</strong> intégrant des visualisations Python et une interface soignée à destination de l'utilisateur final.</div>
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="pipe-num">1</div>
+        <div class="pipe-name">DÉTECTION</div>
+        <div class="pipe-desc">Push sur <code>ml/</code> ou <code>dbt/models/ml/</code> → workflow déclenché</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">2</div>
+        <div class="pipe-name">ENTRAÎN.</div>
+        <div class="pipe-desc">XGBoost réentraîné sur la vue <code>ml_features</code> à jour</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">3</div>
+        <div class="pipe-name">ARTEFACTS</div>
+        <div class="pipe-desc"><code>model.pkl</code> + <code>preprocessor.pkl</code> auto-commités dans le repo</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">4</div>
+        <div class="pipe-name">PRÉDICTION</div>
+        <div class="pipe-desc">FastAPI sert le nouveau modèle via <code>POST /predict</code> sans intervention</div>
+      </div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- 03 PIPELINE -->
+<!-- 03 APIS DE COLLECTE -->
 <section class="container">
-  <div class="section-label">03 — Fonctionnement</div>
-  <h2 class="section-h2">Les étapes · Comment ça marche ?</h2>
-  <div class="pipeline">
-    <div class="pipe-step">
-      <div class="pipe-num">1</div>
-      <div class="pipe-name">COLLECTE</div>
-      <div class="pipe-desc">Steam / SteamSpy alimentent la base Supabase via Airflow &amp; Prefect</div>
+  <div class="section-label">03 — APIs de Collecte</div>
+  <h2 class="section-h2">3 sources de données · 13 608 jeux référencés</h2>
+  <div class="api-grid">
+    <div class="api-card">
+      <div class="api-name">Steam Web API</div>
+      <div class="api-type">Données produit</div>
+      <ul class="api-list">
+        <li>Détails du jeu : nom, type, catégories, date de sortie, description</li>
+        <li>Prix en euros</li>
+        <li>Top 5 avis positifs + 5 négatifs (filtrés par utilité)</li>
+        <li>Statistiques succès : nombre d'achievements, taux de déverrouillage médian</li>
+        <li>Présence Early Access, DLC, support multijoueur</li>
+      </ul>
     </div>
-    <div class="pipe-step">
-      <div class="pipe-num">2</div>
-      <div class="pipe-name">TRANSFORM</div>
-      <div class="pipe-desc">dbt modélise et expose la vue <code>ml_features</code> dans Supabase</div>
+    <div class="api-card">
+      <div class="api-name">SteamSpy API</div>
+      <div class="api-type">Données marché</div>
+      <ul class="api-list">
+        <li>Estimation des propriétaires (min / max, midpoint calculé)</li>
+        <li>Peak CCU (joueurs simultanés max)</li>
+        <li>Temps de jeu médian</li>
+        <li>Tags attribués par les joueurs avec score de popularité</li>
+        <li>Liste paginée des jeux indie pour l'alimentation initiale</li>
+      </ul>
     </div>
-    <div class="pipe-step">
-      <div class="pipe-num">3</div>
-      <div class="pipe-name">ML TRAIN</div>
-      <div class="pipe-desc">XGBoost entraîné sur 13 608 jeux · seuil F1-optimisé à 0,57</div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-num">4</div>
-      <div class="pipe-name">API</div>
-      <div class="pipe-desc">FastAPI sert le modèle via <code>POST /predict</code> et traduit via DeepL</div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-num">5</div>
-      <div class="pipe-name">SAISIE</div>
-      <div class="pipe-desc">L'utilisateur décrit son jeu via le frontend React + Vite</div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-num">6</div>
-      <div class="pipe-name">VERDICT</div>
-      <div class="pipe-desc">Proba · score Metacritic fictif (40–95) · « Top! » ou « Flop! »</div>
+    <div class="api-card">
+      <div class="api-name">Twitch Helix API</div>
+      <div class="api-type">Signal tendance</div>
+      <ul class="api-list">
+        <li>Recherche du jeu par nom dans le catalogue Twitch</li>
+        <li>Énumération de tous les streams actifs (jusqu'à 500, paginé)</li>
+        <li>Agrégation du nombre total de spectateurs en direct</li>
+        <li>Indicateur de présence Twitch (signal fort de succès : 52 % vs 18 %)</li>
+        <li>Rate limiting respecté (délais 300ms–1s entre appels)</li>
+      </ul>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- 04 STACK -->
+<!-- 04 MACHINE LEARNING -->
 <section class="container">
-  <div class="section-label">04 — Stack technique</div>
-  <h2 class="section-h2">Outils & Technologies</h2>
+  <div class="section-label">04 — Machine Learning</div>
+  <h2 class="section-h2">Modèle XGBoost · Feature Engineering avancé</h2>
+  <div class="ml-grid">
+    <div class="ia-card">
+      <div class="ia-emoji">🤖</div>
+      <div class="ia-title">Modèle XGBoost</div>
+      <div class="ia-desc">Classifieur binaire (<strong>succès / flop</strong>) entraîné sur 13 608 jeux Steam · 400 estimators · profondeur max 6 · learning rate 0,05 · validation croisée 5-fold stratifiée · <code>scale_pos_weight</code> calculé dynamiquement sur le déséquilibre réel des classes.</div>
+    </div>
+    <div class="ia-card">
+      <div class="ia-emoji">📈</div>
+      <div class="ia-title">Performances (CV)</div>
+      <div class="ia-desc"><strong>ROC-AUC CV : 0,83</strong> · F1 CV : 0,53 · Précision : 0,45 · Rappel : 0,64 · Seuil de décision <strong>F1-optimisé à 0,57</strong> pour gérer le déséquilibre des classes (17 % de succès dans le dataset).</div>
+    </div>
+    <div class="ia-card">
+      <div class="ia-emoji">🎯</div>
+      <div class="ia-title">Feature Engineering</div>
+      <div class="ia-desc">Prix <strong>log-transformé</strong> · tags répétés ×3, genres ×2, catégories ×2 dans la matrice pour pondérer leur influence via <code>colsample_bytree</code> · <strong>TF-IDF</strong> sur la description (200 features max, bigrams, sublinear_tf) · présence Twitch · Early Access · nombre de langues.</div>
+    </div>
+    <div class="ia-card">
+      <div class="ia-emoji">⚖️</div>
+      <div class="ia-title">Pondération par âge</div>
+      <div class="ia-desc">Les jeux sortis depuis <strong>moins d'un an ont un poids réduit</strong> (0,05 → 1,0 selon l'âge) car leur label de succès est incertain. Cette décision améliore la robustesse du modèle sur les prédictions de jeux fictifs comparés à des titres récents.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 05 IA GÉNÉRATIVE -->
+<section class="container">
+  <div class="section-label">05 — IA Générative</div>
+  <h2 class="section-h2">Prompts engineerés · Résultats personnalisés</h2>
+  <div class="ia-grid">
+    <div class="ia-card">
+      <div class="ia-emoji">✍️</div>
+      <div class="ia-title">Groq · Llama-3.3-70b</div>
+      <div class="ia-desc">Génération d'une <strong>critique fictive de jeu en français</strong> (60 mots) avec nom de magazine inventé. Le prompt encode le verdict (Top/Flop), le score Metacritic fictif et les caractéristiques du jeu. Le <strong>ton est calibré dynamiquement</strong> selon le score (de "sévère" à "très enthousiaste") avec des guardrails : aucun vrai jeu ou magazine réel cité.</div>
+    </div>
+    <div class="ia-card">
+      <div class="ia-emoji">🎨</div>
+      <div class="ia-title">Pollinations · Flux</div>
+      <div class="ia-desc">Génération d'une <strong>jaquette de jeu réaliste</strong> au format portrait, style packaging professionnel. Le <strong>prompt builder encode 80+ templates</strong> selon le genre, l'atmosphère, les mécaniques, le style visuel, la perspective et les modes de jeu — pour un résultat cohérent et professionnel à chaque génération.</div>
+    </div>
+    <div class="ia-card">
+      <div class="ia-emoji">🌐</div>
+      <div class="ia-title">DeepL API</div>
+      <div class="ia-desc">Traduction automatique des descriptions Steam (en anglais) <strong>vers le français</strong> via l'endpoint <code>POST /translate</code> de l'API FastAPI. Permet d'afficher les données réelles des jeux comparables dans la langue de l'utilisateur, sans traitement NLP supplémentaire.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 06 STACK TECHNIQUE -->
+<section class="container">
+  <div class="section-label">06 — Stack technique</div>
+  <h2 class="section-h2">Outils &amp; Technologies</h2>
   <div class="stack-grid">
 
     <div class="stack-card">
-      <div class="stack-layer">Stockage</div>
-      <div class="stack-name">Supabase</div>
-      <div class="stack-role">Base PostgreSQL managée hébergeant les jeux de référence et la vue <code>ml_features</code> consommée par le modèle.</div>
-      <span class="stack-tag tag-cyan">Base de données</span>
+      <div class="stack-layer">Orchestration</div>
+      <div class="stack-name">Prefect</div>
+      <div class="stack-role">Flows de collecte et de mise à jour ML déployés sur Prefect Cloud, déclenchés via webhook par GitHub Actions selon un schedule hebdomadaire.</div>
+      <span class="stack-tag tag-pink">Pipeline</span>
     </div>
 
     <div class="stack-card">
-      <div class="stack-layer">Orchestration</div>
-      <div class="stack-name">Airflow + Prefect</div>
-      <div class="stack-role">Double orchestration : Airflow pour les DAGs de collecte, Prefect pour les flows de mise à jour ML et déploiement.</div>
-      <span class="stack-tag tag-pink">Pipeline</span>
+      <div class="stack-layer">CI / CD</div>
+      <div class="stack-name">GitHub Actions</div>
+      <div class="stack-role">2 workflows : ETL hebdomadaire (lundi 3h UTC) et réentraînement ML automatique (sur modification de config). Artefacts ML commités automatiquement.</div>
+      <span class="stack-tag tag-pink">Automatisation</span>
     </div>
 
     <div class="stack-card">
       <div class="stack-layer">Transformation</div>
       <div class="stack-name">dbt</div>
-      <div class="stack-role">Modélisation et transformation des données dans Supabase — documentation, tests et lignage inclus.</div>
+      <div class="stack-role">3 couches : staging (vues brutes), ML (tables matérialisées : ml_features, ml_tags, ml_genres, ml_categories, ml_reviews), marts (analyses sentiment).</div>
       <span class="stack-tag tag-cyan">Data Transform</span>
     </div>
 
     <div class="stack-card">
-      <div class="stack-layer">Collecte</div>
-      <div class="stack-name">Steam / SteamSpy</div>
-      <div class="stack-role">Récupération de données réelles sur les jeux indie : genre, prix, tags, notes, présence Twitch, DLC…</div>
-      <span class="stack-tag tag-green">Données réelles</span>
+      <div class="stack-layer">Stockage</div>
+      <div class="stack-name">Supabase</div>
+      <div class="stack-role">Base PostgreSQL managée hébergeant les 5 tables principales (games, genres, categories, tags, reviews) et les vues dbt. Requêtée directement via PostgREST depuis le frontend.</div>
+      <span class="stack-tag tag-cyan">Base de données</span>
     </div>
 
     <div class="stack-card">
       <div class="stack-layer">Machine Learning</div>
       <div class="stack-name">XGBoost</div>
-      <div class="stack-role">Classifieur entraîné sur 13 608 jeux · 400 estimators · CV ROC-AUC 0,83 · seuil F1-optimisé à 0,57.</div>
+      <div class="stack-role">Classifieur binaire · ROC-AUC CV 0,83 · seuil F1-optimisé 0,57 · préprocesseur séparé (ColumnTransformer + MultiLabelBinarizer + TF-IDF) sauvegardé indépendamment.</div>
       <span class="stack-tag tag-pink">ML · Classification</span>
     </div>
 
     <div class="stack-card">
       <div class="stack-layer">Backend</div>
       <div class="stack-name">FastAPI</div>
-      <div class="stack-role">API REST exposant <code>POST /predict</code> (verdict + probabilité + score Metacritic fictif) et <code>POST /translate</code> via DeepL.</div>
+      <div class="stack-role">Expose <code>POST /predict</code> (verdict + probabilité + score Metacritic fictif), <code>POST /translate</code> via DeepL, et les endpoints analytiques sentiment. Déployé sur Render.</div>
       <span class="stack-tag tag-green">API REST</span>
     </div>
 
     <div class="stack-card">
       <div class="stack-layer">Frontend</div>
       <div class="stack-name">React + Vite</div>
-      <div class="stack-role">SPA moderne (pnpm) pour la saisie du jeu fictif et l'affichage du verdict, hébergée via Render.</div>
-      <span class="stack-tag tag-gray">Front-end</span>
+      <div class="stack-role">SPA moderne (React 19) pour la saisie du jeu fictif, l'affichage du verdict et les dashboards analytiques (Chart.js). Déployée sur Vercel. Développée en collaboration.</div>
+      <span class="stack-tag tag-gray">Front-end collaboratif</span>
     </div>
 
     <div class="stack-card">
-      <div class="stack-layer">Visualisation</div>
-      <div class="stack-name">Chart.js</div>
-      <div class="stack-role">Dashboards interactifs (barres, radar, nuage de tags) intégrés aux pages analytiques du projet.</div>
-      <span class="stack-tag tag-cyan">Dataviz JS</span>
+      <div class="stack-layer">IA Générative</div>
+      <div class="stack-name">Groq + Pollinations</div>
+      <div class="stack-role">Groq (Llama-3.3-70b) pour les critiques fictives · Pollinations/Flux pour les jaquettes de jeux. Prompts engineerés avec 80+ templates de style visuel et contrôle de ton.</div>
+      <span class="stack-tag tag-warn">Generative AI</span>
     </div>
 
-    <div class="stack-card">
-      <div class="stack-layer">Traduction</div>
-      <div class="stack-name">DeepL API</div>
-      <div class="stack-role">Traduction automatique des descriptions de jeux en français via l'endpoint <code>/translate</code> de l'API.</div>
-      <span class="stack-tag tag-warn">NLP</span>
-    </div>
-
-    <div class="stack-card">
-      <div class="stack-layer">Infrastructure</div>
-      <div class="stack-name">Docker</div>
-      <div class="stack-role">Conteneurisation de l'ensemble de la stack (API, Airflow, migrations) via <code>docker-compose.yml</code>.</div>
-      <span class="stack-tag tag-gray">DevOps</span>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- 05 ML -->
-<section class="container">
-  <div class="section-label">05 — Machine Learning</div>
-  <h2 class="section-h2">Modèle XGBoost · Résultats réels</h2>
-  <div class="ia-grid">
-    <div class="ia-card">
-      <div class="ia-emoji">🤖</div>
-      <div class="ia-title">Modèle XGBoost</div>
-      <div class="ia-desc">Classifieur binaire (succès / flop) entraîné sur <strong>13 608 jeux Steam</strong> · 400 estimators · profondeur max 6 · learning rate 0,05 · validation croisée 5-fold stratifiée.</div>
-    </div>
-    <div class="ia-card">
-      <div class="ia-emoji">📈</div>
-      <div class="ia-title">Performances (CV)</div>
-      <div class="ia-desc"><strong>ROC-AUC CV : 0,83</strong> · F1 CV : 0,53 · Précision : 0,45 · Rappel : 0,64 · Seuil de décision F1-optimisé à <strong>0,57</strong> pour gérer le déséquilibre des classes (17 % de succès).</div>
-    </div>
-    <div class="ia-card">
-      <div class="ia-emoji">🎯</div>
-      <div class="ia-title">Feature Engineering</div>
-      <div class="ia-desc">Prix log-transformé · tags & genres pondérés · TF-IDF sur la description (200 features) · présence Twitch · DLC · Early Access · nombre de langues supportées · poids réduit aux jeux récents (&lt;6 mois).</div>
-    </div>
-    <div class="ia-card">
-      <div class="ia-emoji">🔢</div>
-      <div class="ia-title">Sortie du modèle</div>
-      <div class="ia-desc">Verdict <strong>« Top! » / « Flop! »</strong> · probabilité de succès (0–1) · score Metacritic fictif (40–95) calculé par projection linéaire de la probabilité · traduit via DeepL si besoin.</div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- 06 DONNÉES -->
-<section class="container">
-  <div class="section-label">06 — Données</div>
-  <h2 class="section-h2">Dataset · Chiffres clés</h2>
-  <div class="data-grid">
-    <div class="data-card">
-      <div class="data-type">Dataset global</div>
-      <div class="data-source">4 872 jeux analysés</div>
-      <div class="data-desc"><strong>28 % de taux de succès</strong> · prix moyen €9 · 38 % de présence Twitch · genre dominant : Action.</div>
-    </div>
-    <div class="data-card">
-      <div class="data-type">API</div>
-      <div class="data-source">Steam / SteamSpy</div>
-      <div class="data-desc">Prix, tags, genres, catégories, date de sortie, Early Access, achievements, nombre de langues, avis utilisateurs.</div>
-    </div>
-    <div class="data-card">
-      <div class="data-type">Facteurs de succès</div>
-      <div class="data-source">Signaux binaires</div>
-      <div class="data-desc">Twitch : 52 % succès vs 18 % flop · DLC : 58 % vs 21 % · Early Access : 30 % vs 22 % — corrélations mesurées sur le dataset.</div>
-    </div>
-    <div class="data-card">
-      <div class="data-type">Entraînement ML</div>
-      <div class="data-source">13 608 exemples</div>
-      <div class="data-desc">Split 80/20 stratifié · <strong>2 298 positifs</strong> (17 %) · scale_pos_weight dynamique · poids réduits pour les jeux sortis depuis moins de 6 mois.</div>
-    </div>
   </div>
 </section>
 
@@ -599,7 +646,7 @@ body::after {
 <!-- 07 ÉQUIPE -->
 <section class="container">
   <div class="section-label">07 — Équipe</div>
-  <h2 class="section-h2">Répartition des rôles</h2>
+  <h2 class="section-h2">Répartition des contributions</h2>
   <div class="team-grid">
     <div class="team-card">
       <div class="team-header">
@@ -610,15 +657,14 @@ body::after {
         </div>
       </div>
       <div class="team-tasks">
-        <div class="task-item">Conception et gestion de la base PostgreSQL</div>
-        <div class="task-item">Développement des pipelines Airflow</div>
-        <div class="task-item">Modélisation des données avec dbt</div>
-        <div class="task-item">Intégration des APIs de collecte (IGDB, Steam…)</div>
-        <div class="task-item">Développement du site web (interface utilisateur)</div>
-        <div class="task-item">Intégration des APIs IA (image + texte)</div>
-        <div class="task-item">Conception des visualisations Matplotlib / Seaborn</div>
-        <div class="task-item">Analyse des données et modèle de scoring</div>
-        <div class="task-item">Sécurisation du code (SonarQube / OWASP)</div>
+        <div class="task-item highlight">Conception et gestion du schéma PostgreSQL (55 colonnes, 5 tables)</div>
+        <div class="task-item highlight">Développement des fetchers Python (Steam, SteamSpy, Twitch)</div>
+        <div class="task-item highlight">Orchestration Prefect (flows, déploiement Prefect Cloud)</div>
+        <div class="task-item highlight">Modélisation dbt (staging → ML → marts)</div>
+        <div class="task-item highlight">Modèle XGBoost — entraînement, feature engineering, threshold</div>
+        <div class="task-item">Développement frontend React (avec assistance IA)</div>
+        <div class="task-item highlight">Intégration APIs IA (Groq + Pollinations) — prompt engineering</div>
+        <div class="task-item">Analyse exploratoire des données et corrélations marché</div>
       </div>
     </div>
     <div class="team-card">
@@ -630,15 +676,14 @@ body::after {
         </div>
       </div>
       <div class="team-tasks">
-        <div class="task-item">Conception et gestion de la base PostgreSQL</div>
-        <div class="task-item">Développement des pipelines Airflow</div>
-        <div class="task-item">Modélisation des données avec dbt</div>
-        <div class="task-item">Intégration des APIs de collecte (IGDB, Steam…)</div>
-        <div class="task-item">Développement du site web (interface utilisateur)</div>
-        <div class="task-item">Intégration des APIs IA (image + texte)</div>
-        <div class="task-item">Conception des visualisations Matplotlib / Seaborn</div>
-        <div class="task-item">Analyse des données et modèle de scoring</div>
-        <div class="task-item">Sécurisation du code (SonarQube / OWASP)</div>
+        <div class="task-item highlight">Conception et gestion du schéma PostgreSQL (55 colonnes, 5 tables)</div>
+        <div class="task-item highlight">Développement des fetchers Python (Steam, SteamSpy, Twitch)</div>
+        <div class="task-item highlight">Orchestration Prefect (flows, déploiement Prefect Cloud)</div>
+        <div class="task-item highlight">Modélisation dbt (staging → ML → marts)</div>
+        <div class="task-item highlight">Modèle XGBoost — entraînement, feature engineering, threshold</div>
+        <div class="task-item">Développement frontend React (avec assistance IA)</div>
+        <div class="task-item highlight">Intégration APIs IA (Groq + Pollinations) — prompt engineering</div>
+        <div class="task-item">Analyse exploratoire des données et corrélations marché</div>
       </div>
     </div>
   </div>
@@ -649,37 +694,39 @@ body::after {
 <!-- 08 LIVRABLE -->
 <section class="container">
   <div class="section-label">08 — Livrable</div>
-  <h2 class="section-h2">Résultat produit</h2>
+  <h2 class="section-h2">Résultat produit · Plateforme en ligne</h2>
   <div class="result-card">
     <div class="result-score">
       <div class="result-big" style="font-size:3rem;line-height:1.2">0.83</div>
       <div class="result-label">ROC-AUC · Validation croisée</div>
       <div class="result-verdict">✓ TOP!</div>
+      <a href="https://willit-flop.vercel.app/" target="_blank" class="result-demo">🎮 Tester le site ↗</a>
     </div>
     <div class="result-text">
-      Le livrable est une <strong>plateforme full-stack déployée</strong> (Render + Supabase) permettant à l'utilisateur de décrire un jeu indie et d'obtenir :<br><br>
+      Le livrable est une <strong>plateforme full-stack déployée</strong> (Vercel + Render + Supabase) avec un pipeline de données entièrement automatisé :<br><br>
       • Un <strong>verdict « Top! » / « Flop! »</strong> produit par le modèle XGBoost<br>
-      • Une <strong>probabilité de succès</strong> (0–100 %) basée sur les données Steam réelles<br>
-      • Un <strong>score Metacritic fictif</strong> (40–95) pour contextualiser le résultat<br>
-      • Un <strong>dashboard analytique</strong> (Chart.js) sur le marché indie : genres, prix, tags, timeline<br>
-      • La <strong>description traduite</strong> automatiquement en français via DeepL<br><br>
-      Architecture : <strong>FastAPI + XGBoost</strong> en backend · <strong>React + Vite</strong> en frontend · <strong>dbt + Supabase</strong> pour les données · orchestré via <strong>Airflow + Prefect</strong> · conteneurisé avec <strong>Docker</strong>.
+      • Une <strong>probabilité de succès</strong> (0–100 %) basée sur 13 608 jeux Steam réels<br>
+      • Un <strong>score Metacritic fictif</strong> (40–95) projeté linéairement depuis la probabilité<br>
+      • Une <strong>critique générée par IA</strong> (Groq / Llama-3.3-70b) avec ton calibré<br>
+      • Une <strong>jaquette de jeu générée</strong> (Pollinations / Flux) depuis le formulaire<br>
+      • Un <strong>dashboard analytique</strong> sur le marché indie (genres, prix, tags, timeline)<br><br>
+      Architecture : <strong>Prefect + GitHub Actions</strong> pour l'orchestration · <strong>dbt + Supabase</strong> pour la donnée · <strong>XGBoost + FastAPI</strong> pour le ML · <strong>React + Vite</strong> en frontend.
     </div>
   </div>
 </section>
 
 <footer class="footer">
   <div class="footer-brand">WILL<span class="hl">IT</span>FLOP</div>
-  <div class="footer-copy">FICHE PROJET — Bootcamp Data Analyst 2026 — À soumettre pour validation</div>
+  <div class="footer-copy">FICHE PROJET — Bootcamp Data Analyst 2026</div>
   <div class="footer-tags">
     <span class="stack-tag tag-pink">XGBoost</span>
-    <span class="stack-tag tag-green">FastAPI</span>
-    <span class="stack-tag tag-gray">React + Vite</span>
-    <span class="stack-tag tag-cyan">Supabase</span>
+    <span class="stack-tag tag-pink">Prefect</span>
     <span class="stack-tag tag-cyan">dbt</span>
-    <span class="stack-tag tag-pink">Airflow</span>
-    <span class="stack-tag tag-warn">DeepL</span>
-    <span class="stack-tag tag-gray">Docker</span>
+    <span class="stack-tag tag-cyan">Supabase</span>
+    <span class="stack-tag tag-green">FastAPI</span>
+    <span class="stack-tag tag-warn">Groq · Llama-3.3-70b</span>
+    <span class="stack-tag tag-warn">Pollinations · Flux</span>
+    <span class="stack-tag tag-gray">React + Vite</span>
   </div>
 </footer>
 

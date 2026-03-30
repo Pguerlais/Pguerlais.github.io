@@ -764,9 +764,9 @@
         <div class="skill-cat-icons"><i class="devicon-apacheairflow-plain" title="Airflow"></i><i class="devicon-dbt-plain" title="dbt"></i></div>
         <div class="skill-cat-title">// Data Engineering</div>
         <div class="skill-tags">
-          <span class="skill-tag core">Apache Airflow</span><span class="skill-tag core">dbt</span>
-          <span class="skill-tag">Orchestration</span><span class="skill-tag">Pipeline ETL</span>
-          <span class="skill-tag">PostgreSQL</span><span class="skill-tag">API Gaming (IGDB / Steam)</span>
+          <span class="skill-tag core">Prefect</span><span class="skill-tag core">dbt</span>
+          <span class="skill-tag">GitHub Actions</span><span class="skill-tag">Pipeline ETL</span>
+          <span class="skill-tag">PostgreSQL</span><span class="skill-tag">Steam · SteamSpy · Twitch</span>
         </div>
       </div>
 
@@ -902,12 +902,12 @@
             <div class="project-num-label">Projet — 03</div>
             <div class="project-meta">
               <div class="project-featured-badge">★ Projet phare</div>
-              <div class="project-status wip">
-                <span class="project-status-dot"></span>
-                En cours
+              <div class="project-status done" style="color:var(--gold);background:rgba(181,145,74,0.1);border-color:rgba(181,145,74,0.3);">
+                <span class="project-status-dot" style="background:var(--gold)"></span>
+                Livré
               </div>
               <div class="project-category">
-                Python · Airflow<br/>dbt · IA Générative
+                Python · Prefect<br/>dbt · XGBoost · IA Gen
               </div>
             </div>
             <div class="project-bg-num">03</div>
@@ -918,25 +918,25 @@
               <div class="project-subtitle">Prédiction commerciale — Pipeline Data complet</div>
             </div>
             <p class="project-desc">
-              Plateforme de prédiction de viabilité pour des concepts de jeux vidéo.
-              L'utilisateur décrit un jeu, le système interroge des APIs gaming (IGDB, Steam),
-              transforme les données avec <strong>dbt</strong>, orchestre le pipeline via <strong>Airflow</strong>
-              et produit un score de viabilité, un synopsis et une image générés par IA.
-              Code audité SonarQube + OWASP.
+              Pipeline end-to-end automatisé (Prefect + GitHub Actions) collectant 13 608 jeux via
+              <strong>3 APIs</strong> (Steam, SteamSpy, Twitch), transformés avec <strong>dbt</strong>
+              et classifiés par un modèle <strong>XGBoost</strong> (ROC-AUC 0,83).
+              Intègre de l'<strong>IA générative promptée</strong> pour les jaquettes (Pollinations/Flux)
+              et les critiques fictives (Groq / Llama-3.3-70b).
             </p>
             <div class="project-stack">
               <span class="stack-badge">Python</span>
               <span class="stack-badge">PostgreSQL</span>
-              <span class="stack-badge">Apache Airflow</span>
+              <span class="stack-badge">Prefect</span>
               <span class="stack-badge">dbt</span>
-              <span class="stack-badge">API REST</span>
-              <span class="stack-badge">IA Générative</span>
-              <span class="stack-badge">SonarQube</span>
-              <span class="stack-badge">OWASP</span>
+              <span class="stack-badge">XGBoost</span>
+              <span class="stack-badge">Steam · SteamSpy · Twitch</span>
+              <span class="stack-badge">Groq · Pollinations</span>
             </div>
             <div class="project-footer">
               <div class="project-links">
-                <a href="https://github.com/Pguerlais/Willitflop" target="_blank" class="project-link" onclick="event.stopPropagation()">↗ GitHub</a>
+                <a href="https://willit-flop.vercel.app/" target="_blank" class="project-link" onclick="event.stopPropagation()">↗ Site live</a>
+                <a href="https://github.com/anthjatowrth/WillitFlop" target="_blank" class="project-link" onclick="event.stopPropagation()">↗ GitHub</a>
               </div>
               <div class="project-arrow">↗</div>
             </div>
