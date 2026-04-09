@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cosmos Pipeline — Présentation Projet</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Mono:wght@400;700&family=Exo+2:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+@media print {
+  .no-print { display: none !important; }
+  body { background: #F4F2EE !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .section { page-break-inside: avoid; }
+  .hero { min-height: auto; padding: 48px; }
+  .hero-grid, body::after { display: none; }
+}
+
+:root {
+  --bg:        #F4F2EE;
+  --bg2:       #EDEAE4;
+  --bg3:       #E3E0D8;
+  --border:    #D4D0C8;
+  --pink:      #E8005A;
+  --cyan:      #007A8C;
+  --cyan-b:    #00C8B4;
+  --ink:       #0D0D1A;
+  --ink2:      #2A2A3A;
+  --gray:      #7A7A8C;
+  --success:   #007A4C;
+  --danger:    #CC1A1A;
+  --warn:      #8C6A00;
+  --white:     #FFFFFF;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Exo 2', sans-serif;
+  line-height: 1.65;
+}
+
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.5;
+}
+
+/* ── NAV ── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(244,242,238,0.94);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 48px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.nav-brand { font-family: 'Orbitron', sans-serif; font-size: 0.95rem; font-weight: 900; color: var(--ink); letter-spacing: 0.08em; }
+.nav-brand .hl { color: var(--cyan); }
+.nav-right { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.nav-tag {
+  font-family: 'Space Mono', monospace; font-size: 0.6rem;
+  color: var(--cyan); background: rgba(0,122,140,0.1);
+  border: 1px solid rgba(0,122,140,0.3);
+  padding: 4px 14px; border-radius: 20px; letter-spacing: 0.15em;
+}
+.btn-back {
+  font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em;
+  background: transparent; color: var(--cyan); text-decoration: none;
+  border: 1px solid rgba(0,122,140,0.5); border-radius: 4px;
+  padding: 5px 14px; transition: background 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.btn-back:hover { background: rgba(0,122,140,0.1); border-color: var(--cyan); }
+.btn-print {
+  font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em;
+  background: var(--cyan); color: #fff; border: none; border-radius: 4px;
+  padding: 6px 16px; cursor: pointer; transition: background 0.2s;
+}
+.btn-print:hover { background: #005f6e; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 52vh;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 20px; text-align: center;
+  padding: 72px 48px; position: relative; overflow: hidden;
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,122,140,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,122,140,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+}
+.hero::before {
+  content: '';
+  position: absolute; width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,122,140,0.07) 0%, rgba(0,200,180,0.04) 50%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  animation: pulse 7s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{transform:translate(-50%,-50%) scale(1)} 50%{transform:translate(-50%,-50%) scale(1.12)} }
+
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 0.4em; color: var(--cyan);
+  opacity: 0; animation: fadeUp 0.6s 0.1s forwards;
+}
+.hero-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  font-weight: 900; letter-spacing: 0.04em; line-height: 1.1;
+  color: var(--ink);
+  opacity: 0; animation: fadeUp 0.6s 0.3s forwards;
+}
+.hero-title .hl { color: var(--cyan); }
+
+.hero-sub {
+  font-family: 'Space Mono', monospace; font-size: 0.8rem;
+  color: var(--gray); letter-spacing: 0.2em; text-transform: uppercase;
+  opacity: 0; animation: fadeUp 0.6s 0.5s forwards;
+}
+.hero-sub span { color: var(--cyan); }
+
+.hero-badges {
+  display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+  opacity: 0; animation: fadeUp 0.6s 0.7s forwards;
+}
+.badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 16px; border-radius: 30px;
+  font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em;
+}
+.badge-pink { color: var(--pink); background: rgba(232,0,90,0.08); border: 1px solid rgba(232,0,90,0.25); }
+.badge-cyan { color: var(--cyan); background: rgba(0,122,140,0.08); border: 1px solid rgba(0,122,140,0.25); }
+.badge-ink  { color: var(--ink2); background: rgba(13,13,26,0.06); border: 1px solid rgba(13,13,26,0.15); }
+.badge-green{ color: var(--success); background: rgba(0,122,76,0.08); border: 1px solid rgba(0,122,76,0.25); }
+.dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; animation: blink 1.2s step-end infinite; }
+@keyframes blink { 50%{opacity:0} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── LAYOUT ── */
+.container { max-width: 1060px; margin: 0 auto; padding: 72px 48px; }
+.divider { height: 1px; margin: 0 48px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
+
+.section-label {
+  font-family: 'Space Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.4em; color: var(--cyan); text-transform: uppercase;
+  margin-bottom: 6px; display: flex; align-items: center; gap: 12px;
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(0,122,140,0.3), transparent); }
+.section-h2 {
+  font-family: 'Orbitron', sans-serif; font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 700; color: var(--ink); letter-spacing: 0.04em; margin-bottom: 36px;
+}
+
+/* ── CARDS ── */
+.concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media(max-width:680px){ .concept-grid { grid-template-columns: 1fr; } }
+
+.concept-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  padding: 28px; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.concept-card:hover { border-color: var(--cyan); box-shadow: 0 4px 24px rgba(0,122,140,0.1); }
+.concept-card.full { grid-column: 1 / -1; }
+
+.card-icon {
+  width: 40px; height: 40px; border-radius: 8px; margin-bottom: 14px;
+  display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+}
+.icon-pink  { background: rgba(232,0,90,0.1);  border: 1px solid rgba(232,0,90,0.2); }
+.icon-cyan  { background: rgba(0,122,140,0.1);  border: 1px solid rgba(0,122,140,0.2); }
+.icon-ink   { background: rgba(13,13,26,0.06);  border: 1px solid rgba(13,13,26,0.12); }
+.icon-green { background: rgba(0,122,76,0.1);   border: 1px solid rgba(0,122,76,0.2); }
+
+.card-title {
+  font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 700;
+  color: var(--ink); margin-bottom: 10px; letter-spacing: 0.04em;
+}
+.card-text { font-size: 0.88rem; color: var(--gray); line-height: 1.65; }
+.card-text strong { color: var(--ink2); font-weight: 600; }
+
+/* ── PIPELINE ── */
+.pipeline {
+  display: flex; align-items: stretch; gap: 0; flex-wrap: wrap; margin-top: 8px;
+}
+.pipe-step {
+  flex: 1; min-width: 130px;
+  background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+  padding: 20px 16px; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  position: relative; transition: border-color 0.2s;
+}
+.pipe-step:hover { border-color: var(--cyan); }
+.pipe-step + .pipe-step::before {
+  content: '→'; position: absolute; left: -18px; top: 50%; transform: translateY(-50%);
+  color: var(--cyan); font-size: 1rem; font-weight: 700;
+}
+@media(max-width:600px){ .pipe-step + .pipe-step::before { display: none; } }
+.pipe-num {
+  width: 28px; height: 28px; border-radius: 50%; background: var(--cyan);
+  color: #fff; font-family: 'Orbitron', sans-serif; font-size: 0.7rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.pipe-num.pink { background: var(--pink); }
+.pipe-name { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; font-weight: 700; color: var(--ink); }
+.pipe-desc { font-size: 0.72rem; color: var(--gray); line-height: 1.4; }
+
+/* ── AUTO BLOCK ── */
+.auto-block {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  padding: 28px 32px; margin-bottom: 16px;
+}
+.auto-block-title {
+  font-family: 'Orbitron', sans-serif; font-size: 0.8rem; font-weight: 700;
+  color: var(--ink); margin-bottom: 6px; display: flex; align-items: center; gap: 10px;
+}
+.auto-block-label {
+  font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.2em;
+  padding: 2px 10px; border-radius: 3px;
+}
+.auto-block-desc { font-size: 0.84rem; color: var(--gray); line-height: 1.6; margin-bottom: 16px; }
+.auto-block-desc strong { color: var(--ink2); }
+
+/* ── STACK ── */
+.stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.stack-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+  padding: 20px; display: flex; flex-direction: column; gap: 10px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.stack-card:hover { border-color: var(--cyan); transform: translateY(-3px); }
+.stack-layer {
+  font-family: 'Space Mono', monospace; font-size: 0.55rem;
+  letter-spacing: 0.25em; text-transform: uppercase; color: var(--cyan);
+}
+.stack-name { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--ink); letter-spacing: 0.04em; }
+.stack-role { font-size: 0.78rem; color: var(--gray); }
+.stack-tag {
+  display: inline-block; padding: 2px 8px; border-radius: 3px;
+  font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em;
+  margin-top: 4px; width: fit-content;
+}
+.tag-pink  { background: rgba(232,0,90,0.08);  color: var(--pink);    border: 1px solid rgba(232,0,90,0.2); }
+.tag-cyan  { background: rgba(0,122,140,0.08); color: var(--cyan);    border: 1px solid rgba(0,122,140,0.2); }
+.tag-green { background: rgba(0,122,76,0.08);  color: var(--success); border: 1px solid rgba(0,122,76,0.2); }
+.tag-gray  { background: rgba(13,13,26,0.06);  color: var(--ink2);   border: 1px solid rgba(13,13,26,0.12); }
+.tag-warn  { background: rgba(140,106,0,0.08); color: var(--warn);   border: 1px solid rgba(140,106,0,0.25); }
+
+/* ── INFRA TABLE ── */
+.infra-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+.infra-table th {
+  font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em;
+  color: var(--cyan); text-transform: uppercase; text-align: left;
+  padding: 10px 16px; border-bottom: 2px solid var(--border);
+}
+.infra-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); color: var(--gray); }
+.infra-table td:first-child { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--ink2); font-weight: 700; }
+.infra-table tr:last-child td { border-bottom: none; }
+.infra-table tr:hover td { background: var(--bg2); }
+
+/* ── RESULT ── */
+.result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 32px; }
+.result-stat {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  padding: 28px; text-align: center;
+  display: flex; flex-direction: column; gap: 8px; align-items: center;
+}
+.result-stat.featured { border-color: var(--cyan); border-width: 2px; }
+.result-big { font-family: 'Orbitron', sans-serif; font-size: 2.8rem; font-weight: 900; color: var(--cyan); line-height: 1; }
+.result-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gray); text-transform: uppercase; }
+.result-verdict {
+  display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; border-radius: 30px;
+  font-family: 'Orbitron', sans-serif; font-size: 0.8rem; font-weight: 700;
+  background: rgba(0,122,76,0.1); color: var(--success); border: 1px solid rgba(0,122,76,0.3);
+}
+.result-text { font-size: 0.88rem; color: var(--gray); line-height: 1.65; }
+.result-text strong { color: var(--ink2); font-weight: 600; }
+
+/* ── BQTABLE ── */
+.bq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.bq-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+  padding: 20px;
+}
+.bq-card:hover { border-color: var(--cyan); }
+.bq-name { font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: 700; color: var(--cyan); margin-bottom: 4px; }
+.bq-pipeline { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.2em; color: var(--gray); text-transform: uppercase; margin-bottom: 10px; }
+.bq-desc { font-size: 0.8rem; color: var(--gray); line-height: 1.5; }
+
+/* ── FOOTER ── */
+.footer {
+  border-top: 1px solid var(--border); padding: 36px 48px; background: var(--bg2);
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+.footer-brand { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 900; color: var(--ink); letter-spacing: 0.08em; }
+.footer-brand .hl { color: var(--cyan); }
+.footer-copy  { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--gray); letter-spacing: 0.15em; }
+.footer-tags  { display: flex; gap: 8px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav no-print">
+  <div class="nav-brand">COSMOS <span class="hl">PIPELINE</span></div>
+  <div class="nav-right">
+    <div class="nav-tag">STAGE · DATA ENGINEER — 2026</div>
+    <a href="index.html" class="btn-back">← Retour portfolio</a>
+    <button class="btn-print" onclick="window.print()">⎙ IMPRIMER</button>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-eyebrow">// FICHE DE PRÉSENTATION PROJET — STAGE DATA ANALYST //</div>
+  <h1 class="hero-title">COSMOS <span class="hl">PIPELINE</span></h1>
+  <p class="hero-sub">Automatisation <span>Data</span> — GCP · BigQuery · Looker Studio</p>
+  <div class="hero-badges">
+    <span class="badge badge-green"><span class="dot"></span>En production · 2 pipelines actifs</span>
+    <span class="badge badge-cyan">Stage Data Analyst · Wild Code School 2026</span>
+    <span class="badge badge-ink">Pierre Guerlais</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── 01 CONCEPT ─── -->
+<section class="container">
+  <div class="section-label">01 — Contexte &amp; Objectif</div>
+  <h2 class="section-h2">Automatiser les flux data d'une certification cosmétique</h2>
+  <div class="concept-grid">
+    <div class="concept-card full">
+      <div class="card-icon icon-cyan">🌿</div>
+      <div class="card-title">La problématique</div>
+      <div class="card-text">
+        Dans le secteur des cosmétiques biologiques et naturels, la certification <strong>COSMOS</strong> (standard européen) impose un suivi rigoureux des produits certifiés et des matières premières (RM) autorisées par chaque organisme certificateur (CB).<br><br>
+        Chaque mois, les CB transmettent des <strong>fichiers Excel de référence</strong> déposés sur Google Drive. Jusqu'ici, la mise à jour des catalogues et la détection des changements de matières premières se faisaient <strong>manuellement</strong>, sans historique fiable ni alertes automatisées. La charge opérationnelle était élevée et les risques d'erreur importants.
+      </div>
+    </div>
+    <div class="concept-card">
+      <div class="card-icon icon-green">🎯</div>
+      <div class="card-title">La solution</div>
+      <div class="card-text">
+        Deux <strong>Cloud Functions GCP</strong> (Python 3.11) déclenchées automatiquement par Cloud Scheduler ingèrent les fichiers Drive, calculent les deltas, alimentent <strong>BigQuery</strong> et envoient des <strong>emails d'alerte SMTP</strong>. Looker Studio se rafraîchit automatiquement depuis BQ pour les visualisations.
+      </div>
+    </div>
+    <div class="concept-card">
+      <div class="card-icon icon-pink">⚡</div>
+      <div class="card-title">L'impact</div>
+      <div class="card-text">
+        Passage d'un suivi <strong>100 % manuel</strong> à un pipeline <strong>entièrement automatisé</strong> : détection immédiate des nouveaux ingrédients ADDED/REMOVED, historique complet dans BigQuery, alertes email aux parties prenantes, et dashboard Looker Studio toujours à jour — le tout dans les <strong>limites du free tier GCP</strong>.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── 02 PIPELINE CATALOGUE ─── -->
+<section class="container">
+  <div class="section-label">02 — Pipeline Catalogue</div>
+  <h2 class="section-h2">Ingestion mensuelle du catalogue COSMOS</h2>
+
+  <div class="auto-block">
+    <div class="auto-block-title">
+      Catalogues COSMOS → BigQuery
+      <span class="auto-block-label tag-cyan">Cloud Scheduler · 16 de chaque mois à 9h UTC</span>
+    </div>
+    <div class="auto-block-desc">
+      Chaque mois, un fichier <code>catalog-export-YYYY-MM-DD.xlsx</code> est déposé sur Google Drive. La Cloud Function <strong>catalog_ingest</strong> détecte automatiquement les nouveaux fichiers non encore ingérés (idempotence via BigQuery), lit les <strong>3 onglets produits</strong> en mémoire, normalise les colonnes et calcule les deltas ADDED/REMOVED par rapport au mois précédent avant d'écrire dans 4 tables BQ.
+    </div>
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="pipe-num">1</div>
+        <div class="pipe-name">SCAN</div>
+        <div class="pipe-desc">Google Drive API — détection fichiers non ingérés</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">2</div>
+        <div class="pipe-name">IDEMPOTENCE</div>
+        <div class="pipe-desc">SELECT DISTINCT catalog_date dans BQ — pas de doublons</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">3</div>
+        <div class="pipe-name">LECTURE</div>
+        <div class="pipe-desc">3 onglets xlsx en mémoire (BytesIO) — Products, Approved, Certified</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">4</div>
+        <div class="pipe-name">DELTAS</div>
+        <div class="pipe-desc">Calcul ADDED/REMOVED vs mois précédent BQ — clé composite</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">5</div>
+        <div class="pipe-name">BQ WRITE</div>
+        <div class="pipe-desc">WRITE_APPEND dans 4 tables — autodetect schema</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── 03 PIPELINE RM ─── -->
+<section class="container">
+  <div class="section-label">03 — Pipeline RM (Matières Premières)</div>
+  <h2 class="section-h2">Détection des ADDED/REMOVED par organisme certificateur</h2>
+
+  <div class="auto-block">
+    <div class="auto-block-title">
+      Fichiers CB → Comparaison BQ → Alertes email
+      <span class="auto-block-label tag-pink">Cloud Scheduler · Mensuel</span>
+    </div>
+    <div class="auto-block-desc">
+      Chaque CB (organisme certificateur) dépose mensuellement son fichier Excel de matières premières sur Drive. La Cloud Function <strong>rm_ingest</strong> compare les RM du mois courant avec le <strong>mois précédent lu depuis BigQuery</strong> (architecture BQ-first, sans comparaison entre fichiers Drive). Elle vérifie les ADDED vs un référentiel historique validé, puis envoie un <strong>email récapitulatif SMTP</strong> aux destinataires configurés via Secret Manager.
+    </div>
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="pipe-num pink">1</div>
+        <div class="pipe-name">IDEMPOTENCE</div>
+        <div class="pipe-desc">SELECT DISTINCT (month, cb_name) dans rm_events</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num pink">2</div>
+        <div class="pipe-name">SCAN DRIVE</div>
+        <div class="pipe-desc">1 fichier par CB — détection fichiers non ingérés</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num pink">3</div>
+        <div class="pipe-name">DELTAS</div>
+        <div class="pipe-desc">ADDED/REMOVED vs mois précédent BQ — onglet "Cosmos approved ingredients"</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num pink">4</div>
+        <div class="pipe-name">VALIDATION</div>
+        <div class="pipe-desc">Vérification ADDED vs rm_validated_history — statut submitted_and_validated</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num pink">5</div>
+        <div class="pipe-name">EMAIL</div>
+        <div class="pipe-desc">SMTP Gmail — App Password — destinataires via Secret Manager</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── 04 TABLES BIGQUERY ─── -->
+<section class="container">
+  <div class="section-label">04 — Modélisation BigQuery</div>
+  <h2 class="section-h2">7 tables · Dataset <code style="font-size:0.9em;color:var(--cyan)">cosmos_catalog</code></h2>
+  <div class="bq-grid">
+    <div class="bq-card">
+      <div class="bq-name">products</div>
+      <div class="bq-pipeline">Pipeline Catalogue</div>
+      <div class="bq-desc">Produits du catalogue COSMOS — onglet Products</div>
+    </div>
+    <div class="bq-card">
+      <div class="bq-name">approved_ingredients</div>
+      <div class="bq-pipeline">Pipeline Catalogue</div>
+      <div class="bq-desc">Ingrédients approuvés — onglet Cosmos approved ingredients</div>
+    </div>
+    <div class="bq-card">
+      <div class="bq-name">certified_ingredients</div>
+      <div class="bq-pipeline">Pipeline Catalogue</div>
+      <div class="bq-desc">Ingrédients certifiés — onglet Cosmos certified ingredients</div>
+    </div>
+    <div class="bq-card">
+      <div class="bq-name">catalog_events</div>
+      <div class="bq-pipeline">Pipeline Catalogue</div>
+      <div class="bq-desc">Deltas ADDED/REMOVED catalogue — calculé à chaque ingestion</div>
+    </div>
+    <div class="bq-card">
+      <div class="bq-name">rm_events</div>
+      <div class="bq-pipeline">Pipeline RM</div>
+      <div class="bq-desc">ADDED/REMOVED par CB et par mois — colonnes : month, cb_name, event_type, identifier, commercial_name</div>
+    </div>
+    <div class="bq-card">
+      <div class="bq-name">rm_validation</div>
+      <div class="bq-pipeline">Pipeline RM</div>
+      <div class="bq-desc">Statut de validation des nouveaux RM — submitted_and_validated, observation</div>
+    </div>
+    <div class="bq-card">
+      <div class="bq-name">rm_validated_history</div>
+      <div class="bq-pipeline">Pipeline RM</div>
+      <div class="bq-desc">Référentiel historique des RM validés — enrichi manuellement à chaque cycle</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── 05 STACK TECHNIQUE ─── -->
+<section class="container">
+  <div class="section-label">05 — Stack Technique</div>
+  <h2 class="section-h2">Google Cloud Platform · Free Tier · Python 3.11</h2>
+  <div class="stack-grid">
+
+    <div class="stack-card">
+      <div class="stack-layer">Compute</div>
+      <div class="stack-name">Cloud Functions</div>
+      <div class="stack-role">Gen 2 — Python 3.11 — 512 Mo — 300s timeout. Deux fonctions indépendantes : <code>catalog_ingest</code> et <code>rm_ingest</code>, chacune avec son propre <code>requirements.txt</code>.</div>
+      <span class="stack-tag tag-cyan">Serverless</span>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-layer">Orchestration</div>
+      <div class="stack-name">Cloud Scheduler</div>
+      <div class="stack-role">Déclenchement HTTP automatique. Catalogue : <code>0 9 16 * *</code> (16 de chaque mois, 9h UTC). RM : mensuel. 2 jobs dans les limites du free tier (3 gratuits).</div>
+      <span class="stack-tag tag-cyan">Cron · GCP</span>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-layer">Stockage & Analyse</div>
+      <div class="stack-name">BigQuery</div>
+      <div class="stack-role">Dataset <code>cosmos_catalog</code> EU — 7 tables — WRITE_APPEND + autodetect schema. Quelques Mo, dans les limites du free tier (10 Go stockage, 1 To requêtes/mois).</div>
+      <span class="stack-tag tag-cyan">Data Warehouse</span>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-layer">Source de données</div>
+      <div class="stack-name">Google Drive API</div>
+      <div class="stack-role">Lecture des fichiers xlsx mensuels via l'API Drive v3. Téléchargement en mémoire (<code>BytesIO</code>) — aucun stockage local sur la Cloud Function.</div>
+      <span class="stack-tag tag-gray">Drive v3</span>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-layer">Sécurité</div>
+      <div class="stack-name">Secret Manager</div>
+      <div class="stack-role">Stockage sécurisé des credentials sensibles : App Password Gmail (<code>gmail-app-password</code>) et liste des destinataires email (<code>gmail-recipients</code>). 6 versions actives gratuites.</div>
+      <span class="stack-tag tag-warn">Secrets · GCP</span>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-layer">Notifications</div>
+      <div class="stack-name">SMTP Gmail</div>
+      <div class="stack-role">Envoi d'emails récapitulatifs des RM ADDED/REMOVED via App Password Gmail (<code>karima.belaouaied@gmail.com</code>). Destinataires configurés dynamiquement via Secret Manager.</div>
+      <span class="stack-tag tag-pink">Email · Alertes</span>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-layer">Dataviz</div>
+      <div class="stack-name">Looker Studio</div>
+      <div class="stack-role">Tableau de bord connecté directement à BigQuery — rafraîchissement automatique. Visualisation des produits certifiés, tendances catalogue et suivi des événements RM.</div>
+      <span class="stack-tag tag-green">BI · Gratuit</span>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-layer">Data Processing</div>
+      <div class="stack-name">Python · Pandas</div>
+      <div class="stack-role">Nettoyage et normalisation des colonnes (lowercase, espaces→_, %→_pct), lecture multi-onglets en mémoire, détection des deltas par clé composite, gestion des cas limites (NaN, Version STRING…).</div>
+      <span class="stack-tag tag-gray">ETL · Python 3.11</span>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── 06 INFRASTRUCTURE ─── -->
+<section class="container">
+  <div class="section-label">06 — Infrastructure GCP</div>
+  <h2 class="section-h2">Architecture serverless · 100 % free tier</h2>
+
+  <div class="auto-block" style="margin-bottom:32px">
+    <div class="auto-block-title">
+      Contrainte forte : zéro facturation
+      <span class="auto-block-label tag-green">Free Tier · Validé</span>
+    </div>
+    <div class="auto-block-desc">
+      L'ensemble de l'infrastructure est conçue pour rester dans les limites gratuites de GCP. <strong>2 exécutions par mois</strong> sur Cloud Functions (limite : 2 M/mois), <strong>quelques Mo</strong> dans BigQuery (limite : 10 Go stockage + 1 To requêtes), <strong>2 jobs</strong> Cloud Scheduler (limite : 3 gratuits). Aucune ressource payante provisionnée.
+    </div>
+  </div>
+
+  <table class="infra-table">
+    <thead>
+      <tr>
+        <th>Élément</th>
+        <th>Valeur</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Projet GCP</td><td>cosmosdata</td></tr>
+      <tr><td>Service Account</td><td>pipeline-automation</td></tr>
+      <tr><td>Dataset BigQuery</td><td>cosmos_catalog (region EU)</td></tr>
+      <tr><td>Cloud Function Catalogue</td><td>catalog_ingest — Gen 2, Python 3.11, 512 Mo, 300s</td></tr>
+      <tr><td>Cloud Function RM</td><td>rm_ingest — Gen 2, Python 3.11, 512 Mo, 300s</td></tr>
+      <tr><td>Cloud Scheduler Catalogue</td><td><code>0 9 16 * *</code> — le 16 de chaque mois à 9h UTC ✅</td></tr>
+      <tr><td>Cloud Scheduler RM</td><td>Mensuel (en cours de configuration)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── 07 RÉSULTATS ─── -->
+<section class="container">
+  <div class="section-label">07 — Résultats &amp; Livrables</div>
+  <h2 class="section-h2">2 pipelines en production · BigQuery alimenté · Alertes opérationnelles</h2>
+
+  <div class="result-grid">
+    <div class="result-stat featured">
+      <div class="result-big">2</div>
+      <div class="result-label">Pipelines en production</div>
+      <div class="result-verdict">✓ Déployés</div>
+    </div>
+    <div class="result-stat">
+      <div class="result-big">7</div>
+      <div class="result-label">Tables BigQuery alimentées</div>
+    </div>
+    <div class="result-stat">
+      <div class="result-big">0 €</div>
+      <div class="result-label">Coût infrastructure GCP</div>
+    </div>
+    <div class="result-stat">
+      <div class="result-big">100%</div>
+      <div class="result-label">Automatisation — zéro intervention manuelle</div>
+    </div>
+  </div>
+
+  <div class="concept-card full">
+    <div class="card-title">Ce qui a été livré</div>
+    <div class="card-text">
+      • <strong>Pipeline Catalogue</strong> — ingestion mensuelle automatique des fichiers xlsx, calcul des deltas ADDED/REMOVED, alimentation de 4 tables BigQuery, idempotence validée, Cloud Scheduler configuré.<br><br>
+      • <strong>Pipeline RM</strong> — détection des changements de matières premières par CB, comparaison BQ-first (sans comparaison entre fichiers Drive), vérification vs référentiel historique, email récapitulatif SMTP opérationnel, test end-to-end validé.<br><br>
+      • <strong>Architecture data</strong> — modélisation de 7 tables BigQuery, gestion des cas limites critiques (NaN, types de colonnes, idempotence, lecture xlsx en mémoire), documentation technique complète.<br><br>
+      • <strong>Looker Studio</strong> — dashboard connecté à BigQuery, rafraîchissement automatique, visualisations des produits certifiés et des événements catalogue.
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="footer-brand">COSMOS <span class="hl">PIPELINE</span></div>
+  <div class="footer-copy">FICHE PROJET — Stage Data Analyst · Wild Code School 2026</div>
+  <div class="footer-tags">
+    <span class="stack-tag tag-cyan">BigQuery</span>
+    <span class="stack-tag tag-cyan">Cloud Functions</span>
+    <span class="stack-tag tag-cyan">Cloud Scheduler</span>
+    <span class="stack-tag tag-cyan">Google Drive API</span>
+    <span class="stack-tag tag-gray">Python · Pandas</span>
+    <span class="stack-tag tag-warn">Secret Manager</span>
+    <span class="stack-tag tag-green">Looker Studio</span>
+    <span class="stack-tag tag-pink">SMTP Gmail</span>
+  </div>
+</footer>
+
+</body>
+</html>
