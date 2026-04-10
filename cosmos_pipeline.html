@@ -205,11 +205,6 @@ body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--w
 }
 .card-body { font-size: 0.87rem; color: var(--gray); line-height: 1.72; }
 .card-body strong { color: var(--mid); font-weight: 600; }
-.card-body code {
-  font-family: 'Source Code Pro', monospace; font-size: 0.82em;
-  background: var(--g50); padding: 1px 5px; border-radius: 3px; color: var(--g700);
-}
-.card-icon { font-size: 1.3rem; margin-bottom: 12px; }
 
 /* ── BEFORE / AFTER ── */
 .ba-grid {
@@ -242,30 +237,6 @@ body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--w
 .ba-list li:last-child { border-bottom: none; }
 .ba-icon { flex-shrink: 0; margin-top: 2px; line-height: 1.3; }
 
-/* ── VALUE BANNER ── */
-.value-banner {
-  background: var(--g900); border-radius: 16px;
-  padding: 44px 48px; margin-bottom: 0;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
-}
-@media(max-width:700px) { .value-banner { grid-template-columns: 1fr; padding: 28px; gap: 28px; } }
-.vb-kicker { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; color: var(--g300); text-transform: uppercase; margin-bottom: 14px; }
-.vb-title { font-family: 'Montserrat', sans-serif; font-size: 1.55rem; font-weight: 800; color: var(--white); line-height: 1.3; margin-bottom: 14px; }
-.vb-body { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.75; }
-.vb-list { list-style: none; }
-.vb-list li {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
-  font-size: 0.88rem; color: rgba(255,255,255,0.8);
-}
-.vb-list li:last-child { border-bottom: none; }
-.vb-check {
-  width: 20px; height: 20px; border-radius: 50%;
-  background: var(--g600, var(--g500)); color: white;
-  display: inline-flex; align-items: center; justify-content: center;
-  font-size: 0.62rem; font-weight: 700; flex-shrink: 0; margin-top: 2px;
-}
-
 /* ── PIPELINE ── */
 .pipe-wrap { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 28px 32px; margin-bottom: 20px; }
 .pipe-header {
@@ -274,7 +245,6 @@ body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--w
 }
 .pipe-title { font-family: 'Montserrat', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--g900); }
 .pipe-sub { font-size: 0.82rem; color: var(--gray); line-height: 1.65; margin-bottom: 20px; margin-top: 4px; }
-.pipe-sub code { font-family: 'Source Code Pro', monospace; font-size: 0.82em; background: var(--g50); padding: 1px 5px; border-radius: 3px; color: var(--g700); }
 .pipe-sub strong { color: var(--mid); }
 .pipe-flow { display: flex; align-items: stretch; flex-wrap: wrap; gap: 0; }
 .pipe-step {
@@ -300,19 +270,6 @@ body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--w
 .pipe-name { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 700; color: var(--g900); }
 .pipe-desc { font-size: 0.66rem; color: var(--gray); line-height: 1.4; }
 
-/* ── BQ TABLES ── */
-.bq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 14px; }
-.bq-card {
-  background: var(--white); border: 1px solid var(--border); border-radius: 10px;
-  padding: 20px; transition: border-color 0.2s, box-shadow 0.2s;
-}
-.bq-card:hover { border-color: var(--g300); box-shadow: 0 2px 12px rgba(13,55,38,0.07); }
-.bq-dot-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-.bq-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--g500); flex-shrink: 0; }
-.bq-name { font-family: 'Source Code Pro', monospace; font-size: 0.8rem; font-weight: 500; color: var(--g900); }
-.bq-pipe { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--g500); margin-bottom: 8px; }
-.bq-desc { font-size: 0.77rem; color: var(--gray); line-height: 1.55; }
-
 /* ── STACK ── */
 .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
 .stack-card {
@@ -324,7 +281,6 @@ body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--w
 .stack-layer { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--g500); }
 .stack-name { font-family: 'Montserrat', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--g900); }
 .stack-role { font-size: 0.78rem; color: var(--gray); line-height: 1.6; }
-.stack-role code { font-family: 'Source Code Pro', monospace; font-size: 0.84em; background: var(--g50); padding: 1px 5px; border-radius: 3px; color: var(--g700); }
 .stack-badge {
   display: inline-block; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em;
   padding: 3px 10px; border-radius: 20px; width: fit-content; margin-top: 4px;
@@ -332,47 +288,6 @@ body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--w
 .sb-green { background: var(--g100); color: var(--g700); border: 1px solid var(--g200); }
 .sb-gcp   { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
 .sb-gray  { background: var(--light); color: var(--mid); border: 1px solid var(--border); }
-.sb-warn  { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
-
-/* ── SKILLS ── */
-.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; }
-.skill-cat {
-  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
-  padding: 26px; transition: border-color 0.2s;
-}
-.skill-cat:hover { border-color: var(--g200); }
-.skill-cat-head {
-  display: flex; align-items: center; gap: 12px;
-  font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 700;
-  color: var(--g900); margin-bottom: 18px;
-}
-.skill-icon {
-  width: 34px; height: 34px; border-radius: 8px;
-  background: var(--g100); border: 1px solid var(--g200);
-  display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0;
-}
-.skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
-.skill-tag {
-  font-size: 0.74rem; font-weight: 500; padding: 5px 12px; border-radius: 20px;
-  border: 1px solid var(--border); color: var(--mid); background: var(--g50);
-  transition: all 0.15s;
-}
-.skill-tag:hover { background: var(--g100); border-color: var(--g200); }
-.skill-tag.primary { background: var(--g100); border-color: var(--g300); color: var(--g800); font-weight: 600; }
-
-/* ── INFRA TABLE ── */
-.infra-wrap { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-.infra-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-.infra-table th {
-  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--g500); text-align: left; padding: 12px 20px;
-  border-bottom: 2px solid var(--border); background: var(--g50);
-}
-.infra-table td { padding: 12px 20px; border-bottom: 1px solid var(--border); color: var(--gray); }
-.infra-table td:first-child { font-weight: 600; color: var(--mid); font-size: 0.82rem; }
-.infra-table tr:last-child td { border-bottom: none; }
-.infra-table tr:hover td { background: var(--g50); }
-.infra-table code { font-family: 'Source Code Pro', monospace; font-size: 0.82em; background: var(--g50); padding: 1px 5px; border-radius: 3px; color: var(--g700); }
 
 /* ── RESULTS ── */
 .results-dark { background: var(--g900); }
@@ -439,7 +354,6 @@ body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--w
   .hero-stats { width: 100%; flex-wrap: wrap; }
   .hero-stat { padding: 16px 20px; flex: 1 1 40%; }
   .footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
-  .value-banner { padding: 28px; gap: 28px; }
 }
 </style>
 </head>
@@ -477,10 +391,6 @@ body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--w
         <div class="stat-lbl">Pipelines en production</div>
       </div>
       <div class="hero-stat">
-        <div class="stat-big">7</div>
-        <div class="stat-lbl">Tables BigQuery</div>
-      </div>
-      <div class="hero-stat">
         <div class="stat-big">0 €</div>
         <div class="stat-lbl">Coût infrastructure</div>
       </div>
@@ -502,10 +412,10 @@ body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--w
   </div>
 </section>
 
-<!-- ─── 01 CONTEXTE ─── -->
+<!-- ─── 01 CONTEXTE & MISSION ─── -->
 <section class="section">
   <div class="inner">
-    <div class="sec-label">01 — Contexte & Problème</div>
+    <div class="sec-label">01 — Contexte & Mission</div>
     <h2 class="sec-h2">Une certification mondiale, une gestion encore manuelle</h2>
     <p class="sec-intro">
       COSMOS est la référence internationale pour la certification des cosmétiques biologiques et naturels.
@@ -517,9 +427,9 @@ body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--w
         <div class="card-tag tag-green">L'organisation</div>
         <div class="card-title">COSMOS Standard AISBL</div>
         <div class="card-body">
-          Association internationale indépendante regroupant <strong>5 organismes certificateurs (CB)</strong>
+          Association internationale indépendante regroupant <strong>5 organismes certificateurs</strong>
           européens. Elle définit le standard COSMOS utilisé par <strong>56 100+ produits certifiés</strong> à travers le monde.
-          Chaque mois, les CB transmettent leurs listes de matières premières approuvées.
+          Chaque mois, les organismes transmettent leurs listes de matières premières approuvées.
         </div>
       </div>
       <div class="card">
@@ -527,7 +437,7 @@ body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--w
         <div class="card-tag tag-red">Le problème</div>
         <div class="card-title">Un suivi 100 % manuel et risqué</div>
         <div class="card-body">
-          Les CB déposent des <strong>fichiers Excel sur Google Drive</strong> chaque mois.
+          Les organismes déposent des <strong>fichiers Excel sur Google Drive</strong> chaque mois.
           La mise à jour du catalogue, la détection des ingrédients ajoutés ou supprimés, et les alertes
           aux parties prenantes se faisaient <strong>manuellement</strong> — sans historique, sans traçabilité,
           avec des risques d'erreur humaine importants.
@@ -549,463 +459,10 @@ body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--w
 
 <div class="divider"></div>
 
-<!-- ─── 02 VALEUR AJOUTÉE ─── -->
-<section class="section alt">
-  <div class="inner">
-    <div class="sec-label">02 — Valeur Ajoutée</div>
-    <h2 class="sec-h2">Une transformation concrète et mesurable</h2>
-    <p class="sec-intro">
-      Ce projet n'est pas seulement technique : il supprime une charge opérationnelle réelle
-      et crée une infrastructure data pérenne là où il n'y en avait aucune.
-    </p>
-
-    <!-- Before / After -->
-    <div class="ba-grid" style="margin-bottom:32px">
-      <div class="ba-box before">
-        <div class="ba-head"><span class="ba-head-dot"></span>Avant le projet</div>
-        <ul class="ba-list">
-          <li><span class="ba-icon">✗</span> Comparaison manuelle des fichiers Excel chaque mois</li>
-          <li><span class="ba-icon">✗</span> Aucun historique des changements d'ingrédients</li>
-          <li><span class="ba-icon">✗</span> Alertes transmises manuellement par email</li>
-          <li><span class="ba-icon">✗</span> Risque d'oubli ou d'erreur humaine élevé</li>
-          <li><span class="ba-icon">✗</span> Aucune visibilité sur les tendances catalogue</li>
-          <li><span class="ba-icon">✗</span> Pas de tableau de bord centralisé</li>
-        </ul>
-      </div>
-      <div class="ba-arrow-col">→</div>
-      <div class="ba-box after">
-        <div class="ba-head"><span class="ba-head-dot"></span>Après le projet</div>
-        <ul class="ba-list">
-          <li><span class="ba-icon">✓</span> Ingestion automatique le 16 de chaque mois</li>
-          <li><span class="ba-icon">✓</span> Historique complet dans BigQuery avec idempotence</li>
-          <li><span class="ba-icon">✓</span> Emails SMTP automatiques aux parties prenantes</li>
-          <li><span class="ba-icon">✓</span> Zéro intervention humaine dans le processus</li>
-          <li><span class="ba-icon">✓</span> Dashboard Looker Studio en temps réel</li>
-          <li><span class="ba-icon">✓</span> Infrastructure 100 % free tier — 0 € de coût</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Value banner -->
-    <div class="value-banner">
-      <div>
-        <div class="vb-kicker">Impact opérationnel</div>
-        <div class="vb-title">Une infrastructure data conçue pour durer</div>
-        <div class="vb-body">
-          En partant de zéro sur GCP, j'ai livré une solution complète et robuste qui répond
-          aux contraintes réelles de l'organisation : déploiement serverless, coût nul,
-          traçabilité totale et alertes fiables — une architecture qui peut monter en charge
-          sans refonte.
-        </div>
-      </div>
-      <ul class="vb-list">
-        <li><span class="vb-check">✓</span>Idempotence garantie : aucun doublon possible dans BigQuery</li>
-        <li><span class="vb-check">✓</span>Architecture BQ-first : source de vérité unique et centralisée</li>
-        <li><span class="vb-check">✓</span>Secrets sécurisés via GCP Secret Manager (zéro credential en dur)</li>
-        <li><span class="vb-check">✓</span>Deux fonctions indépendantes et maintenables séparément</li>
-        <li><span class="vb-check">✓</span>Zéro stockage local sur les Cloud Functions (lecture en mémoire)</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ─── 03 ARCHITECTURE ─── -->
-<section class="section">
-  <div class="inner">
-    <div class="sec-label">03 — Architecture des Pipelines</div>
-    <h2 class="sec-h2">Deux Cloud Functions indépendantes, un data warehouse commun</h2>
-    <p class="sec-intro">
-      Chaque pipeline correspond à un périmètre métier distinct. Ils partagent le même dataset BigQuery
-      mais s'exécutent de façon entièrement autonome.
-    </p>
-
-    <!-- Pipeline Catalogue -->
-    <div class="pipe-wrap">
-      <div class="pipe-header">
-        <div class="pipe-title">Pipeline Catalogue — Ingestion mensuelle du référentiel COSMOS</div>
-        <span class="card-tag tag-green" style="margin:0">Cloud Scheduler · 16 de chaque mois · 9h UTC</span>
-      </div>
-      <p class="pipe-sub">
-        La fonction <code>catalog_ingest</code> détecte automatiquement les fichiers <code>catalog-export-YYYY-MM-DD.xlsx</code>
-        non encore ingérés (idempotence via BigQuery), lit les <strong>3 onglets produits</strong> en mémoire,
-        normalise les colonnes et calcule les deltas ADDED/REMOVED avant d'écrire dans 4 tables BQ.
-      </p>
-      <div class="pipe-flow">
-        <div class="pipe-step">
-          <div class="pipe-num num-green">1</div>
-          <div class="pipe-name">SCAN DRIVE</div>
-          <div class="pipe-desc">Détection des fichiers non encore ingérés via Drive API v3</div>
-        </div>
-        <div class="pipe-step">
-          <div class="pipe-num num-green">2</div>
-          <div class="pipe-name">IDEMPOTENCE</div>
-          <div class="pipe-desc">SELECT DISTINCT catalog_date — aucun doublon possible</div>
-        </div>
-        <div class="pipe-step">
-          <div class="pipe-num num-green">3</div>
-          <div class="pipe-name">LECTURE xlsx</div>
-          <div class="pipe-desc">3 onglets en mémoire (BytesIO) — sans stockage local</div>
-        </div>
-        <div class="pipe-step">
-          <div class="pipe-num num-green">4</div>
-          <div class="pipe-name">DELTAS</div>
-          <div class="pipe-desc">ADDED/REMOVED vs mois précédent — clé composite</div>
-        </div>
-        <div class="pipe-step">
-          <div class="pipe-num num-green">5</div>
-          <div class="pipe-name">BQ WRITE</div>
-          <div class="pipe-desc">WRITE_APPEND · 4 tables · autodetect schema</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pipeline RM -->
-    <div class="pipe-wrap">
-      <div class="pipe-header">
-        <div class="pipe-title">Pipeline RM — Détection des ADDED/REMOVED par organisme certificateur</div>
-        <span class="card-tag tag-dark" style="margin:0">Cloud Scheduler · Mensuel</span>
-      </div>
-      <p class="pipe-sub">
-        La fonction <code>rm_ingest</code> compare les matières premières du mois courant avec
-        le <strong>mois précédent lu depuis BigQuery</strong> (architecture BQ-first). Elle vérifie les
-        ADDED contre le référentiel historique validé, puis envoie un <strong>email récapitulatif SMTP</strong>
-        aux destinataires configurés dans Secret Manager.
-      </p>
-      <div class="pipe-flow">
-        <div class="pipe-step">
-          <div class="pipe-num num-dark">1</div>
-          <div class="pipe-name">IDEMPOTENCE</div>
-          <div class="pipe-desc">SELECT DISTINCT (month, cb_name) dans rm_events</div>
-        </div>
-        <div class="pipe-step">
-          <div class="pipe-num num-dark">2</div>
-          <div class="pipe-name">SCAN DRIVE</div>
-          <div class="pipe-desc">1 fichier par CB — détection des fichiers non ingérés</div>
-        </div>
-        <div class="pipe-step">
-          <div class="pipe-num num-dark">3</div>
-          <div class="pipe-name">DELTAS BQ</div>
-          <div class="pipe-desc">ADDED/REMOVED vs mois précédent — onglet "Cosmos approved"</div>
-        </div>
-        <div class="pipe-step">
-          <div class="pipe-num num-dark">4</div>
-          <div class="pipe-name">VALIDATION</div>
-          <div class="pipe-desc">Vérification ADDED vs rm_validated_history</div>
-        </div>
-        <div class="pipe-step">
-          <div class="pipe-num num-dark">5</div>
-          <div class="pipe-name">EMAIL SMTP</div>
-          <div class="pipe-desc">Gmail App Password · destinataires via Secret Manager</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ─── 04 BIGQUERY ─── -->
-<section class="section alt">
-  <div class="inner">
-    <div class="sec-label">04 — Modélisation BigQuery</div>
-    <h2 class="sec-h2">7 tables · Dataset <code style="font-size:0.85em;color:var(--g700);font-family:'Source Code Pro',monospace">cosmos_catalog</code></h2>
-    <p class="sec-intro">
-      Chaque table a un rôle précis dans le pipeline. La séparation des périmètres catalogue et RM
-      assure une maintenance indépendante et une lecture efficace des données.
-    </p>
-    <div class="bq-grid">
-      <div class="bq-card">
-        <div class="bq-dot-row"><span class="bq-dot"></span><span class="bq-name">products</span></div>
-        <div class="bq-pipe">Pipeline Catalogue · ~36k lignes</div>
-        <div class="bq-desc">Produits certifiés du catalogue COSMOS — onglet Products</div>
-      </div>
-      <div class="bq-card">
-        <div class="bq-dot-row"><span class="bq-dot"></span><span class="bq-name">approved_ingredients</span></div>
-        <div class="bq-pipe">Pipeline Catalogue · ~11k lignes</div>
-        <div class="bq-desc">Ingrédients approuvés — onglet Cosmos approved ingredients</div>
-      </div>
-      <div class="bq-card">
-        <div class="bq-dot-row"><span class="bq-dot"></span><span class="bq-name">certified_ingredients</span></div>
-        <div class="bq-pipe">Pipeline Catalogue · ~11k lignes</div>
-        <div class="bq-desc">Ingrédients certifiés — onglet Cosmos certified ingredients</div>
-      </div>
-      <div class="bq-card">
-        <div class="bq-dot-row"><span class="bq-dot"></span><span class="bq-name">catalog_events</span></div>
-        <div class="bq-pipe">Pipeline Catalogue</div>
-        <div class="bq-desc">Deltas ADDED/REMOVED catalogue — calculé à chaque ingestion mensuelle. Clé composite : commercial_name · brand · company</div>
-      </div>
-      <div class="bq-card">
-        <div class="bq-dot-row"><span class="bq-dot"></span><span class="bq-name">rm_events</span></div>
-        <div class="bq-pipe">Pipeline RM</div>
-        <div class="bq-desc">ADDED/REMOVED par CB et par mois — colonnes : month, cb_name, event_type, identifier, commercial_name</div>
-      </div>
-      <div class="bq-card">
-        <div class="bq-dot-row"><span class="bq-dot"></span><span class="bq-name">rm_validation</span></div>
-        <div class="bq-pipe">Pipeline RM</div>
-        <div class="bq-desc">Statut de validation des RM ajoutés — submitted_and_validated, observation</div>
-      </div>
-      <div class="bq-card">
-        <div class="bq-dot-row"><span class="bq-dot" style="background:var(--g200)"></span><span class="bq-name" style="color:var(--gray)">rm_validated_history</span></div>
-        <div class="bq-pipe" style="color:var(--gray)">Pipeline RM · Référentiel · En cours</div>
-        <div class="bq-desc">Référentiel historique des RM validés — enrichi manuellement à chaque cycle. Alimentation prévue.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ─── 05 STACK TECHNIQUE ─── -->
-<section class="section">
-  <div class="inner">
-    <div class="sec-label">05 — Stack Technique</div>
-    <h2 class="sec-h2">Google Cloud Platform · Architecture serverless · Free Tier</h2>
-    <p class="sec-intro">
-      Chaque composant a été sélectionné pour répondre à une contrainte forte : zéro facturation,
-      robustesse maximale et maintenance simplifiée.
-    </p>
-    <div class="stack-grid">
-
-      <div class="stack-card">
-        <div class="stack-layer">Compute · GCP</div>
-        <div class="stack-name">Cloud Functions Gen 2</div>
-        <div class="stack-role">Python 3.11 · 512 Mo · timeout 300s. Deux fonctions indépendantes : <code>catalog_ingest</code> et <code>rm_ingest</code>, chacune avec son propre <code>requirements.txt</code>. Déclenchées par HTTP via Cloud Scheduler.</div>
-        <span class="stack-badge sb-gcp">Serverless · GCP</span>
-      </div>
-
-      <div class="stack-card">
-        <div class="stack-layer">Orchestration · GCP</div>
-        <div class="stack-name">Cloud Scheduler</div>
-        <div class="stack-role">Déclenchement HTTP automatique des Cloud Functions. Catalogue : <code>0 9 16 * *</code> (16 de chaque mois, 9h UTC). RM : mensuel. 2 jobs — dans la limite gratuite (3 jobs offerts).</div>
-        <span class="stack-badge sb-gcp">Cron · GCP</span>
-      </div>
-
-      <div class="stack-card">
-        <div class="stack-layer">Data Warehouse · GCP</div>
-        <div class="stack-name">BigQuery</div>
-        <div class="stack-role">Dataset <code>cosmos_catalog</code> région EU — 7 tables — WRITE_APPEND + autodetect schema. Quelques Mo de données, bien en dessous du free tier (10 Go stockage, 1 To requêtes/mois).</div>
-        <span class="stack-badge sb-gcp">Data Warehouse · GCP</span>
-      </div>
-
-      <div class="stack-card">
-        <div class="stack-layer">Source de données · GCP</div>
-        <div class="stack-name">Google Drive API v3</div>
-        <div class="stack-role">Lecture des fichiers xlsx mensuels déposés par les CB. Téléchargement en mémoire (<code>BytesIO</code>) — zéro stockage sur la Cloud Function. Authentification via Service Account GCP.</div>
-        <span class="stack-badge sb-gray">Drive API v3</span>
-      </div>
-
-      <div class="stack-card">
-        <div class="stack-layer">Sécurité · GCP</div>
-        <div class="stack-name">Secret Manager</div>
-        <div class="stack-role">Stockage sécurisé des credentials sensibles : App Password Gmail (<code>gmail-app-password</code>) et liste des destinataires email (<code>gmail-recipients</code>). Aucun credential en dur dans le code. 6 versions actives gratuites.</div>
-        <span class="stack-badge sb-warn">Secrets · GCP</span>
-      </div>
-
-      <div class="stack-card">
-        <div class="stack-layer">Notifications</div>
-        <div class="stack-name">SMTP Gmail</div>
-        <div class="stack-role">Envoi d'emails récapitulatifs des RM ADDED/REMOVED via App Password Gmail. Destinataires configurés dynamiquement via Secret Manager — aucun destinataire codé en dur.</div>
-        <span class="stack-badge sb-gray">Email · Alertes</span>
-      </div>
-
-      <div class="stack-card">
-        <div class="stack-layer">Data Viz</div>
-        <div class="stack-name">Looker Studio</div>
-        <div class="stack-role">Dashboard connecté directement à BigQuery — rafraîchissement automatique. Visualisation des produits certifiés, tendances du catalogue et suivi des événements RM par organisme.</div>
-        <span class="stack-badge sb-green">BI · Gratuit</span>
-      </div>
-
-      <div class="stack-card">
-        <div class="stack-layer">Data Processing</div>
-        <div class="stack-name">Python · Pandas</div>
-        <div class="stack-role">Nettoyage et normalisation des colonnes (lowercase, espaces→_, %→_pct), lecture multi-onglets en mémoire, détection des deltas par clé composite, gestion des cas limites (NaN, Version STRING…).</div>
-        <span class="stack-badge sb-gray">ETL · Python 3.11</span>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ─── 06 COMPÉTENCES DÉVELOPPÉES ─── -->
-<section class="section alt">
-  <div class="inner">
-    <div class="sec-label">06 — Compétences Développées</div>
-    <h2 class="sec-h2">Des compétences acquises en conditions réelles de production</h2>
-    <p class="sec-intro">
-      Ce stage m'a permis de monter en compétences sur l'ensemble de la chaîne data engineering,
-      de la conception de pipeline à la mise en production sur un cloud public.
-    </p>
-    <div class="skills-grid">
-
-      <div class="skill-cat">
-        <div class="skill-cat-head">
-          <div class="skill-icon">☁️</div>
-          Google Cloud Platform
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Cloud Functions Gen 2</span>
-          <span class="skill-tag primary">BigQuery</span>
-          <span class="skill-tag primary">Cloud Scheduler</span>
-          <span class="skill-tag primary">Secret Manager</span>
-          <span class="skill-tag">Google Drive API v3</span>
-          <span class="skill-tag">Service Account IAM</span>
-          <span class="skill-tag">GCP Console</span>
-          <span class="skill-tag">Free Tier Optimization</span>
-        </div>
-      </div>
-
-      <div class="skill-cat">
-        <div class="skill-cat-head">
-          <div class="skill-icon">⚙️</div>
-          Data Engineering
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Conception de pipeline ETL</span>
-          <span class="skill-tag primary">Idempotence</span>
-          <span class="skill-tag primary">Détection de deltas</span>
-          <span class="skill-tag">Architecture BQ-first</span>
-          <span class="skill-tag">WRITE_APPEND</span>
-          <span class="skill-tag">Autodetect schema</span>
-          <span class="skill-tag">Clé composite</span>
-        </div>
-      </div>
-
-      <div class="skill-cat">
-        <div class="skill-cat-head">
-          <div class="skill-icon">🐍</div>
-          Python & Traitement de données
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Python 3.11</span>
-          <span class="skill-tag primary">Pandas</span>
-          <span class="skill-tag">openpyxl</span>
-          <span class="skill-tag">google-cloud-bigquery</span>
-          <span class="skill-tag">google-api-python-client</span>
-          <span class="skill-tag">BytesIO (lecture en mémoire)</span>
-          <span class="skill-tag">Gestion NaN & types</span>
-        </div>
-      </div>
-
-      <div class="skill-cat">
-        <div class="skill-cat-head">
-          <div class="skill-icon">🗄️</div>
-          Modélisation & SQL
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Schéma BigQuery</span>
-          <span class="skill-tag">SQL analytique</span>
-          <span class="skill-tag">Data Warehouse design</span>
-          <span class="skill-tag">Partitionnement & performance</span>
-          <span class="skill-tag">SELECT DISTINCT · MERGE</span>
-        </div>
-      </div>
-
-      <div class="skill-cat">
-        <div class="skill-cat-head">
-          <div class="skill-icon">📊</div>
-          Dataviz & Reporting
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Looker Studio</span>
-          <span class="skill-tag">Connexion native BigQuery</span>
-          <span class="skill-tag">Dashboard design</span>
-          <span class="skill-tag">Rafraîchissement automatique</span>
-          <span class="skill-tag">KPIs métier</span>
-        </div>
-      </div>
-
-      <div class="skill-cat">
-        <div class="skill-cat-head">
-          <div class="skill-icon">🔐</div>
-          Sécurité & DevOps
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag primary">Secret Manager GCP</span>
-          <span class="skill-tag">Service Account & IAM</span>
-          <span class="skill-tag">Architecture serverless</span>
-          <span class="skill-tag">SMTP App Password</span>
-          <span class="skill-tag">Zéro credential en dur</span>
-          <span class="skill-tag">gcloud CLI</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ─── 07 INFRASTRUCTURE ─── -->
-<section class="section">
-  <div class="inner">
-    <div class="sec-label">07 — Infrastructure GCP</div>
-    <h2 class="sec-h2">Architecture serverless · 100 % free tier · zéro facturation</h2>
-    <p class="sec-intro">
-      L'ensemble de l'infrastructure est dimensionné pour rester dans les limites gratuites de GCP.
-      Un choix délibéré qui prouve qu'une solution robuste ne nécessite pas forcément un budget.
-    </p>
-    <div class="infra-wrap">
-      <table class="infra-table">
-        <thead>
-          <tr><th>Composant GCP</th><th>Configuration</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Projet GCP</td><td>cosmosdata</td></tr>
-          <tr><td>Service Account</td><td>pipeline-automation — IAM roles : BigQuery Data Editor, Drive readonly, Secret Accessor</td></tr>
-          <tr><td>Dataset BigQuery</td><td>cosmos_catalog — région EU</td></tr>
-          <tr><td>Cloud Function · Catalogue</td><td><code>catalog_ingest</code> — Gen 2, Python 3.11, 512 Mo, timeout 300s ✅ Déployée</td></tr>
-          <tr><td>Cloud Function · RM</td><td><code>rm_ingest</code> — Gen 2, Python 3.11, 512 Mo, timeout 300s ✅ Déployée</td></tr>
-          <tr><td>Cloud Scheduler · Catalogue</td><td><code>0 9 16 * *</code> — le 16 de chaque mois à 9h UTC ✅ Actif · Prochaine exécution : 16/04/2026</td></tr>
-          <tr><td>Cloud Scheduler · RM</td><td>Mensuel — à configurer</td></tr>
-          <tr><td>Secret Manager</td><td>2 secrets actifs : <code>gmail-app-password</code>, <code>gmail-recipients</code></td></tr>
-          <tr><td>Exécutions / mois</td><td>2 (limite free tier : 2 M/mois) — coût effectif : 0 €</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <!-- Code architecture -->
-    <div style="margin-top:32px">
-      <h3 style="font-family:'Montserrat',sans-serif;font-size:0.95rem;font-weight:700;color:var(--g900);margin-bottom:20px">Architecture modulaire du code</h3>
-      <div class="grid-2">
-        <div class="card">
-          <div class="card-tag tag-green">catalog/ · En production</div>
-          <div class="card-title">Pipeline Catalogue</div>
-          <div class="card-body">
-            <code>main.py</code> — point d'entrée Cloud Function<br>
-            <code>pipeline.py</code> — orchestration complète<br>
-            <code>drive_client.py</code> — scan Drive &amp; téléchargement xlsx<br>
-            <code>bq_client.py</code> — lecture &amp; écriture BigQuery<br>
-            <code>requirements.txt</code> — dépendances isolées<br><br>
-            Librairies clés : <code>google-cloud-bigquery</code>, <code>google-api-python-client</code>, <code>pandas</code>, <code>openpyxl</code>, <code>pyarrow</code>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-tag tag-dark">rm/ · En production</div>
-          <div class="card-title">Pipeline RM</div>
-          <div class="card-body">
-            <code>main.py</code> — point d'entrée Cloud Function<br>
-            <code>pipeline.py</code> — orchestration par CB<br>
-            <code>detect_and_check_rm.py</code> — fusion logique deltas + validation<br>
-            <code>drive_client.py</code> — scan Drive par CB<br>
-            <code>bq_client.py</code> — lecture historique &amp; écriture<br>
-            <code>gmail_client.py</code> — SMTP Gmail via App Password<br>
-            <code>requirements.txt</code> + <code>google-cloud-secret-manager</code>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ─── 08 RÉSULTATS ─── -->
+<!-- ─── 02 RÉSULTATS ─── -->
 <section class="section dark results-dark">
   <div class="inner">
-    <div class="sec-label light">08 — Résultats & Livrables</div>
+    <div class="sec-label light">02 — Résultats & Livrables</div>
     <h2 class="sec-h2 light">2 pipelines livrés · BigQuery opérationnel · Alertes actives</h2>
     <p class="sec-intro light">
       Un projet mené de bout en bout : de la compréhension du besoin métier à la mise en production,
@@ -1038,11 +495,11 @@ body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--w
       </li>
       <li>
         <span class="dl-check">✓</span>
-        <span><strong>Pipeline RM</strong> — détection des changements par CB, comparaison BQ-first, vérification vs référentiel historique validé, email récapitulatif SMTP opérationnel, test end-to-end réussi.</span>
+        <span><strong>Pipeline RM</strong> — détection des changements par organisme, comparaison BQ-first, vérification vs référentiel historique validé, email récapitulatif SMTP opérationnel, test end-to-end réussi.</span>
       </li>
       <li>
         <span class="dl-check">✓</span>
-        <span><strong>Data Warehouse BigQuery</strong> — 7 tables modélisées, gestion des cas limites critiques (NaN, types de colonnes mixtes, idempotence, lecture xlsx en mémoire).</span>
+        <span><strong>Data Warehouse BigQuery</strong> — 7 tables modélisées, source de vérité unique pour les deux pipelines, gestion robuste des cas limites et garantie d'idempotence.</span>
       </li>
       <li>
         <span class="dl-check">✓</span>
@@ -1053,6 +510,198 @@ body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--w
         <span><strong>Documentation technique</strong> — architecture décrite, variables d'environnement documentées, processus de déploiement reproductible.</span>
       </li>
     </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── 03 AVANT / APRÈS ─── -->
+<section class="section alt">
+  <div class="inner">
+    <div class="sec-label">03 — Avant / Après</div>
+    <h2 class="sec-h2">Une transformation concrète et mesurable</h2>
+    <p class="sec-intro">
+      Ce projet supprime une charge opérationnelle réelle et crée une infrastructure data pérenne
+      là où il n'y en avait aucune.
+    </p>
+    <div class="ba-grid">
+      <div class="ba-box before">
+        <div class="ba-head"><span class="ba-head-dot"></span>Avant le projet</div>
+        <ul class="ba-list">
+          <li><span class="ba-icon">✗</span> Comparaison manuelle des fichiers Excel chaque mois</li>
+          <li><span class="ba-icon">✗</span> Aucun historique des changements d'ingrédients</li>
+          <li><span class="ba-icon">✗</span> Alertes transmises manuellement par email</li>
+          <li><span class="ba-icon">✗</span> Risque d'oubli ou d'erreur humaine élevé</li>
+          <li><span class="ba-icon">✗</span> Aucune visibilité sur les tendances catalogue</li>
+          <li><span class="ba-icon">✗</span> Pas de tableau de bord centralisé</li>
+        </ul>
+      </div>
+      <div class="ba-arrow-col">→</div>
+      <div class="ba-box after">
+        <div class="ba-head"><span class="ba-head-dot"></span>Après le projet</div>
+        <ul class="ba-list">
+          <li><span class="ba-icon">✓</span> Ingestion automatique le 16 de chaque mois</li>
+          <li><span class="ba-icon">✓</span> Historique complet dans BigQuery avec idempotence</li>
+          <li><span class="ba-icon">✓</span> Emails automatiques aux parties prenantes</li>
+          <li><span class="ba-icon">✓</span> Zéro intervention humaine dans le processus</li>
+          <li><span class="ba-icon">✓</span> Dashboard Looker Studio en temps réel</li>
+          <li><span class="ba-icon">✓</span> Infrastructure 100 % free tier — 0 € de coût</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── 04 ARCHITECTURE ─── -->
+<section class="section">
+  <div class="inner">
+    <div class="sec-label">04 — Architecture des Pipelines</div>
+    <h2 class="sec-h2">Deux Cloud Functions indépendantes, un data warehouse commun</h2>
+    <p class="sec-intro">
+      Chaque pipeline correspond à un périmètre métier distinct. Ils partagent le même dataset BigQuery
+      mais s'exécutent de façon entièrement autonome, déclenchés chaque mois par Cloud Scheduler.
+    </p>
+
+    <!-- Pipeline Catalogue -->
+    <div class="pipe-wrap">
+      <div class="pipe-header">
+        <div class="pipe-title">Pipeline Catalogue — Ingestion mensuelle du référentiel COSMOS</div>
+        <span class="card-tag tag-green" style="margin:0">Automatique · le 16 de chaque mois</span>
+      </div>
+      <p class="pipe-sub">
+        Détecte automatiquement les nouveaux fichiers catalogues déposés sur Google Drive,
+        ingère les <strong>3 onglets produits</strong>, calcule les variations ADDED/REMOVED
+        et écrit dans <strong>4 tables BigQuery</strong> avec garantie d'idempotence.
+      </p>
+      <div class="pipe-flow">
+        <div class="pipe-step">
+          <div class="pipe-num num-green">1</div>
+          <div class="pipe-name">SCAN DRIVE</div>
+          <div class="pipe-desc">Détection des fichiers non encore ingérés</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num num-green">2</div>
+          <div class="pipe-name">IDEMPOTENCE</div>
+          <div class="pipe-desc">Vérification en base — aucun doublon possible</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num num-green">3</div>
+          <div class="pipe-name">LECTURE</div>
+          <div class="pipe-desc">3 onglets en mémoire — pas de stockage intermédiaire</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num num-green">4</div>
+          <div class="pipe-name">DELTAS</div>
+          <div class="pipe-desc">Calcul ADDED/REMOVED vs mois précédent</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num num-green">5</div>
+          <div class="pipe-name">BQ WRITE</div>
+          <div class="pipe-desc">Écriture dans 4 tables BigQuery</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pipeline RM -->
+    <div class="pipe-wrap">
+      <div class="pipe-header">
+        <div class="pipe-title">Pipeline RM — Détection des ADDED/REMOVED par organisme certificateur</div>
+        <span class="card-tag tag-dark" style="margin:0">Automatique · Mensuel</span>
+      </div>
+      <p class="pipe-sub">
+        Compare les matières premières du mois courant avec le <strong>mois précédent depuis BigQuery</strong>,
+        vérifie les ajouts contre le référentiel historique validé, puis envoie un
+        <strong>email récapitulatif automatique</strong> aux équipes.
+      </p>
+      <div class="pipe-flow">
+        <div class="pipe-step">
+          <div class="pipe-num num-dark">1</div>
+          <div class="pipe-name">IDEMPOTENCE</div>
+          <div class="pipe-desc">Vérification par organisme et par mois</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num num-dark">2</div>
+          <div class="pipe-name">SCAN DRIVE</div>
+          <div class="pipe-desc">Détection d'un fichier par organisme certificateur</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num num-dark">3</div>
+          <div class="pipe-name">DELTAS BQ</div>
+          <div class="pipe-desc">ADDED/REMOVED — comparaison depuis BigQuery</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num num-dark">4</div>
+          <div class="pipe-name">VALIDATION</div>
+          <div class="pipe-desc">Vérification des ajouts vs référentiel historique</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num num-dark">5</div>
+          <div class="pipe-name">EMAIL</div>
+          <div class="pipe-desc">Envoi d'email récapitulatif automatique aux équipes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── 05 STACK TECHNIQUE ─── -->
+<section class="section alt">
+  <div class="inner">
+    <div class="sec-label">05 — Stack Technique</div>
+    <h2 class="sec-h2">Google Cloud Platform · Architecture serverless · Free Tier</h2>
+    <p class="sec-intro">
+      Chaque composant a été choisi pour répondre à une contrainte forte : zéro facturation,
+      robustesse maximale et maintenance simplifiée.
+    </p>
+    <div class="stack-grid">
+
+      <div class="stack-card">
+        <div class="stack-layer">Compute · GCP</div>
+        <div class="stack-name">Cloud Functions Gen 2</div>
+        <div class="stack-role">Deux fonctions serverless Python indépendantes — une par périmètre métier. Isolation totale, déploiement séparé, zéro infrastructure à gérer.</div>
+        <span class="stack-badge sb-gcp">Serverless · GCP</span>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-layer">Orchestration · GCP</div>
+        <div class="stack-name">Cloud Scheduler</div>
+        <div class="stack-role">Déclenchement automatique mensuel des deux pipelines. Zéro intervention humaine dans le cycle de traitement — entièrement configurable.</div>
+        <span class="stack-badge sb-gcp">Cron · GCP</span>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-layer">Data Warehouse · GCP</div>
+        <div class="stack-name">BigQuery</div>
+        <div class="stack-role">Source de vérité centrale — 7 tables dans le dataset cosmos_catalog. Architecture BQ-first : le pipeline RM lit directement depuis BigQuery pour ses comparaisons.</div>
+        <span class="stack-badge sb-gcp">Data Warehouse · GCP</span>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-layer">Source de données</div>
+        <div class="stack-name">Google Drive API v3</div>
+        <div class="stack-role">Lecture des fichiers Excel mensuels déposés par les organismes certificateurs. Authentification sécurisée via Service Account GCP — aucun credential en dur.</div>
+        <span class="stack-badge sb-gray">Drive API v3</span>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-layer">Data Processing</div>
+        <div class="stack-name">Python · Pandas</div>
+        <div class="stack-role">Nettoyage, normalisation et calcul des deltas ADDED/REMOVED. Gestion robuste des cas limites : données manquantes, types mixtes, fichiers multi-onglets.</div>
+        <span class="stack-badge sb-gray">ETL · Python 3.11</span>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-layer">Data Viz</div>
+        <div class="stack-name">Looker Studio</div>
+        <div class="stack-role">Dashboard connecté directement à BigQuery, rafraîchissement automatique. Visualisation des produits certifiés et des événements catalogue par organisme et par mois.</div>
+        <span class="stack-badge sb-green">BI · Gratuit</span>
+      </div>
+
+    </div>
   </div>
 </section>
 
