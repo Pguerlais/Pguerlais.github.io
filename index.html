@@ -596,16 +596,11 @@
   <!-- ─── HERO ─── -->
   <section id="hero">
     <div class="hero-content">
-      <div class="availability-pill">
-        <span class="availability-dot"></span>
-        Disponible — Recherche de stage / alternance
-      </div>
       <div class="hero-eyebrow">Data Analyst — Performance Opérationnelle</div>
       <h1 class="hero-name">Pierre<span>Guerlais</span></h1>
       <p class="hero-tagline">
         <strong>10 ans à piloter des opérations par les chiffres.</strong><br/>
-        Aujourd'hui Data Analyst — Python, SQL, Power BI, Airflow, dbt.<br/>
-        Je transforme des données complexes en <span class="highlight">décisions claires</span>,
+        Je transforme des données complexes en <span class="highlight">décisions claires</span> —
         avec une lecture terrain que les modèles seuls ne donnent pas.
       </p>
       <div class="hero-cta">
@@ -670,9 +665,9 @@
         </div>
       </div>
       <div class="hero-stats">
-        <div class="stat-box"><div class="stat-number">10+</div><div class="stat-label">Ans en Ops</div></div>
-        <div class="stat-box"><div class="stat-number">3</div><div class="stat-label">Projets Data</div></div>
-        <div class="stat-box"><div class="stat-number">8+</div><div class="stat-label">Outils</div></div>
+        <div class="stat-box"><div class="stat-number">10+</div><div class="stat-label">Ans en Ops terrain</div></div>
+        <div class="stat-box"><div class="stat-number">2</div><div class="stat-label">Pipelines GCP en prod</div></div>
+        <div class="stat-box"><div class="stat-number">3</div><div class="stat-label">Projets livrés</div></div>
       </div>
     </div>
   </section>
@@ -692,6 +687,12 @@
         <p>La <strong>Wild Code School</strong> n'a pas changé ma trajectoire, elle lui a donné un nom et un cadre technique. Python, SQL, Power BI, Airflow, dbt — autant d'outils qui donnent enfin toute leur puissance à ce que j'ai toujours fait intuitivement. Et la prochaine étape qui m'attire ? <span class="highlight">Automatisation des flux data et rapprochement des LLM</span> — un domaine où ma culture terrain et ma curiosité technologique se rejoignent naturellement.</p>
       </div>
       <div class="timeline reveal">
+        <div class="timeline-item">
+          <div class="timeline-period">Avr. 2026 · 1 mois</div>
+          <div class="timeline-role">Stage Data Engineer</div>
+          <div class="timeline-company">COSMOS Standard AISBL — Paris</div>
+          <div class="timeline-desc">Conception et déploiement de <strong>2 pipelines GCP serverless</strong> (Cloud Functions, BigQuery, Cloud Scheduler). Ingestion automatisée depuis Google Drive, alertes SMTP, dashboard Looker Studio. Architecture 100 % free tier.</div>
+        </div>
         <div class="timeline-item">
           <div class="timeline-period">2025 — Présent</div>
           <div class="timeline-role">Data Analyst — RNCP Niv. 6</div>
@@ -750,23 +751,26 @@
       </div>
 
       <div class="skill-category reveal">
-        <div class="skill-cat-icons"><i class="devicon-matplotlib-plain" title="Matplotlib"></i><i class="devicon-streamlit-plain" title="Streamlit"></i></div>
+        <div class="skill-cat-icons"><i class="devicon-googlecloud-plain" title="Looker Studio"></i><i class="devicon-matplotlib-plain" title="Matplotlib"></i><i class="devicon-streamlit-plain" title="Streamlit"></i></div>
         <div class="skill-cat-title">// BI et Dataviz</div>
         <div class="skill-tags">
           <span class="skill-tag core">Power BI</span><span class="skill-tag core">DAX</span>
-          <span class="skill-tag">Matplotlib</span><span class="skill-tag">Seaborn</span>
-          <span class="skill-tag">Streamlit</span><span class="skill-tag">Storytelling Data</span>
+          <span class="skill-tag core">Looker Studio</span><span class="skill-tag">Matplotlib</span>
+          <span class="skill-tag">Seaborn</span><span class="skill-tag">Streamlit</span>
+          <span class="skill-tag">Storytelling Data</span>
         </div>
       </div>
 
       <!-- Nouveau bloc Data Engineering -->
       <div class="skill-category reveal">
-        <div class="skill-cat-icons"><i class="devicon-apacheairflow-plain" title="Airflow"></i><i class="devicon-dbt-plain" title="dbt"></i></div>
-        <div class="skill-cat-title">// Data Engineering</div>
+        <div class="skill-cat-icons"><i class="devicon-googlecloud-plain" title="Google Cloud"></i><i class="devicon-python-plain" title="Python"></i></div>
+        <div class="skill-cat-title">// Cloud & Data Engineering</div>
         <div class="skill-tags">
-          <span class="skill-tag core">Prefect</span><span class="skill-tag core">dbt</span>
-          <span class="skill-tag">GitHub Actions</span><span class="skill-tag">Pipeline ETL</span>
-          <span class="skill-tag">PostgreSQL</span><span class="skill-tag">Steam · SteamSpy · Twitch</span>
+          <span class="skill-tag core">Cloud Functions</span><span class="skill-tag core">BigQuery</span>
+          <span class="skill-tag core">Cloud Scheduler</span><span class="skill-tag">Secret Manager</span>
+          <span class="skill-tag">Drive API v3</span><span class="skill-tag">Pipeline ETL</span>
+          <span class="skill-tag">Serverless GCP</span><span class="skill-tag">Idempotence</span>
+          <span class="skill-tag">Free Tier GCP</span><span class="skill-tag">GitHub Actions</span>
         </div>
       </div>
 
@@ -780,12 +784,12 @@
         </div>
       </div>
 
-      <!-- Nouveau bloc Qualité & Sécurité -->
-      <div class="skill-category reveal">
+      <!-- Bloc Qualité & Méthodes — compétences transverses -->
+      <div class="skill-category reveal" style="opacity:0.72; border-color: rgba(255,255,255,0.05);">
         <div class="skill-cat-icons"><i class="devicon-sonarqube-plain" title="SonarQube"></i><i class="devicon-git-plain" title="Git"></i><i class="devicon-github-original" title="GitHub"></i></div>
         <div class="skill-cat-title">// Qualité et Méthodes</div>
         <div class="skill-tags">
-          <span class="skill-tag core">SonarQube</span><span class="skill-tag core">OWASP</span>
+          <span class="skill-tag">SonarQube</span><span class="skill-tag">OWASP</span>
           <span class="skill-tag">Git / GitHub</span><span class="skill-tag">Agile / Scrum</span>
           <span class="skill-tag">KPI et Reporting</span><span class="skill-tag">Amélioration continue</span>
           <span class="skill-tag">Six Sigma Yellow Belt</span>
@@ -943,6 +947,7 @@
           </div>
         </div>
       </a>
+
 
     </div>
   </section>

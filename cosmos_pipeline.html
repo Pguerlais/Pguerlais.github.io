@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COSMOS Standard — Pipeline Data · Pierre Guerlais</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hero { background: #0f3d2e !important; }
+  .results-dark { background: #0f3d2e !important; }
+}
+
+:root {
+  --g900: #0d3726;
+  --g800: #145539;
+  --g700: #1b7051;
+  --g600: #238a64;
+  --g500: #2da672;
+  --g400: #3dc085;
+  --g300: #70d4a8;
+  --g200: #a8e9cc;
+  --g100: #d4f5e4;
+  --g50:  #f0fbf5;
+  --white:  #ffffff;
+  --text:   #1a2d22;
+  --mid:    #3a5245;
+  --gray:   #6b7e74;
+  --light:  #eaf2ed;
+  --border: #d2e8db;
+  --dark:   #0a1f15;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); line-height: 1.7; }
+
+/* ── NAV ── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 66px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700; font-size: 1rem; color: var(--g900); letter-spacing: 0.02em;
+  text-decoration: none;
+}
+.nav-leaf {
+  width: 26px; height: 26px; background: var(--g700); border-radius: 50% 50% 50% 4px;
+  transform: rotate(-45deg); flex-shrink: 0;
+}
+.nav-sep { color: var(--border); font-weight: 300; }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-tag {
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--g700); background: var(--g50); border: 1px solid var(--g200);
+  border-radius: 20px; padding: 4px 14px;
+}
+.btn-back, .btn-print {
+  font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600;
+  padding: 7px 18px; border-radius: 6px; cursor: pointer;
+  text-decoration: none; transition: all 0.2s; white-space: nowrap; border: 1.5px solid;
+}
+.btn-back { color: var(--g800); border-color: var(--g200); background: transparent; }
+.btn-back:hover { background: var(--g50); border-color: var(--g300); }
+.btn-print { color: var(--white); border-color: var(--g700); background: var(--g700); }
+.btn-print:hover { background: var(--g800); border-color: var(--g800); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--g900);
+  color: var(--white);
+  padding: 96px 56px 80px;
+  position: relative; overflow: hidden;
+}
+.hero-bg-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 70% at 5% 50%, rgba(61,192,133,0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 90% 15%, rgba(45,166,114,0.07) 0%, transparent 50%);
+}
+.hero-bg-grid {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.035;
+  background-image:
+    linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+.hero-inner { position: relative; max-width: 1080px; margin: 0 auto; }
+
+.hero-eyebrow {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--g300); margin-bottom: 22px;
+  display: flex; align-items: center; gap: 14px;
+  opacity: 0; animation: fadeUp 0.6s 0s forwards;
+}
+.hero-eyebrow::before { content: ''; width: 28px; height: 2px; background: var(--g400); flex-shrink: 0; }
+
+.hero-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 800; line-height: 1.15; margin-bottom: 22px;
+  opacity: 0; animation: fadeUp 0.6s 0.1s forwards;
+}
+.hero-title em { color: var(--g300); font-style: normal; }
+
+.hero-desc {
+  font-size: 1.05rem; color: rgba(255,255,255,0.65);
+  max-width: 640px; line-height: 1.8; margin-bottom: 52px;
+  opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+}
+
+.hero-stats {
+  display: flex; gap: 0; flex-wrap: wrap;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; overflow: hidden;
+  background: rgba(255,255,255,0.04);
+  width: fit-content;
+  opacity: 0; animation: fadeUp 0.6s 0.3s forwards;
+}
+.hero-stat {
+  padding: 22px 40px; text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.hero-stat:last-child { border-right: none; }
+.stat-big {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.2rem; font-weight: 800; color: var(--g300);
+  line-height: 1; margin-bottom: 6px;
+}
+.stat-lbl { font-size: 0.7rem; font-weight: 500; color: rgba(255,255,255,0.5); }
+
+.hero-tags {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 32px;
+  opacity: 0; animation: fadeUp 0.6s 0.4s forwards;
+}
+.hero-tag {
+  font-size: 0.72rem; font-weight: 500; padding: 5px 14px; border-radius: 30px;
+  border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.05);
+}
+
+/* ── LAYOUT ── */
+.section { padding: 80px 56px; }
+.section.alt  { background: var(--g50); }
+.section.dark { background: var(--g900); color: var(--white); }
+.inner { max-width: 1080px; margin: 0 auto; }
+
+.sec-label {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--g500); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 10px;
+}
+.sec-label::after { content: ''; width: 32px; height: 2px; background: var(--g300); flex-shrink: 0; }
+.sec-label.light { color: var(--g300); }
+.sec-label.light::after { background: var(--g500); }
+
+.sec-h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.45rem, 2.5vw, 2rem);
+  font-weight: 700; color: var(--g900); margin-bottom: 10px; line-height: 1.3;
+}
+.sec-h2.light { color: var(--white); }
+
+.sec-intro { font-size: 0.95rem; color: var(--gray); max-width: 680px; margin-bottom: 44px; line-height: 1.8; }
+.sec-intro.light { color: rgba(255,255,255,0.6); }
+
+/* ── CARDS ── */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+@media(max-width:900px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
+@media(max-width:640px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  padding: 28px; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.card:hover { border-color: var(--g300); box-shadow: 0 4px 20px rgba(13,55,38,0.08); transform: translateY(-2px); }
+.card.accent { border-color: var(--g400); border-width: 2px; background: var(--g50); }
+.card.full { grid-column: 1 / -1; }
+
+.card-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 4px; margin-bottom: 14px;
+}
+.tag-green { background: var(--g100); color: var(--g700); }
+.tag-red   { background: #fee2e2; color: #991b1b; }
+.tag-blue  { background: #dbeafe; color: #1e40af; }
+.tag-warn  { background: #fef3c7; color: #92400e; }
+.tag-gray  { background: var(--light); color: var(--mid); }
+.tag-dark  { background: rgba(13,55,38,0.1); color: var(--g900); }
+
+.card-title {
+  font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700;
+  color: var(--g900); margin-bottom: 10px;
+}
+.card-body { font-size: 0.87rem; color: var(--gray); line-height: 1.72; }
+.card-body strong { color: var(--mid); font-weight: 600; }
+
+/* ── BEFORE / AFTER ── */
+.ba-grid {
+  display: grid; grid-template-columns: 1fr 56px 1fr; gap: 0; align-items: stretch;
+  border-radius: 12px; overflow: hidden; border: 1px solid var(--border);
+}
+@media(max-width:640px) { .ba-grid { grid-template-columns: 1fr; } .ba-arrow-col { display: none; } }
+.ba-box { padding: 30px 28px; }
+.ba-box.before { background: #fff8f8; }
+.ba-box.after  { background: var(--g50); }
+.ba-arrow-col {
+  background: var(--light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; color: var(--g400);
+  border-left: 1px solid var(--border); border-right: 1px solid var(--border);
+}
+.ba-head {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+.ba-box.before .ba-head { color: #b91c1c; }
+.ba-box.after  .ba-head { color: var(--g700); }
+.ba-head-dot { width: 8px; height: 8px; border-radius: 50%; }
+.ba-box.before .ba-head-dot { background: #ef4444; }
+.ba-box.after  .ba-head-dot { background: var(--g400); }
+.ba-list { list-style: none; }
+.ba-list li { font-size: 0.86rem; padding: 7px 0; border-bottom: 1px solid; display: flex; gap: 10px; align-items: flex-start; }
+.ba-box.before .ba-list li { color: #7f1d1d; border-color: #fee2e2; }
+.ba-box.after  .ba-list li { color: var(--mid); border-color: var(--g100); }
+.ba-list li:last-child { border-bottom: none; }
+.ba-icon { flex-shrink: 0; margin-top: 2px; line-height: 1.3; }
+
+/* ── PIPELINE ── */
+.pipe-wrap { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 28px 32px; margin-bottom: 20px; }
+.pipe-header {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+  gap: 10px; margin-bottom: 8px;
+}
+.pipe-title { font-family: 'Montserrat', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--g900); }
+.pipe-sub { font-size: 0.82rem; color: var(--gray); line-height: 1.65; margin-bottom: 20px; margin-top: 4px; }
+.pipe-sub strong { color: var(--mid); }
+.pipe-flow { display: flex; align-items: stretch; flex-wrap: wrap; gap: 0; }
+.pipe-step {
+  flex: 1; min-width: 115px;
+  background: var(--g50); border: 1px solid var(--g100); border-radius: 10px;
+  padding: 16px 12px; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  position: relative; transition: border-color 0.2s, background 0.2s;
+}
+.pipe-step:hover { border-color: var(--g300); background: var(--g100); }
+.pipe-step + .pipe-step::before {
+  content: '→'; position: absolute; left: -13px; top: 50%; transform: translateY(-50%);
+  color: var(--g400); font-size: 0.95rem; font-weight: 700;
+}
+@media(max-width:600px) { .pipe-step + .pipe-step::before { display: none; } }
+.pipe-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  color: white; font-family: 'Montserrat', sans-serif; font-size: 0.68rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.num-green { background: var(--g700); }
+.num-dark  { background: var(--g900); }
+.pipe-name { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 700; color: var(--g900); }
+.pipe-desc { font-size: 0.66rem; color: var(--gray); line-height: 1.4; }
+
+/* ── STACK ── */
+.stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.stack-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  padding: 22px; display: flex; flex-direction: column; gap: 8px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.stack-card:hover { border-color: var(--g300); box-shadow: 0 4px 16px rgba(13,55,38,0.08); transform: translateY(-2px); }
+.stack-layer { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--g500); }
+.stack-name { font-family: 'Montserrat', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--g900); }
+.stack-role { font-size: 0.78rem; color: var(--gray); line-height: 1.6; }
+.stack-badge {
+  display: inline-block; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em;
+  padding: 3px 10px; border-radius: 20px; width: fit-content; margin-top: 4px;
+}
+.sb-green { background: var(--g100); color: var(--g700); border: 1px solid var(--g200); }
+.sb-gcp   { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+.sb-gray  { background: var(--light); color: var(--mid); border: 1px solid var(--border); }
+
+/* ── RESULTS ── */
+.results-dark { background: var(--g900); }
+.result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; margin-bottom: 40px; }
+.result-stat {
+  text-align: center; padding: 36px 20px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 12px;
+}
+.result-stat.featured { background: rgba(61,192,133,0.12); border-color: var(--g400); }
+.result-big {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.6rem; font-weight: 800; color: var(--g300); line-height: 1; margin-bottom: 8px;
+}
+.result-label { font-size: 0.72rem; color: rgba(255,255,255,0.5); }
+
+.deliverable-list { list-style: none; }
+.deliverable-list li {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  font-size: 0.88rem; color: rgba(255,255,255,0.75);
+}
+.deliverable-list li:last-child { border-bottom: none; }
+.dl-check {
+  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+  background: var(--g600, var(--g500)); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.65rem; font-weight: 700; margin-top: 1px;
+}
+.deliverable-list strong { color: var(--white); font-weight: 600; }
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--dark);
+  padding: 40px 56px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+}
+.footer-brand {
+  font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 800;
+  color: var(--white); letter-spacing: 0.04em;
+}
+.footer-brand em { color: var(--g300); font-style: normal; }
+.footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.35); letter-spacing: 0.05em; }
+.footer-tags { display: flex; gap: 7px; flex-wrap: wrap; }
+.footer-tag {
+  font-size: 0.63rem; font-weight: 600; letter-spacing: 0.1em;
+  padding: 4px 12px; border-radius: 20px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.55);
+}
+
+/* ── DIVIDER ── */
+.divider { height: 1px; background: var(--border); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px) {
+  .nav { padding: 0 20px; }
+  .section { padding: 56px 20px; }
+  .hero { padding: 64px 20px 56px; }
+  .hero-stats { width: 100%; flex-wrap: wrap; }
+  .hero-stat { padding: 16px 20px; flex: 1 1 40%; }
+  .footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav no-print">
+  <a href="index.html" class="nav-brand" style="text-decoration:none;color:inherit">
+    <div class="nav-leaf"></div>
+    COSMOS <span class="nav-sep" style="margin:0 2px">/</span> PIPELINE DATA
+  </a>
+  <div class="nav-right">
+    <div class="nav-tag">Stage Data Engineer · 2026</div>
+    <a href="index.html" class="btn-back">← Retour portfolio</a>
+    <button class="btn-print" onclick="window.print()">⎙ Imprimer</button>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-bg-glow"></div>
+  <div class="hero-bg-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Stage Data Engineer · Wild Code School 2026 · Paris</div>
+    <h1 class="hero-title">
+      De la saisie manuelle<br>à l'<em>automatisation totale</em><br>des flux data COSMOS
+    </h1>
+    <p class="hero-desc">
+      Conception et déploiement de deux pipelines de données serverless sur Google Cloud Platform
+      pour automatiser la veille des matières premières et le suivi du catalogue cosmétique mondial.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-big">2</div>
+        <div class="stat-lbl">Pipelines en production</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-big">0 €</div>
+        <div class="stat-lbl">Coût infrastructure</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-big">100%</div>
+        <div class="stat-lbl">Automatisation</div>
+      </div>
+    </div>
+    <div class="hero-tags">
+      <span class="hero-tag">Google Cloud Platform</span>
+      <span class="hero-tag">BigQuery</span>
+      <span class="hero-tag">Cloud Functions</span>
+      <span class="hero-tag">Cloud Scheduler</span>
+      <span class="hero-tag">Python 3.11</span>
+      <span class="hero-tag">Looker Studio</span>
+      <span class="hero-tag">Secret Manager</span>
+      <span class="hero-tag">Google Drive API</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 01 CONTEXTE & MISSION ─── -->
+<section class="section">
+  <div class="inner">
+    <div class="sec-label">01 — Contexte & Mission</div>
+    <h2 class="sec-h2">Une certification mondiale, une gestion encore manuelle</h2>
+    <p class="sec-intro">
+      COSMOS est la référence internationale pour la certification des cosmétiques biologiques et naturels.
+      Derrière ce standard, une organisation qui devait gérer ses données critiques sans infrastructure data adaptée.
+    </p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">🌿</div>
+        <div class="card-tag tag-green">L'organisation</div>
+        <div class="card-title">COSMOS Standard AISBL</div>
+        <div class="card-body">
+          Association internationale indépendante regroupant <strong>5 organismes certificateurs</strong>
+          européens. Elle définit le standard COSMOS utilisé par <strong>56 100+ produits certifiés</strong> à travers le monde.
+          Chaque mois, les organismes transmettent leurs listes de matières premières approuvées.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚠️</div>
+        <div class="card-tag tag-red">Le problème</div>
+        <div class="card-title">Un suivi 100 % manuel et risqué</div>
+        <div class="card-body">
+          Les organismes déposent des <strong>fichiers Excel sur Google Drive</strong> chaque mois.
+          La mise à jour du catalogue, la détection des ingrédients ajoutés ou supprimés, et les alertes
+          aux parties prenantes se faisaient <strong>manuellement</strong> — sans historique, sans traçabilité,
+          avec des risques d'erreur humaine importants.
+        </div>
+      </div>
+      <div class="card accent">
+        <div class="card-icon">🚀</div>
+        <div class="card-tag tag-dark">La mission</div>
+        <div class="card-title">Automatiser entièrement ces flux</div>
+        <div class="card-body">
+          Concevoir et déployer deux pipelines GCP qui ingèrent automatiquement les fichiers Drive,
+          calculent les <strong>variations ADDED/REMOVED</strong>, alimentent un data warehouse BigQuery
+          et envoient des <strong>alertes email aux équipes</strong> — sans aucune intervention manuelle.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── 02 RÉSULTATS ─── -->
+<section class="section dark results-dark">
+  <div class="inner">
+    <div class="sec-label light">02 — Résultats & Livrables</div>
+    <h2 class="sec-h2 light">2 pipelines livrés · BigQuery opérationnel · Alertes actives</h2>
+    <p class="sec-intro light">
+      Un projet mené de bout en bout : de la compréhension du besoin métier à la mise en production,
+      en passant par la conception, le développement et les tests end-to-end.
+    </p>
+
+    <div class="result-grid">
+      <div class="result-stat featured">
+        <div class="result-big">2</div>
+        <div class="result-label">Pipelines en production</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-big">7</div>
+        <div class="result-label">Tables BigQuery alimentées</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-big">0 €</div>
+        <div class="result-label">Coût infrastructure GCP</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-big">100%</div>
+        <div class="result-label">Processus automatisé</div>
+      </div>
+    </div>
+
+    <ul class="deliverable-list">
+      <li>
+        <span class="dl-check">✓</span>
+        <span><strong>Pipeline Catalogue</strong> — ingestion mensuelle automatique, calcul ADDED/REMOVED, alimentation de 4 tables BigQuery, idempotence validée, Cloud Scheduler configuré et actif.</span>
+      </li>
+      <li>
+        <span class="dl-check">✓</span>
+        <span><strong>Pipeline RM</strong> — détection des changements par organisme, comparaison BQ-first, vérification vs référentiel historique validé, email récapitulatif SMTP opérationnel, test end-to-end réussi.</span>
+      </li>
+      <li>
+        <span class="dl-check">✓</span>
+        <span><strong>Data Warehouse BigQuery</strong> — 7 tables modélisées, source de vérité unique pour les deux pipelines, gestion robuste des cas limites et garantie d'idempotence.</span>
+      </li>
+      <li>
+        <span class="dl-check">✓</span>
+        <span><strong>Dashboard Looker Studio</strong> — connecté à BigQuery, rafraîchissement automatique, visualisations des produits certifiés et des événements catalogue par mois.</span>
+      </li>
+      <li>
+        <span class="dl-check">✓</span>
+        <span><strong>Documentation technique</strong> — architecture décrite, variables d'environnement documentées, processus de déploiement reproductible.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── 03 AVANT / APRÈS ─── -->
+<section class="section alt">
+  <div class="inner">
+    <div class="sec-label">03 — Avant / Après</div>
+    <h2 class="sec-h2">Une transformation concrète et mesurable</h2>
+    <p class="sec-intro">
+      Ce projet supprime une charge opérationnelle réelle et crée une infrastructure data pérenne
+      là où il n'y en avait aucune.
+    </p>
+    <div class="ba-grid">
+      <div class="ba-box before">
+        <div class="ba-head"><span class="ba-head-dot"></span>Avant le projet</div>
+        <ul class="ba-list">
+          <li><span class="ba-icon">✗</span> Comparaison manuelle des fichiers Excel chaque mois</li>
+          <li><span class="ba-icon">✗</span> Aucun historique des changements d'ingrédients</li>
+          <li><span class="ba-icon">✗</span> Alertes transmises manuellement par email</li>
+          <li><span class="ba-icon">✗</span> Risque d'oubli ou d'erreur humaine élevé</li>
+          <li><span class="ba-icon">✗</span> Aucune visibilité sur les tendances catalogue</li>
+          <li><span class="ba-icon">✗</span> Pas de tableau de bord centralisé</li>
+        </ul>
+      </div>
+      <div class="ba-arrow-col">→</div>
+      <div class="ba-box after">
+        <div class="ba-head"><span class="ba-head-dot"></span>Après le projet</div>
+        <ul class="ba-list">
+          <li><span class="ba-icon">✓</span> Ingestion automatique le 16 de chaque mois</li>
+          <li><span class="ba-icon">✓</span> Historique complet dans BigQuery avec idempotence</li>
+          <li><span class="ba-icon">✓</span> Emails automatiques aux parties prenantes</li>
+          <li><span class="ba-icon">✓</span> Zéro intervention humaine dans le processus</li>
+          <li><span class="ba-icon">✓</span> Dashboard Looker Studio en temps réel</li>
+          <li><span class="ba-icon">✓</span> Infrastructure 100 % free tier — 0 € de coût</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── 04 ARCHITECTURE ─── -->
+<section class="section">
+  <div class="inner">
+    <div class="sec-label">04 — Architecture des Pipelines</div>
+    <h2 class="sec-h2">Deux Cloud Functions indépendantes, un data warehouse commun</h2>
+    <p class="sec-intro">
+      Chaque pipeline correspond à un périmètre métier distinct. Ils partagent le même dataset BigQuery
+      mais s'exécutent de façon entièrement autonome, déclenchés chaque mois par Cloud Scheduler.
+    </p>
+
+    <!-- Pipeline Catalogue -->
+    <div class="pipe-wrap">
+      <div class="pipe-header">
+        <div class="pipe-title">Pipeline Catalogue — Ingestion mensuelle du référentiel COSMOS</div>
+        <span class="card-tag tag-green" style="margin:0">Automatique · le 16 de chaque mois</span>
+      </div>
+      <p class="pipe-sub">
+        Détecte automatiquement les nouveaux fichiers catalogues déposés sur Google Drive,
+        ingère les <strong>3 onglets produits</strong>, calcule les variations ADDED/REMOVED
+        et écrit dans <strong>4 tables BigQuery</strong> avec garantie d'idempotence.
+      </p>
+      <div class="pipe-flow">
+        <div class="pipe-step">
+          <div class="pipe-num num-green">1</div>
+          <div class="pipe-name">SCAN DRIVE</div>
+          <div class="pipe-desc">Détection des fichiers non encore ingérés</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num num-green">2</div>
+          <div class="pipe-name">IDEMPOTENCE</div>
+          <div class="pipe-desc">Vérification en base — aucun doublon possible</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num num-green">3</div>
+          <div class="pipe-name">LECTURE</div>
+          <div class="pipe-desc">3 onglets en mémoire — pas de stockage intermédiaire</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num num-green">4</div>
+          <div class="pipe-name">DELTAS</div>
+          <div class="pipe-desc">Calcul ADDED/REMOVED vs mois précédent</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num num-green">5</div>
+          <div class="pipe-name">BQ WRITE</div>
+          <div class="pipe-desc">Écriture dans 4 tables BigQuery</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pipeline RM -->
+    <div class="pipe-wrap">
+      <div class="pipe-header">
+        <div class="pipe-title">Pipeline RM — Détection des ADDED/REMOVED par organisme certificateur</div>
+        <span class="card-tag tag-dark" style="margin:0">Automatique · Mensuel</span>
+      </div>
+      <p class="pipe-sub">
+        Compare les matières premières du mois courant avec le <strong>mois précédent depuis BigQuery</strong>,
+        vérifie les ajouts contre le référentiel historique validé, puis envoie un
+        <strong>email récapitulatif automatique</strong> aux équipes.
+      </p>
+      <div class="pipe-flow">
+        <div class="pipe-step">
+          <div class="pipe-num num-dark">1</div>
+          <div class="pipe-name">IDEMPOTENCE</div>
+          <div class="pipe-desc">Vérification par organisme et par mois</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num num-dark">2</div>
+          <div class="pipe-name">SCAN DRIVE</div>
+          <div class="pipe-desc">Détection d'un fichier par organisme certificateur</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num num-dark">3</div>
+          <div class="pipe-name">DELTAS BQ</div>
+          <div class="pipe-desc">ADDED/REMOVED — comparaison depuis BigQuery</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num num-dark">4</div>
+          <div class="pipe-name">VALIDATION</div>
+          <div class="pipe-desc">Vérification des ajouts vs référentiel historique</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num num-dark">5</div>
+          <div class="pipe-name">EMAIL</div>
+          <div class="pipe-desc">Envoi d'email récapitulatif automatique aux équipes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── 05 STACK TECHNIQUE ─── -->
+<section class="section alt">
+  <div class="inner">
+    <div class="sec-label">05 — Stack Technique</div>
+    <h2 class="sec-h2">Google Cloud Platform · Architecture serverless · Free Tier</h2>
+    <p class="sec-intro">
+      Chaque composant a été choisi pour répondre à une contrainte forte : zéro facturation,
+      robustesse maximale et maintenance simplifiée.
+    </p>
+    <div class="stack-grid">
+
+      <div class="stack-card">
+        <div class="stack-layer">Compute · GCP</div>
+        <div class="stack-name">Cloud Functions Gen 2</div>
+        <div class="stack-role">Deux fonctions serverless Python indépendantes — une par périmètre métier. Isolation totale, déploiement séparé, zéro infrastructure à gérer.</div>
+        <span class="stack-badge sb-gcp">Serverless · GCP</span>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-layer">Orchestration · GCP</div>
+        <div class="stack-name">Cloud Scheduler</div>
+        <div class="stack-role">Déclenchement automatique mensuel des deux pipelines. Zéro intervention humaine dans le cycle de traitement — entièrement configurable.</div>
+        <span class="stack-badge sb-gcp">Cron · GCP</span>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-layer">Data Warehouse · GCP</div>
+        <div class="stack-name">BigQuery</div>
+        <div class="stack-role">Source de vérité centrale — 7 tables dans le dataset cosmos_catalog. Architecture BQ-first : le pipeline RM lit directement depuis BigQuery pour ses comparaisons.</div>
+        <span class="stack-badge sb-gcp">Data Warehouse · GCP</span>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-layer">Source de données</div>
+        <div class="stack-name">Google Drive API v3</div>
+        <div class="stack-role">Lecture des fichiers Excel mensuels déposés par les organismes certificateurs. Authentification sécurisée via Service Account GCP — aucun credential en dur.</div>
+        <span class="stack-badge sb-gray">Drive API v3</span>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-layer">Data Processing</div>
+        <div class="stack-name">Python · Pandas</div>
+        <div class="stack-role">Nettoyage, normalisation et calcul des deltas ADDED/REMOVED. Gestion robuste des cas limites : données manquantes, types mixtes, fichiers multi-onglets.</div>
+        <span class="stack-badge sb-gray">ETL · Python 3.11</span>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-layer">Data Viz</div>
+        <div class="stack-name">Looker Studio</div>
+        <div class="stack-role">Dashboard connecté directement à BigQuery, rafraîchissement automatique. Visualisation des produits certifiés et des événements catalogue par organisme et par mois.</div>
+        <span class="stack-badge sb-green">BI · Gratuit</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="footer-brand">COSMOS <em>STANDARD</em> · PIPELINE DATA</div>
+  <div class="footer-copy">Stage Data Engineer · Wild Code School · Pierre Guerlais · 2026</div>
+  <div class="footer-tags">
+    <span class="footer-tag">Cloud Functions</span>
+    <span class="footer-tag">BigQuery</span>
+    <span class="footer-tag">Cloud Scheduler</span>
+    <span class="footer-tag">Secret Manager</span>
+    <span class="footer-tag">Drive API</span>
+    <span class="footer-tag">Python 3.11</span>
+    <span class="footer-tag">Looker Studio</span>
+    <span class="footer-tag">SMTP</span>
+  </div>
+</footer>
+
+</body>
+</html>
