@@ -244,10 +244,10 @@ ul.bullets li {
       </div>
       <div class="entry-sub"><b>COSMOS Standard AISBL</b> — Distanciel</div>
       <ul class="bullets">
-        <li>Conception et déploiement de <b>4 Cloud Functions serverless GCP</b> (catalog_ingest, rm_ingest, company_ingest, monthly_trigger) — 12 organismes certificateurs couverts, automatisation complète d'un flux data mensuel critique, 0 € d'infrastructure</li>
-        <li><b>8 tables BigQuery</b> modélisées (produits, ingrédients, événements ADDED/REMOVED, matières premières, entreprises) + 3 vues analytiques — architecture BQ-first, schémas explicites, idempotence garantie sur l'ensemble des pipelines</li>
-        <li>Intégration <b>Basecamp OAuth 2.0</b> pour la publication automatique des rapports RM mensuels (12 CB), renouvellement de token automatique ; alertes email SMTP avec CSV en pièce jointe via Secret Manager</li>
-        <li>Matrices d'évolution historique par entreprise avec indicateurs de tendance (↑↓→), exports GCS structurés, dashboard Looker Studio connecté à BigQuery en rafraîchissement automatique</li>
+        <li>Conception et mise en production de <b>4 pipelines de données automatisés</b> sur Google Cloud Platform (Python 3.11, Cloud Functions Gen 2, Cloud Scheduler, BigQuery, Google Drive API v3) — ingestion mensuelle de fichiers Excel, détection automatique des ajouts et suppressions de produits, zéro intervention manuelle</li>
+        <li>Modélisation d'un <b>data warehouse BigQuery</b> : 8 tables (produits certifiés, ingrédients, événements catalogue, matières premières, entreprises) + 3 vues SQL analytiques — données consolidées pour 56 000+ produits cosmétiques certifiés à l'international, cohérence garantie entre chaque exécution</li>
+        <li>Intégration d'<b>API externes</b> (Basecamp REST API OAuth 2.0, SMTP Gmail) — publication automatique de rapports mensuels pour <b>12 organismes certificateurs</b>, alertes email avec fichiers CSV en pièce jointe, credentials sécurisés via GCP Secret Manager</li>
+        <li>Exports automatisés vers <b>Google Cloud Storage</b>, matrices d'évolution historique par entreprise avec indicateurs de tendance, dashboard <b>Looker Studio</b> connecté à BigQuery — infrastructure 100 % GCP Free Tier (0 €/mois)</li>
       </ul>
     </div>
 
