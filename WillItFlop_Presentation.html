@@ -307,7 +307,7 @@ body::after {
   display: flex; align-items: flex-start; gap: 8px;
   font-size: 0.82rem; color: var(--gray); line-height: 1.4;
 }
-.task-item::before { content: '▸'; color: var(--pink); flex-shrink: 0; margin-top: 1px; }
+.task-item::before { content: '·'; color: var(--pink); flex-shrink: 0; margin-top: 1px; }
 .task-item.highlight { color: var(--ink2); font-weight: 600; }
 .task-item.highlight::before { color: var(--cyan); }
 
@@ -355,7 +355,7 @@ body::after {
   <div class="nav-brand">WILL<span class="hl">IT</span>FLOP</div>
   <div class="nav-right">
     <div class="nav-tag">FICHE PROJET — 2026</div>
-    <a href="https://willit-flop.vercel.app/" target="_blank" class="btn-explore">🎮 Voir le site en direct</a>
+    <a href="https://willit-flop.vercel.app/" target="_blank" class="btn-explore">Voir le site en direct ↗</a>
     <button class="btn-print" onclick="window.print()">⎙ IMPRIMER</button>
   </div>
 </nav>
@@ -380,7 +380,7 @@ body::after {
   <h2 class="section-h2">Qu'est-ce que WillItFlop ?</h2>
   <div class="concept-grid">
     <div class="concept-card full">
-      <div class="card-icon icon-pink">🎮</div>
+      <div class="card-icon icon-pink">01</div>
       <div class="card-title">La problématique</div>
       <div class="card-text">
         Dans l'industrie du jeu vidéo, <strong>estimer la viabilité commerciale d'un titre avant sa sortie est un défi majeur</strong>. Des studios indépendants aux grands éditeurs, de nombreux jeux échouent malgré des budgets conséquents — faute d'une analyse de marché rigoureuse et de données exploitables en amont.<br><br>
@@ -388,14 +388,14 @@ body::after {
       </div>
     </div>
     <div class="concept-card">
-      <div class="card-icon icon-cyan">💡</div>
+      <div class="card-icon icon-cyan">02</div>
       <div class="card-title">La solution</div>
       <div class="card-text">
         Une plateforme web où l'utilisateur <strong>décrit un jeu vidéo fictif</strong> (genre, catégories, tags, prix…). Le système s'appuie sur <strong>13 608 jeux Steam réels</strong> et un modèle XGBoost pour produire un <strong>score de viabilité commerciale</strong>, une probabilité de succès et un score Metacritic fictif.
       </div>
     </div>
     <div class="concept-card">
-      <div class="card-icon icon-green">🎯</div>
+      <div class="card-icon icon-green">03</div>
       <div class="card-title">La valeur ajoutée</div>
       <div class="card-text">
         Le projet combine <strong>collecte automatisée via 3 APIs</strong> (Steam, SteamSpy, Twitch), un <strong>pipeline end-to-end orchestré</strong> (Prefect + GitHub Actions + dbt) et de l'<strong>IA générative promptée</strong> (Groq + Pollinations) pour une expérience à la fois analytique et immersive.
@@ -527,22 +527,22 @@ body::after {
   <h2 class="section-h2">Modèle XGBoost · Feature Engineering avancé</h2>
   <div class="ml-grid">
     <div class="ia-card">
-      <div class="ia-emoji">🤖</div>
+      <div class="ia-emoji">01</div>
       <div class="ia-title">Modèle XGBoost</div>
       <div class="ia-desc">Classifieur binaire (<strong>succès / flop</strong>) entraîné sur 13 608 jeux Steam · 400 estimators · profondeur max 6 · learning rate 0,05 · validation croisée 5-fold stratifiée · <code>scale_pos_weight</code> calculé dynamiquement sur le déséquilibre réel des classes.</div>
     </div>
     <div class="ia-card">
-      <div class="ia-emoji">📈</div>
+      <div class="ia-emoji">02</div>
       <div class="ia-title">Performances (CV)</div>
       <div class="ia-desc"><strong>ROC-AUC CV : 0,83</strong> · F1 CV : 0,53 · Précision : 0,45 · Rappel : 0,64 · Seuil de décision <strong>F1-optimisé à 0,57</strong> pour gérer le déséquilibre des classes (17 % de succès dans le dataset).</div>
     </div>
     <div class="ia-card">
-      <div class="ia-emoji">🎯</div>
+      <div class="ia-emoji">03</div>
       <div class="ia-title">Feature Engineering</div>
       <div class="ia-desc">Prix <strong>log-transformé</strong> · tags répétés ×3, genres ×2, catégories ×2 dans la matrice pour pondérer leur influence via <code>colsample_bytree</code> · <strong>TF-IDF</strong> sur la description (200 features max, bigrams, sublinear_tf) · présence Twitch · Early Access · nombre de langues.</div>
     </div>
     <div class="ia-card">
-      <div class="ia-emoji">⚖️</div>
+      <div class="ia-emoji">04</div>
       <div class="ia-title">Pondération par âge</div>
       <div class="ia-desc">Les jeux sortis depuis <strong>moins d'un an ont un poids réduit</strong> (0,05 → 1,0 selon l'âge) car leur label de succès est incertain. Cette décision améliore la robustesse du modèle sur les prédictions de jeux fictifs comparés à des titres récents.</div>
     </div>
@@ -700,16 +700,18 @@ body::after {
       <div class="result-big" style="font-size:3rem;line-height:1.2">0.83</div>
       <div class="result-label">ROC-AUC · Validation croisée</div>
       <div class="result-verdict">✓ TOP!</div>
-      <a href="https://willit-flop.vercel.app/" target="_blank" class="result-demo">🎮 Tester le site ↗</a>
+      <a href="https://willit-flop.vercel.app/" target="_blank" class="result-demo">Tester le site ↗</a>
     </div>
     <div class="result-text">
       Le livrable est une <strong>plateforme full-stack déployée</strong> (Vercel + Render + Supabase) avec un pipeline de données entièrement automatisé :<br><br>
-      • Un <strong>verdict « Top! » / « Flop! »</strong> produit par le modèle XGBoost<br>
-      • Une <strong>probabilité de succès</strong> (0–100 %) basée sur 13 608 jeux Steam réels<br>
-      • Un <strong>score Metacritic fictif</strong> (40–95) projeté linéairement depuis la probabilité<br>
-      • Une <strong>critique générée par IA</strong> (Groq / Llama-3.3-70b) avec ton calibré<br>
-      • Une <strong>jaquette de jeu générée</strong> (Pollinations / Flux) depuis le formulaire<br>
-      • Un <strong>dashboard analytique</strong> sur le marché indie (genres, prix, tags, timeline)<br><br>
+      <ul style="margin:0.5rem 0 1rem 1.1rem;padding:0;line-height:1.7;">
+        <li>Un <strong>verdict « Top! » / « Flop! »</strong> produit par le modèle XGBoost</li>
+        <li>Une <strong>probabilité de succès</strong> (0–100 %) basée sur 13 608 jeux Steam réels</li>
+        <li>Un <strong>score Metacritic fictif</strong> (40–95) projeté linéairement depuis la probabilité</li>
+        <li>Une <strong>critique générée par IA</strong> (Groq / Llama-3.3-70b) avec ton calibré</li>
+        <li>Une <strong>jaquette de jeu générée</strong> (Pollinations / Flux) depuis le formulaire</li>
+        <li>Un <strong>dashboard analytique</strong> sur le marché indie (genres, prix, tags, timeline)</li>
+      </ul>
       Architecture : <strong>Prefect + GitHub Actions</strong> pour l'orchestration · <strong>dbt + Supabase</strong> pour la donnée · <strong>XGBoost + FastAPI</strong> pour le ML · <strong>React + Vite</strong> en frontend.
     </div>
   </div>
