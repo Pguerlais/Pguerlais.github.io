@@ -242,12 +242,12 @@ ul.bullets li {
         <div class="entry-title">Stage Data Engineer</div>
         <div class="entry-date">Avr. 2026 · 1 mois</div>
       </div>
-      <div class="entry-sub"><b>COSMOS Standard AISBL</b> — Paris (remote)</div>
+      <div class="entry-sub"><b>COSMOS Standard AISBL</b> — Distanciel</div>
       <ul class="bullets">
-        <li>Conception et déploiement de 2 pipelines serverless sur Google Cloud Platform (Cloud Functions Gen 2, Cloud Scheduler, BigQuery, Google Drive API v3, Secret Manager) — automatisation complète d'un flux data mensuel critique</li>
-        <li>Ingestion automatique des fichiers Excel depuis Google Drive, calcul des variations ADDED/REMOVED, alimentation de 7 tables BigQuery, envoi d'alertes email SMTP aux parties prenantes — 0 € de coût infrastructure, idempotence garantie</li>
-        <li>Architecture BQ-first, lecture des fichiers en mémoire (sans stockage intermédiaire), sécurisation des credentials via Secret Manager</li>
-        <li>Dashboard Looker Studio connecté à BigQuery avec rafraichissement automatique</li>
+        <li>Conception et déploiement de <b>4 Cloud Functions serverless GCP</b> (catalog_ingest, rm_ingest, company_ingest, monthly_trigger) — 12 organismes certificateurs couverts, automatisation complète d'un flux data mensuel critique, 0 € d'infrastructure</li>
+        <li><b>8 tables BigQuery</b> modélisées (produits, ingrédients, événements ADDED/REMOVED, matières premières, entreprises) + 3 vues analytiques — architecture BQ-first, schémas explicites, idempotence garantie sur l'ensemble des pipelines</li>
+        <li>Intégration <b>Basecamp OAuth 2.0</b> pour la publication automatique des rapports RM mensuels (12 CB), renouvellement de token automatique ; alertes email SMTP avec CSV en pièce jointe via Secret Manager</li>
+        <li>Matrices d'évolution historique par entreprise avec indicateurs de tendance (↑↓→), exports GCS structurés, dashboard Looker Studio connecté à BigQuery en rafraîchissement automatique</li>
       </ul>
     </div>
 
