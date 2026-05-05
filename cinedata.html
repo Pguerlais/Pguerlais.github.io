@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CinéData — Pierre Guerlais</title>
+  <title>CinéData / Pierre Guerlais</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -435,7 +435,7 @@
 
   <!-- NAV -->
   <nav>
-    <a href="index.html" class="nav-logo">PG — Data Analyst</a>
+    <a href="index.html" class="nav-logo">PG, Data Analyst</a>
     <a href="index.html#projects" class="nav-back">← Retour aux projets</a>
   </nav>
 
@@ -445,10 +445,10 @@
     <div class="hero-glow-2"></div>
 
     <div class="hero-left">
-      <div class="project-num">Projet 02 — Python · ML · Streamlit</div>
+      <div class="project-num">Projet 02 / Python / ML / Streamlit</div>
       <h1 class="project-title-big">Ciné<span>Data</span></h1>
       <p class="project-tagline">
-        Un <strong>système de recommandation de films</strong> construit de bout en bout —
+        Un <strong>système de recommandation de films</strong> construit de bout en bout :
         du pipeline de données brutes IMDb & TMDB jusqu'à une application Streamlit
         déployée en production, pilotée par un moteur <strong>Nearest Neighbors</strong>.
       </p>
@@ -464,7 +464,7 @@
         <div class="meta-cell accent">
           <div class="meta-label">// Contexte</div>
           <div class="meta-value">Projet de formation</div>
-          <div class="meta-value muted">Wild Code School · 2025</div>
+          <div class="meta-value muted">Wild Code School, 2025</div>
         </div>
         <div class="meta-cell">
           <div class="meta-label">// Équipe</div>
@@ -490,7 +490,7 @@
             <span class="chip">IMDb Datasets</span>
             <span class="chip">TMDB API</span>
           </div>
-          <div class="meta-value muted" style="margin-top:0.5rem; font-size:0.78rem;">Fusion multi-sources · ~500k films</div>
+          <div class="meta-value muted" style="margin-top:0.5rem; font-size:0.78rem;">Fusion multi-sources, ~500k films</div>
         </div>
       </div>
 
@@ -498,11 +498,11 @@
         <div class="meta-cell">
           <div class="meta-label">// Algorithme ML</div>
           <div class="meta-value">Nearest Neighbors</div>
-          <div class="meta-value muted">Similarité cosinus · Données hybrides</div>
+          <div class="meta-value muted">Similarité cosinus, données hybrides</div>
         </div>
         <div class="meta-cell">
           <div class="meta-label">// Complexité pipeline</div>
-          <div class="meta-value">10 étapes · End-to-end</div>
+          <div class="meta-value">10 étapes, end-to-end</div>
           <div class="complexity-bar">
             <div class="cbar-seg filled"></div>
             <div class="cbar-seg filled"></div>
@@ -562,7 +562,7 @@
         <div class="step-desc">Nettoyage TMDB + fusion finale des deux sources</div>
       </div>
       <div class="pipeline-step reveal">
-        <div class="step-bubble">·</div>
+        <div class="step-bubble">✓</div>
         <div class="step-num">output</div>
         <div class="step-label">Dataset ML-ready</div>
         <div class="step-desc">Dataset final normalisé, prêt pour le moteur de reco</div>
@@ -582,14 +582,14 @@
       <div class="ml-text reveal">
         <h3>Approche hybride<br/>& similarité cosinus</h3>
         <p>
-          Le système combine des <strong>features hétérogènes</strong> — texte, catégories et
-          variables numériques — pour produire un vecteur de représentation dense par film.
+          Le système combine des <strong>features hétérogènes</strong> (texte, catégories et
+          variables numériques) pour produire un vecteur de représentation dense par film.
           L'algorithme <span class="accent">NearestNeighbors</span> de scikit-learn calcule
           ensuite la distance cosinus entre ce vecteur et l'ensemble du catalogue.
         </p>
         <p>
           Ce choix permet de gérer efficacement les <strong>matrices creuses (sparse)</strong>
-          issues du TF-IDF, tout en assurant des performances rapides en production — 
+          issues du TF-IDF, tout en assurant des performances rapides en production,
           même sur un catalogue de plusieurs centaines de milliers de films.
         </p>
         <p>
@@ -742,7 +742,7 @@ model.fit(X)
 ├── <span class="tree-dir">src/</span>
 │   ├── <span class="tree-file">config.py</span>
 │   ├── <span class="tree-highlight">pipeline.py</span>           <span class="tree-comment"># Orchestration pipeline</span>
-│   ├── <span class="tree-file">utils.py · ui.py</span>
+│   ├── <span class="tree-file">utils.py, ui.py</span>
 │   ├── <span class="tree-dir">reco/</span>
 │   │   └── <span class="tree-highlight">engine.py</span>         <span class="tree-comment"># Moteur NearestNeighbors</span>
 │   └── <span class="tree-dir">s01 → s10/</span>             <span class="tree-comment"># 10 étapes pipeline data</span>

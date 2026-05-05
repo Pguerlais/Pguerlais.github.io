@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WillItFlop — Présentation Projet</title>
+<title>WillItFlop / Présentation Projet</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Mono:wght@400;700&family=Exo+2:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
 @media print {
@@ -354,7 +354,7 @@ body::after {
 <nav class="nav no-print">
   <div class="nav-brand">WILL<span class="hl">IT</span>FLOP</div>
   <div class="nav-right">
-    <div class="nav-tag">FICHE PROJET — 2026</div>
+    <div class="nav-tag">FICHE PROJET / 2026</div>
     <a href="https://willit-flop.vercel.app/" target="_blank" class="btn-explore">Voir le site en direct ↗</a>
     <button class="btn-print" onclick="window.print()">⎙ IMPRIMER</button>
   </div>
@@ -362,12 +362,12 @@ body::after {
 
 <section class="hero">
   <div class="hero-grid"></div>
-  <div class="hero-eyebrow">// FICHE DE PRÉSENTATION PROJET — BOOTCAMP DATA ANALYST //</div>
+  <div class="hero-eyebrow">// FICHE DE PRÉSENTATION PROJET / BOOTCAMP DATA ANALYST //</div>
   <h1 class="hero-title">WILL<span class="hl">IT</span>FLOP</h1>
   <p class="hero-sub">Game Viability <span>Intelligence</span> Platform</p>
   <div class="hero-badges">
-    <span class="badge badge-pink"><span class="dot"></span>Projet livré · Pipeline automatisé</span>
-    <span class="badge badge-cyan">Data Analyst · Bootcamp 2026</span>
+    <span class="badge badge-pink"><span class="dot"></span>Projet livré, pipeline automatisé</span>
+    <span class="badge badge-cyan">Data Analyst, Bootcamp 2026</span>
     <span class="badge badge-ink">Anthony &amp; Pierre</span>
   </div>
 </section>
@@ -376,14 +376,14 @@ body::after {
 
 <!-- 01 CONCEPT -->
 <section class="container">
-  <div class="section-label">01 — Concept</div>
+  <div class="section-label">01 / Concept</div>
   <h2 class="section-h2">Qu'est-ce que WillItFlop ?</h2>
   <div class="concept-grid">
     <div class="concept-card full">
       <div class="card-icon icon-pink">01</div>
       <div class="card-title">La problématique</div>
       <div class="card-text">
-        Dans l'industrie du jeu vidéo, <strong>estimer la viabilité commerciale d'un titre avant sa sortie est un défi majeur</strong>. Des studios indépendants aux grands éditeurs, de nombreux jeux échouent malgré des budgets conséquents — faute d'une analyse de marché rigoureuse et de données exploitables en amont.<br><br>
+        Dans l'industrie du jeu vidéo, <strong>estimer la viabilité commerciale d'un titre avant sa sortie est un défi majeur</strong>. Des studios indépendants aux grands éditeurs, de nombreux jeux échouent malgré des budgets conséquents, faute d'une analyse de marché rigoureuse et de données exploitables en amont.<br><br>
         <strong>WillItFlop</strong> répond à cette question : <em>« Si ce jeu vidéo existait, aurait-il des chances de réussir commercialement ? »</em>
       </div>
     </div>
@@ -408,13 +408,13 @@ body::after {
 
 <!-- 02 PIPELINE & AUTOMATISATION -->
 <section class="container">
-  <div class="section-label">02 — Pipeline &amp; Automatisation</div>
+  <div class="section-label">02 / Pipeline &amp; Automatisation</div>
   <h2 class="section-h2">Une collecte de données entièrement automatisée</h2>
 
   <div class="auto-block">
     <div class="auto-block-title">
       Boucle de collecte hebdomadaire
-      <span class="auto-block-label tag-cyan">Prefect Cloud · GitHub Actions</span>
+      <span class="auto-block-label tag-cyan">Prefect Cloud / GitHub Actions</span>
     </div>
     <div class="auto-block-desc">
       Un <strong>workflow GitHub Actions déclenché chaque lundi à 3h UTC</strong> via un webhook Prefect Cloud lance le pipeline ETL complet. Les nouvelles données sont récupérées, les données récentes (jeux &lt; 1 an) rafraîchies, puis <strong>dbt transforme les données brutes</strong> en vue <code>ml_features</code> prête pour le modèle.
@@ -428,7 +428,7 @@ body::after {
       <div class="pipe-step">
         <div class="pipe-num cyan">2</div>
         <div class="pipe-name">COLLECTE</div>
-        <div class="pipe-desc">3 APIs : Steam Web API · SteamSpy · Twitch Helix</div>
+        <div class="pipe-desc">3 APIs : Steam Web API, SteamSpy, Twitch Helix</div>
       </div>
       <div class="pipe-step">
         <div class="pipe-num cyan">3</div>
@@ -446,7 +446,7 @@ body::after {
   <div class="auto-block">
     <div class="auto-block-title">
       Réentraînement automatique du modèle
-      <span class="auto-block-label tag-pink">GitHub Actions · CI/CD</span>
+      <span class="auto-block-label tag-pink">GitHub Actions / CI/CD</span>
     </div>
     <div class="auto-block-desc">
       Un second workflow surveille les fichiers <code>ml/config.py</code> et <code>dbt/models/ml/**</code>. Toute modification déclenche <strong>automatiquement le réentraînement XGBoost</strong>, puis les artefacts (<code>model.pkl</code>, <code>preprocessor.pkl</code>) sont <strong>commités automatiquement dans le dépôt</strong>, garantissant que l'API FastAPI utilise toujours le modèle le plus récent.
@@ -480,8 +480,8 @@ body::after {
 
 <!-- 03 APIS DE COLLECTE -->
 <section class="container">
-  <div class="section-label">03 — APIs de Collecte</div>
-  <h2 class="section-h2">3 sources de données · 13 608 jeux référencés</h2>
+  <div class="section-label">03 / APIs de Collecte</div>
+  <h2 class="section-h2">3 sources de données, 13 608 jeux référencés</h2>
   <div class="api-grid">
     <div class="api-card">
       <div class="api-name">Steam Web API</div>
@@ -523,23 +523,23 @@ body::after {
 
 <!-- 04 MACHINE LEARNING -->
 <section class="container">
-  <div class="section-label">04 — Machine Learning</div>
-  <h2 class="section-h2">Modèle XGBoost · Feature Engineering avancé</h2>
+  <div class="section-label">04 / Machine Learning</div>
+  <h2 class="section-h2">Modèle XGBoost et feature engineering avancé</h2>
   <div class="ml-grid">
     <div class="ia-card">
       <div class="ia-emoji">01</div>
       <div class="ia-title">Modèle XGBoost</div>
-      <div class="ia-desc">Classifieur binaire (<strong>succès / flop</strong>) entraîné sur 13 608 jeux Steam · 400 estimators · profondeur max 6 · learning rate 0,05 · validation croisée 5-fold stratifiée · <code>scale_pos_weight</code> calculé dynamiquement sur le déséquilibre réel des classes.</div>
+      <div class="ia-desc">Classifieur binaire (<strong>succès / flop</strong>) entraîné sur 13 608 jeux Steam, 400 estimators, profondeur max 6, learning rate 0,05, validation croisée 5-fold stratifiée, <code>scale_pos_weight</code> calculé dynamiquement sur le déséquilibre réel des classes.</div>
     </div>
     <div class="ia-card">
       <div class="ia-emoji">02</div>
       <div class="ia-title">Performances (CV)</div>
-      <div class="ia-desc"><strong>ROC-AUC CV : 0,83</strong> · F1 CV : 0,53 · Précision : 0,45 · Rappel : 0,64 · Seuil de décision <strong>F1-optimisé à 0,57</strong> pour gérer le déséquilibre des classes (17 % de succès dans le dataset).</div>
+      <div class="ia-desc"><strong>ROC-AUC CV : 0,83</strong>, F1 CV : 0,53, Précision : 0,45, Rappel : 0,64. Seuil de décision <strong>F1-optimisé à 0,57</strong> pour gérer le déséquilibre des classes (17 % de succès dans le dataset).</div>
     </div>
     <div class="ia-card">
       <div class="ia-emoji">03</div>
       <div class="ia-title">Feature Engineering</div>
-      <div class="ia-desc">Prix <strong>log-transformé</strong> · tags répétés ×3, genres ×2, catégories ×2 dans la matrice pour pondérer leur influence via <code>colsample_bytree</code> · <strong>TF-IDF</strong> sur la description (200 features max, bigrams, sublinear_tf) · présence Twitch · Early Access · nombre de langues.</div>
+      <div class="ia-desc">Prix <strong>log-transformé</strong>. Tags répétés ×3, genres ×2, catégories ×2 dans la matrice pour pondérer leur influence via <code>colsample_bytree</code>. <strong>TF-IDF</strong> sur la description (200 features max, bigrams, sublinear_tf). Présence Twitch, Early Access, nombre de langues.</div>
     </div>
     <div class="ia-card">
       <div class="ia-emoji">04</div>
@@ -553,18 +553,18 @@ body::after {
 
 <!-- 05 IA GÉNÉRATIVE -->
 <section class="container">
-  <div class="section-label">05 — IA Générative</div>
-  <h2 class="section-h2">Prompts engineerés · Résultats personnalisés</h2>
+  <div class="section-label">05 / IA Générative</div>
+  <h2 class="section-h2">Prompts engineerés pour des résultats personnalisés</h2>
   <div class="ia-grid">
     <div class="ia-card">
       <div class="ia-emoji">✍️</div>
-      <div class="ia-title">Groq · Llama-3.3-70b</div>
+      <div class="ia-title">Groq / Llama-3.3-70b</div>
       <div class="ia-desc">Génération d'une <strong>critique fictive de jeu en français</strong> (60 mots) avec nom de magazine inventé. Le prompt encode le verdict (Top/Flop), le score Metacritic fictif et les caractéristiques du jeu. Le <strong>ton est calibré dynamiquement</strong> selon le score (de "sévère" à "très enthousiaste") avec des guardrails : aucun vrai jeu ou magazine réel cité.</div>
     </div>
     <div class="ia-card">
       <div class="ia-emoji">🎨</div>
-      <div class="ia-title">Pollinations · Flux</div>
-      <div class="ia-desc">Génération d'une <strong>jaquette de jeu réaliste</strong> au format portrait, style packaging professionnel. Le <strong>prompt builder encode 80+ templates</strong> selon le genre, l'atmosphère, les mécaniques, le style visuel, la perspective et les modes de jeu — pour un résultat cohérent et professionnel à chaque génération.</div>
+      <div class="ia-title">Pollinations / Flux</div>
+      <div class="ia-desc">Génération d'une <strong>jaquette de jeu réaliste</strong> au format portrait, style packaging professionnel. Le <strong>prompt builder encode 80+ templates</strong> selon le genre, l'atmosphère, les mécaniques, le style visuel, la perspective et les modes de jeu, pour un résultat cohérent et professionnel à chaque génération.</div>
     </div>
     <div class="ia-card">
       <div class="ia-emoji">🌐</div>
@@ -578,7 +578,7 @@ body::after {
 
 <!-- 06 STACK TECHNIQUE -->
 <section class="container">
-  <div class="section-label">06 — Stack technique</div>
+  <div class="section-label">06 / Stack technique</div>
   <h2 class="section-h2">Outils &amp; Technologies</h2>
   <div class="stack-grid">
 
@@ -613,8 +613,8 @@ body::after {
     <div class="stack-card">
       <div class="stack-layer">Machine Learning</div>
       <div class="stack-name">XGBoost</div>
-      <div class="stack-role">Classifieur binaire · ROC-AUC CV 0,83 · seuil F1-optimisé 0,57 · préprocesseur séparé (ColumnTransformer + MultiLabelBinarizer + TF-IDF) sauvegardé indépendamment.</div>
-      <span class="stack-tag tag-pink">ML · Classification</span>
+      <div class="stack-role">Classifieur binaire, ROC-AUC CV 0,83, seuil F1-optimisé 0,57, préprocesseur séparé (ColumnTransformer + MultiLabelBinarizer + TF-IDF) sauvegardé indépendamment.</div>
+      <span class="stack-tag tag-pink">ML / Classification</span>
     </div>
 
     <div class="stack-card">
@@ -634,7 +634,7 @@ body::after {
     <div class="stack-card">
       <div class="stack-layer">IA Générative</div>
       <div class="stack-name">Groq + Pollinations</div>
-      <div class="stack-role">Groq (Llama-3.3-70b) pour les critiques fictives · Pollinations/Flux pour les jaquettes de jeux. Prompts engineerés avec 80+ templates de style visuel et contrôle de ton.</div>
+      <div class="stack-role">Groq (Llama-3.3-70b) pour les critiques fictives, Pollinations/Flux pour les jaquettes de jeux. Prompts engineerés avec 80+ templates de style visuel et contrôle de ton.</div>
       <span class="stack-tag tag-warn">Generative AI</span>
     </div>
 
@@ -645,7 +645,7 @@ body::after {
 
 <!-- 07 ÉQUIPE -->
 <section class="container">
-  <div class="section-label">07 — Équipe</div>
+  <div class="section-label">07 / Équipe</div>
   <h2 class="section-h2">Répartition des contributions</h2>
   <div class="team-grid">
     <div class="team-card">
@@ -661,9 +661,9 @@ body::after {
         <div class="task-item highlight">Développement des fetchers Python (Steam, SteamSpy, Twitch)</div>
         <div class="task-item highlight">Orchestration Prefect (flows, déploiement Prefect Cloud)</div>
         <div class="task-item highlight">Modélisation dbt (staging → ML → marts)</div>
-        <div class="task-item highlight">Modèle XGBoost — entraînement, feature engineering, threshold</div>
+        <div class="task-item highlight">Modèle XGBoost : entraînement, feature engineering, threshold</div>
         <div class="task-item">Développement frontend React (avec assistance IA)</div>
-        <div class="task-item highlight">Intégration APIs IA (Groq + Pollinations) — prompt engineering</div>
+        <div class="task-item highlight">Intégration APIs IA (Groq + Pollinations) : prompt engineering</div>
         <div class="task-item">Analyse exploratoire des données et corrélations marché</div>
       </div>
     </div>
@@ -680,9 +680,9 @@ body::after {
         <div class="task-item highlight">Développement des fetchers Python (Steam, SteamSpy, Twitch)</div>
         <div class="task-item highlight">Orchestration Prefect (flows, déploiement Prefect Cloud)</div>
         <div class="task-item highlight">Modélisation dbt (staging → ML → marts)</div>
-        <div class="task-item highlight">Modèle XGBoost — entraînement, feature engineering, threshold</div>
+        <div class="task-item highlight">Modèle XGBoost : entraînement, feature engineering, threshold</div>
         <div class="task-item">Développement frontend React (avec assistance IA)</div>
-        <div class="task-item highlight">Intégration APIs IA (Groq + Pollinations) — prompt engineering</div>
+        <div class="task-item highlight">Intégration APIs IA (Groq + Pollinations) : prompt engineering</div>
         <div class="task-item">Analyse exploratoire des données et corrélations marché</div>
       </div>
     </div>
@@ -693,12 +693,12 @@ body::after {
 
 <!-- 08 LIVRABLE -->
 <section class="container">
-  <div class="section-label">08 — Livrable</div>
-  <h2 class="section-h2">Résultat produit · Plateforme en ligne</h2>
+  <div class="section-label">08 / Livrable</div>
+  <h2 class="section-h2">Résultat produit : plateforme en ligne</h2>
   <div class="result-card">
     <div class="result-score">
       <div class="result-big" style="font-size:3rem;line-height:1.2">0.83</div>
-      <div class="result-label">ROC-AUC · Validation croisée</div>
+      <div class="result-label">ROC-AUC, validation croisée</div>
       <div class="result-verdict">✓ TOP!</div>
       <a href="https://willit-flop.vercel.app/" target="_blank" class="result-demo">Tester le site ↗</a>
     </div>
@@ -712,22 +712,22 @@ body::after {
         <li>Une <strong>jaquette de jeu générée</strong> (Pollinations / Flux) depuis le formulaire</li>
         <li>Un <strong>dashboard analytique</strong> sur le marché indie (genres, prix, tags, timeline)</li>
       </ul>
-      Architecture : <strong>Prefect + GitHub Actions</strong> pour l'orchestration · <strong>dbt + Supabase</strong> pour la donnée · <strong>XGBoost + FastAPI</strong> pour le ML · <strong>React + Vite</strong> en frontend.
+      Architecture : <strong>Prefect + GitHub Actions</strong> pour l'orchestration, <strong>dbt + Supabase</strong> pour la donnée, <strong>XGBoost + FastAPI</strong> pour le ML, <strong>React + Vite</strong> en frontend.
     </div>
   </div>
 </section>
 
 <footer class="footer">
   <div class="footer-brand">WILL<span class="hl">IT</span>FLOP</div>
-  <div class="footer-copy">FICHE PROJET — Bootcamp Data Analyst 2026</div>
+  <div class="footer-copy">FICHE PROJET / Bootcamp Data Analyst 2026</div>
   <div class="footer-tags">
     <span class="stack-tag tag-pink">XGBoost</span>
     <span class="stack-tag tag-pink">Prefect</span>
     <span class="stack-tag tag-cyan">dbt</span>
     <span class="stack-tag tag-cyan">Supabase</span>
     <span class="stack-tag tag-green">FastAPI</span>
-    <span class="stack-tag tag-warn">Groq · Llama-3.3-70b</span>
-    <span class="stack-tag tag-warn">Pollinations · Flux</span>
+    <span class="stack-tag tag-warn">Groq / Llama-3.3-70b</span>
+    <span class="stack-tag tag-warn">Pollinations / Flux</span>
     <span class="stack-tag tag-gray">React + Vite</span>
   </div>
 </footer>
