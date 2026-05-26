@@ -214,22 +214,31 @@
     .journey-bar::before { content: ''; position: absolute; width: 160px; height: 160px; border-radius: 50%; background: rgba(181,145,74,0.06); filter: blur(50px); top: -40px; right: 20px; pointer-events: none; }
     .journey-inner { position: relative; z-index: 1; }
     .journey-grid-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 28px 28px; pointer-events: none; }
-    .journey-nodes-area { position: relative; height: 80px; margin-top: 8px; }
-    .journey-svg-layer { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    .journey-track { position: relative; height: 64px; margin-top: 14px; }
+    .journey-line { position: absolute; top: 11px; left: 10%; right: 10%; height: 1px; background: rgba(255,255,255,0.07); overflow: hidden; z-index: 0; }
+    .journey-line-fill { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(181,145,74,0.3), var(--gold)); transform: scaleX(0); transform-origin: left; animation: lineGrow 1.4s cubic-bezier(0.4,0,0.2,1) 0.25s forwards; }
+    @keyframes lineGrow { to { transform: scaleX(1); } }
 
-    .jn { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 6px; opacity: 0; animation: jnPop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; cursor: default; }
-    @keyframes jnPop { from { opacity: 0; transform: scale(0.6) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-    .jn:nth-child(1) { animation-delay: 0.1s; } .jn:nth-child(2) { animation-delay: 0.3s; } .jn:nth-child(3) { animation-delay: 0.5s; } .jn:nth-child(4) { animation-delay: 0.7s; } .jn:nth-child(5) { animation-delay: 0.9s; }
-    .jn-1 { left: 2%; top: 2px; } .jn-2 { left: 23%; top: 2px; } .jn-3 { left: 44%; top: 2px; } .jn-4 { left: 65%; top: 2px; } .jn-5 { left: 86%; top: 2px; }
-    .jn-pin { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 11px; transition: all 0.25s ease; position: relative; }
-    .jn:hover .jn-pin { border-color: var(--gold); background: var(--gold-dim); box-shadow: 0 0 14px rgba(181,145,74,0.35); transform: scale(1.15) translateY(-2px); }
-    .jn-5 .jn-pin { background: var(--gold-dim); border-color: rgba(181,145,74,0.5); box-shadow: 0 0 18px rgba(181,145,74,0.4); animation: jnGlow 2.5s ease infinite; }
-    @keyframes jnGlow { 0%,100% { box-shadow: 0 0 18px rgba(181,145,74,0.4); } 50% { box-shadow: 0 0 28px rgba(181,145,74,0.75); } }
-    .jn-5 .jn-pin::before { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 1px solid rgba(181,145,74,0.25); animation: jnRing 2.5s ease infinite; }
-    @keyframes jnRing { 0% { transform: scale(0.85); opacity: 0; } 50% { opacity: 1; } 100% { transform: scale(1.15); opacity: 0; } }
-    .jn-text { font-size: 0.6rem; font-weight: 600; text-align: center; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.3; max-width: 70px; }
-    .jn-5 .jn-text { color: var(--gold); }
-    .jn-sub { font-size: 0.55rem; color: rgba(255,255,255,0.25); font-style: italic; text-align: center; }
+    .journey-steps { position: relative; display: flex; justify-content: space-between; align-items: flex-start; }
+    .journey-step { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 9px; flex: 1; min-width: 0; opacity: 0; animation: stepIn 0.4s ease forwards; }
+    .journey-step:nth-child(1) { animation-delay: 0.15s; }
+    .journey-step:nth-child(2) { animation-delay: 0.4s; }
+    .journey-step:nth-child(3) { animation-delay: 0.65s; }
+    .journey-step:nth-child(4) { animation-delay: 0.9s; }
+    .journey-step:nth-child(5) { animation-delay: 1.15s; }
+    @keyframes stepIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .step-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--bg-card); border: 1.5px solid rgba(181,145,74,0.5); margin-top: 6px; transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s; }
+    .journey-step:hover .step-dot { border-color: var(--gold); box-shadow: 0 0 10px rgba(181,145,74,0.35); transform: scale(1.15); }
+    .journey-step.is-current .step-dot { width: 12px; height: 12px; margin-top: 5px; background: var(--gold); border-color: var(--gold); box-shadow: 0 0 0 4px rgba(181,145,74,0.16), 0 0 14px rgba(181,145,74,0.55); animation: stepPulse 2.5s ease infinite; }
+    @keyframes stepPulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(181,145,74,0.16), 0 0 14px rgba(181,145,74,0.55); }
+      50% { box-shadow: 0 0 0 6px rgba(181,145,74,0.04), 0 0 22px rgba(181,145,74,0.8); }
+    }
+    .step-label { font-family: var(--font-mono); font-size: 0.58rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.06em; text-align: center; line-height: 1.35; font-weight: 600; }
+    .journey-step.is-current .step-label { color: var(--gold); }
+    .journey-step:hover .step-label { color: rgba(255,255,255,0.85); }
+    .journey-step.is-current:hover .step-label { color: var(--gold-light); }
 
     .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-soft); }
     .stat-box { background: var(--bg-card); padding: 1.2rem 1rem; text-align: center; }
@@ -520,7 +529,11 @@
       border: 1px solid rgba(181,145,74,0.35);
       padding: 0.2rem 0.6rem;
       margin-bottom: 0.6rem;
-      animation: jnGlow 3s ease infinite;
+      animation: badgeGlow 3s ease infinite;
+    }
+    @keyframes badgeGlow {
+      0%, 100% { box-shadow: 0 0 18px rgba(181,145,74,0.4); }
+      50% { box-shadow: 0 0 28px rgba(181,145,74,0.75); }
     }
 
     /* ─── CONTACT ─── */
@@ -640,24 +653,15 @@
           <div class="journey-grid-bg"></div>
           <div class="journey-inner">
             <div class="card-label">// Trajectoire</div>
-            <div class="journey-nodes-area">
-              <svg class="journey-svg-layer" viewBox="0 0 400 80" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <marker id="jArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(181,145,74,0.4)"/></marker>
-                  <marker id="jArrowGold" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b5914a"/></marker>
-                </defs>
-                <style>@keyframes jDraw { to { stroke-dashoffset: 0; } }</style>
-                <path d="M 10,8 L 398,8" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="3 6" fill="none"/>
-                <path d="M 26,15 L 88,15" stroke="rgba(181,145,74,0.35)" stroke-width="1.5" fill="none" marker-end="url(#jArrow)" stroke-dasharray="70" style="stroke-dashoffset:70;animation:jDraw 0.4s ease 0.2s forwards"/>
-                <path d="M 104,15 L 168,15" stroke="rgba(181,145,74,0.35)" stroke-width="1.5" fill="none" marker-end="url(#jArrow)" stroke-dasharray="70" style="stroke-dashoffset:70;animation:jDraw 0.4s ease 0.4s forwards"/>
-                <path d="M 184,15 L 248,15" stroke="rgba(181,145,74,0.35)" stroke-width="1.5" fill="none" marker-end="url(#jArrow)" stroke-dasharray="70" style="stroke-dashoffset:70;animation:jDraw 0.4s ease 0.6s forwards"/>
-                <path d="M 264,15 L 334,15" stroke="#b5914a" stroke-width="2" fill="none" marker-end="url(#jArrowGold)" stroke-dasharray="78" style="stroke-dashoffset:78;animation:jDraw 0.4s ease 0.8s forwards"/>
-              </svg>
-              <div class="jn jn-1"><div class="jn-pin">🎓</div><div class="jn-text">Formateur</div></div>
-              <div class="jn jn-2"><div class="jn-pin">🔍</div><div class="jn-text">RQF</div><div class="jn-sub">junior</div></div>
-              <div class="jn jn-3"><div class="jn-pin">⚙️</div><div class="jn-text">Resp. Production</div></div>
-              <div class="jn jn-4"><div class="jn-pin">✅</div><div class="jn-text">RQF</div><div class="jn-sub">confirmé</div></div>
-              <div class="jn jn-5"><div class="jn-pin">📊</div><div class="jn-text">Data Analyst</div></div>
+            <div class="journey-track">
+              <div class="journey-line"><div class="journey-line-fill"></div></div>
+              <div class="journey-steps">
+                <div class="journey-step"><div class="step-dot"></div><div class="step-label">Formateur</div></div>
+                <div class="journey-step"><div class="step-dot"></div><div class="step-label">RQF<br/>junior</div></div>
+                <div class="journey-step"><div class="step-dot"></div><div class="step-label">Resp.<br/>Production</div></div>
+                <div class="journey-step"><div class="step-dot"></div><div class="step-label">RQF<br/>confirmé</div></div>
+                <div class="journey-step is-current"><div class="step-dot"></div><div class="step-label">Data<br/>Analyst</div></div>
+              </div>
             </div>
           </div>
         </div>
