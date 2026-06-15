@@ -3,7 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pierre Guerlais - Data Analyst</title>
+  <title>Pierre Guerlais — Data Analyst & Data Engineer</title>
+  <meta name="description" content="Pierre Guerlais — Data Analyst & Data Engineer. 10 ans de pilotage opérationnel par les chiffres, pipelines GCP en production et dashboards décisionnels. Ouvert à l'alternance (Data Engineer Bac+5) comme à un poste en CDI/CDD." />
+
+  <!-- ─── Open Graph (LinkedIn, Facebook, Slack…) ─── -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pguerlais.github.io/" />
+  <meta property="og:site_name" content="Portfolio Pierre Guerlais" />
+  <meta property="og:title" content="Pierre Guerlais — Data Analyst &amp; Data Engineer" />
+  <meta property="og:description" content="10 ans de pilotage opérationnel par les chiffres, pipelines GCP en production et dashboards décisionnels. Ouvert à l'alternance (Data Engineer Bac+5) comme à un poste en CDI/CDD." />
+  <meta property="og:image" content="https://pguerlais.github.io/og_card.png" />
+  <meta property="og:image:secure_url" content="https://pguerlais.github.io/og_card.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Pierre Guerlais — Data Analyst &amp; Data Engineer, ouvert à l'alternance et à l'emploi direct" />
+  <meta property="og:locale" content="fr_FR" />
+
+  <!-- ─── Twitter / X ─── -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pierre Guerlais — Data Analyst &amp; Data Engineer" />
+  <meta name="twitter:description" content="Pipelines GCP en production, dashboards décisionnels. Ouvert à l'alternance comme à un poste en CDI/CDD." />
+  <meta name="twitter:image" content="https://pguerlais.github.io/og_card.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -536,6 +557,113 @@
       50% { box-shadow: 0 0 28px rgba(181,145,74,0.75); }
     }
 
+    /* ─── OBJECTIF / DISPONIBILITÉ ─── */
+    #objectif {
+      background: var(--bg-deep);
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+      padding: 5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    #objectif::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -80px;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(181,145,74,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .objectif-head { max-width: 720px; margin-bottom: 2.8rem; position: relative; z-index: 1; }
+    .objectif-kicker {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .objectif-kicker::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--gold); }
+    .objectif-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: 0.03em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 0.9rem;
+    }
+    .objectif-head p { color: var(--muted); font-weight: 300; font-size: 1.02rem; line-height: 1.75; }
+    .objectif-head p strong { color: var(--white); font-weight: 500; }
+
+    .track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; position: relative; z-index: 1; }
+    .track-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 2rem 2rem 1.8rem;
+      display: flex; flex-direction: column; gap: 1.1rem;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .track-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .track-card:hover { border-color: rgba(181,145,74,0.3); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.35), 0 0 0 1px rgba(181,145,74,0.1); }
+    .track-card:hover::before { transform: scaleX(1); }
+
+    .track-top { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; }
+    .track-num { font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.18em; text-transform: uppercase; }
+    .track-status {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--font-mono); font-size: 0.68rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold);
+    }
+    .track-title {
+      font-family: var(--font-display);
+      font-size: 1.9rem; letter-spacing: 0.03em;
+      color: var(--white); line-height: 1;
+      transition: color 0.3s;
+    }
+    .track-card:hover .track-title { color: var(--gold-light); }
+    .track-desc { font-size: 0.9rem; color: var(--muted); font-weight: 300; line-height: 1.7; }
+    .track-desc strong { color: rgba(240,236,228,0.9); font-weight: 500; }
+    .track-meta { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .track-meta span {
+      font-size: 0.72rem; font-family: var(--font-mono);
+      padding: 0.22rem 0.65rem;
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      border: 1px solid var(--border-soft);
+      letter-spacing: 0.04em;
+    }
+
+    .track-cta { display: flex; align-items: center; gap: 1.3rem; margin-top: auto; padding-top: 0.5rem; }
+    .track-dl {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.7rem;
+      background: var(--gold); color: var(--bg-deep);
+      font-family: var(--font-body); font-weight: 700;
+      font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;
+      text-decoration: none;
+      clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 0 100%);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .track-dl:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(181,145,74,0.32); }
+    .ats-link {
+      font-family: var(--font-mono); font-size: 0.72rem;
+      letter-spacing: 0.06em; color: var(--muted);
+      text-decoration: none; border-bottom: 1px dashed var(--border);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .ats-link:hover { color: var(--gold); border-color: var(--gold); }
+
     /* ─── CONTACT ─── */
     #contact { text-align: center; padding: 7rem 4rem; position: relative; overflow: hidden; }
     #contact::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(181,145,74,0.06) 0%, transparent 70%); pointer-events: none; }
@@ -572,6 +700,8 @@
       #hero::after { display: none; }
       .hero-visual { display: none; }
       section { padding: 4rem 2rem; }
+      #objectif { padding: 3.5rem 2rem; }
+      .track-grid { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .project-card { grid-template-columns: 1fr; }
@@ -596,8 +726,9 @@
   <div id="scroll-progress"></div>
 
   <nav>
-    <div class="nav-logo">PG, Data Analyst</div>
+    <div class="nav-logo">PG · Data Analyst &amp; Engineer</div>
     <ul class="nav-links">
+      <li><a href="#objectif">Objectif</a></li>
       <li><a href="#about">Parcours</a></li>
       <li><a href="#skills">Compétences</a></li>
       <li><a href="#projects">Projets</a></li>
@@ -608,16 +739,20 @@
   <!-- ─── HERO ─── -->
   <section id="hero">
     <div class="hero-content">
-      <div class="hero-eyebrow">Data Analyst, Performance Opérationnelle</div>
+      <div class="availability-pill">
+        <span class="availability-dot"></span>
+        Alternance &amp; emploi direct — ouvert aux deux
+      </div>
+      <div class="hero-eyebrow">Data Analyst &amp; Data Engineer · Performance Opérationnelle</div>
       <h1 class="hero-name">Pierre<span>Guerlais</span></h1>
       <p class="hero-tagline">
-        <strong>10 ans à piloter des opérations par les chiffres.</strong><br/>
-        Je transforme des données complexes en <span class="highlight">décisions claires</span>,
-        avec une lecture terrain que les modèles seuls ne donnent pas.
+        <strong>10 ans à piloter des opérations par les chiffres,</strong>
+        aujourd'hui une stack data complète, du <span class="highlight">pipeline GCP en production</span>
+        au dashboard décisionnel. La lecture terrain que les modèles seuls ne donnent pas.
       </p>
       <div class="hero-cta">
         <a href="#projects" class="btn-primary">Voir mes projets</a>
-        <a href="CV_Pierre_Guerlais.pdf" target="_blank" class="btn-secondary">Voir mon CV</a>
+        <a href="#objectif" class="btn-secondary">Mes CV &amp; disponibilité</a>
       </div>
       <div class="hero-contacts">
         <a href="https://www.linkedin.com/in/pierreguerlais" target="_blank" rel="noopener" class="hero-contact-link">
@@ -630,9 +765,9 @@
           <span>Pguerlais</span>
         </a>
         <div class="hero-contact-sep"></div>
-        <a href="CV_Pierre_Guerlais.pdf" target="_blank" class="hero-contact-link">
+        <a href="#objectif" class="hero-contact-link">
           <i class="devicon-readthedocs-plain"></i>
-          <span>Curriculum Vitae</span>
+          <span>Mes CV</span>
         </a>
       </div>
     </div>
@@ -645,8 +780,8 @@
         <div class="identity-card">
           <div class="card-label">// Profil</div>
           <div class="card-value">
-            Data Analyst junior avec un ancrage fort dans le terrain opérationnel.
-            Je parle autant aux décideurs qu'aux équipes métier.
+            Profil hybride Data Analyst / Data Engineer, ancré dans le terrain opérationnel.
+            Je parle autant aux décideurs qu'aux équipes techniques.
           </div>
         </div>
         <div class="journey-bar">
@@ -671,6 +806,67 @@
         <div class="stat-box"><div class="stat-number">2</div><div class="stat-label">Pipelines GCP en prod</div></div>
         <div class="stat-box"><div class="stat-number">4</div><div class="stat-label">Projets livrés</div></div>
       </div>
+    </div>
+  </section>
+
+  <!-- ─── OBJECTIF / DISPONIBILITÉ ─── -->
+  <section id="objectif">
+    <div class="objectif-head reveal">
+      <div class="objectif-kicker">Objectif</div>
+      <h2>Deux façons de travailler ensemble</h2>
+      <p>
+        Diplômé <strong>Data Analyst (RNCP 6)</strong> et déjà passé par la production sur Google Cloud,
+        je suis ouvert à deux scénarios. Choisissez celui qui colle à votre besoin —
+        le CV correspondant est à un clic.
+      </p>
+    </div>
+
+    <div class="track-grid">
+
+      <!-- Piste 1 : Alternance -->
+      <div class="track-card reveal">
+        <div class="track-top">
+          <span class="track-num">Piste 01</span>
+          <span class="track-status"><span class="availability-dot"></span>Dès oct. 2026</span>
+        </div>
+        <div class="track-title">Alternance Data Engineer</div>
+        <p class="track-desc">
+          Je poursuis en <strong>Bac+5 Data Engineer</strong> (Wild Code School, 18 mois) et cherche
+          l'entreprise qui m'accueille en alternance. Vous accompagnez un profil déjà autonome sur
+          GCP, Python et la mise en production — pas un débutant.
+        </p>
+        <div class="track-meta">
+          <span>Bac+5 · 18 mois</span>
+          <span>Rythme alterné</span>
+          <span>Rennes / Hybride / Remote</span>
+        </div>
+        <div class="track-cta">
+          <a href="cv_alternance_data_engineer.pdf" target="_blank" class="track-dl">↓ CV Alternance</a>
+        </div>
+      </div>
+
+      <!-- Piste 2 : Emploi direct -->
+      <div class="track-card reveal">
+        <div class="track-top">
+          <span class="track-num">Piste 02</span>
+          <span class="track-status"><span class="availability-dot"></span>Dispo immédiate</span>
+        </div>
+        <div class="track-title">Poste Data Analyst / Engineer</div>
+        <p class="track-desc">
+          En <strong>CDI ou CDD</strong>, opérationnel tout de suite. Rodé à la mise en production
+          (pipelines GCP, dashboards décisionnels), j'apporte <strong>10 ans de pilotage opérationnel</strong>
+          en plus de la stack technique.
+        </p>
+        <div class="track-meta">
+          <span>CDI / CDD</span>
+          <span>Dispo immédiate</span>
+          <span>Rennes / Hybride / Remote</span>
+        </div>
+        <div class="track-cta">
+          <a href="cv_pierre_guerlais.pdf" target="_blank" class="track-dl">↓ CV (PDF)</a>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -963,14 +1159,14 @@
     </div>
     <h2 class="contact-headline reveal">Travaillons<br/><span>Ensemble</span></h2>
     <p class="contact-intro reveal">
-      Vous cherchez un Data Analyst qui <strong>comprend vos opérations</strong>
-      autant qu'il maîtrise la donnée ? Parlons-en.
+      Vous cherchez un profil Data qui <strong>comprend vos opérations</strong>
+      autant qu'il maîtrise la donnée ? En alternance ou en CDI/CDD, parlons-en.
     </p>
     <div class="contact-links reveal">
-      <a href="CV_Pierre_Guerlais.pdf" target="_blank" class="contact-item">
+      <a href="#objectif" class="contact-item">
         <i class="devicon-readthedocs-plain contact-item-icon-dev" title="CV"></i>
         <span class="contact-item-label">Curriculum Vitae</span>
-        <span class="contact-item-value">Télécharger mon CV</span>
+        <span class="contact-item-value">Alternance ou emploi</span>
       </a>
       <a href="https://www.linkedin.com/in/pierreguerlais" target="_blank" rel="noopener" class="contact-item">
         <i class="devicon-linkedin-plain contact-item-icon-dev" title="LinkedIn"></i>
@@ -987,7 +1183,7 @@
 
   <footer>
     <span class="gold">Pierre Guerlais</span>
-    <span>Data Analyst, <span class="gold">Performance Opérationnelle,</span> 2026</span>
+    <span>Data Analyst &amp; Data Engineer, <span class="gold">Performance Opérationnelle,</span> 2026</span>
   </footer>
 
   <script>
