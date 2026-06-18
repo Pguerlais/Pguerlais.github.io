@@ -20,11 +20,12 @@ HERE   = Path(__file__).parent
 TMP    = Path(os.environ["TEMP"]) / "chrome_pdf_tmp"
 TMP.mkdir(exist_ok=True)
 
-# Correspondance HTML -> PDF (on exclut cv_manager_crc car hors portfolio)
+# Correspondance HTML -> PDF
 CV_MAP = {
     "cv_pierre_guerlais.html":        "cv_pierre_guerlais.pdf",
     "cv_pierre_guerlais_DA_DE.html":  "cv_pierre_guerlais_DA_DE.pdf",
     "cv_alternance_data_engineer.html": "cv_alternance_data_engineer.pdf",
+    "cv_manager_crc.html":            "cv_pierre_guerlais_manager.pdf",
 }
 
 def export(html_path: Path, pdf_path: Path) -> bool:
